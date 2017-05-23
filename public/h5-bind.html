@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>云喇叭 绑定手机号码 </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/weui.min.css">
+</head>
+
+<body ontouchstart="">
+<div class="container">
+
+  {{if .HaveBind}} 
+    <div class="page">
+      <div class=""></div>
+      <div class="hd">
+          <h1 class="page_title"></h1>
+      </div>
+      <div class="bd">
+        <div class="weui_cells_title">  绑定完成  </div>  
+      </div>
+    </div>
+  {{else}} 
+
+  <form action="/h5/bind" method="GET" >
+    <div class="page">
+      <div class=""><br /><br /></div>
+      <div class="hd">
+          <h1 class="page_title">
+          </h1>
+      </div>
+      <div class="bd">
+
+        <div class="weui_cells_title"></div>
+        <div class="weui_cells weui_cells_form">
+
+            <div class="weui_cell ">
+                <div class="weui_cell_hd"><label class="weui_label">手机号</label></div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input value="" class="weui_input" type="number" pattern="[0-9]*" name="userPhoneNumber" id="userPhoneNumber" placeholder="请输入号码"/>
+                </div>
+            </div>
+
+
+            <div id="cellImgCode" class="weui_cell weui_vcode" style="display:;">
+                <div class="weui_cell_hd"><label class="weui_label">图形码</label></div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input id="imgcode" class="weui_input" type="number" placeholder="请输入图形验证码"/>
+                    <input type=hidden name=imgcodeId value="{{.CaptchaId}}">
+                </div>
+                <div class="weui_cell_ft">
+                    <img src="/api/imgcode/{{.CaptchaId}}.png" />
+                </div>
+            </div>
+
+
+
+            <div id="cellSnCode" class="weui_cell" style="display:none;">
+              <div class="weui_cell_hd"><label class="weui_label">验证码</label></div>
+              <div class="weui_cell_bd weui_cell_primary">
+                <input value="" class="weui_input" type="number" name="snkey" id="snkey" placeholder="请输入收到的短信验证码"/>
+                <input type="hidden" id="tempdata"/>
+              </div>
+            </div>
+
+        </div>
+
+        <div id="sendSnCodeBtn" class="weui_btn_area" style="display:;">
+          <a class="weui_btn weui_btn_primary" href="javascript:" id="sendSnCode">获取验证码</a>
+        </div>
+
+        <div id="showSubmitBtn" class="weui_btn_area" style="display:none;">
+          <input class="weui_btn weui_btn_primary" type="submit" value="确定" />
+        </div>
+
+
+    
+      </div>
+    </div>
+
+  </form>
+  {{end}}
+
+    
+</div>
+
+<script src="/js/zepto.min.js"></script>
+<script >
+    // 点击发送 验证码 按钮 
+    document.querySelector('#sendSnCode').onclick = function () {
+      var m = $('#userPhoneNumber')[0].value;
+
+      var x = $('#imgcode')[0].value;
+
+      var $cellSnCode = $('#cellSnCode');  // 
+      var $cellImgCode = $('#cellImgCode');  // 
+      var $sendSnCodeBtn = $('#sendSnCodeBtn'); 
+      var $showSubmitBtn = $('#showSubmitBtn');
+
+      $.getJSON('/api/v1/mobile/sn/send?m='+m+'&x='+x, function (d) {
+        if (d.msg == 'success') {
+          $cellSnCode.show();   // 现实 验证码 输入框 
+          $cellImgCode.hide(); 
+
+          $sendSnCodeBtn.hide();
+          $showSubmitBtn.show(); 
+        } else {
+          alert("图像验证码或手机号码错误");
+        }
+      });
+      
+    };
+</script>
+
+</body>
+
+
+</html>

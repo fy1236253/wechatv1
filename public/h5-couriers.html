@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>附近的快递员</title>
+    <link rel="stylesheet" href="/css/weui.min.css">
+    <link rel="stylesheet" href="/css/example.css">
+    <link rel="stylesheet" type="text/css" href="/css/courier.css">
+    <script src="/js/zepto.min.js"></script>
+    <script type="text/javascript" src="/js/send.js"></script> 
+</head>
+<body>
+<div class="tab">
+  <div class="bd">
+    <div class="weui_cells_title"></div>
+      <div class="weui_cells weui_cells_access" id="bg-random">
+      {{range $u := .Item}} 
+          <a class="weui_cell" href="tel:{{$u.Courier_phone}}">
+              <div class="weui_cell_hd">
+                <li class="head-img">
+                  <img src="/img/usr.png">
+                </li>
+              </div>
+              <div class="weui_cell_bd weui_cell_primary">                  
+                <h4 class="couriers-color">{{$u.Courier_company}}</h4>
+                <h5>
+                  <p>快递员：{{$u.Courier_name}}</p>
+                  <p>电话：{{$u.Courier_phone}}</p>
+                </h5>
+              </div>
+              <div class="weui_cell_ft">
+              </div>
+          </a>
+      {{end}}
+      <input type="hidden" name="" value="{{.Count}}" id="couriers_count">
+      </div>
+  </div>
+
+</div>
+<div class="weui_dialog_alert" id="toast" style="display:none">
+    <div class="weui_mask"></div>
+    <div class="weui_dialog">
+        <div class="weui_dialog_hd"><strong class="weui_dialog_title">oh，my god！！</strong></div>
+        <div class="weui_dialog_bd">你身边暂时没有快递小伙哟！！！</div>
+        <div class="weui_dialog_ft">
+            <a href="/h5/send" class="weui_btn_dialog primary">确定</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    if ({{.Count}} == 0) {
+      $("#toast").show();
+    }
+</script>

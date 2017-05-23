@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>云喇叭</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/weui.min.css">
+</head>
+
+<body ontouchstart="">
+
+<div class="container">
+
+    <div class="lbox_close wxapi_form">
+      <h3 id="menu-basic">{{.NickName}}{{.Sex}}</h3> 
+      <div class="desc">取件地点：{{.At}}  </div>
+      <div class="desc">您包裹数量： {{.Count}} </div>
+      <div class="desc">备注信息： {{.DistanceInfo}} </div>
+    </div>
+
+    <div class="lbox_close wxapi_form">
+      <h3 id="menu-basic">排好队，一个接一个</h3> 
+      {{range $u := .Items}} 
+        <div class="desc"> 
+          <img width="80" src="{{$u.ImgUrl}}" />  {{$u.NickName}} 
+        </div> 
+      {{end}}
+      
+    </div>
+
+
+    <div class="lbox_close wxapi_form">
+        <!-- a href="http://t.cn/R4qelWr"><img src="img/ad-kele.jpg" width="100%" /></a -->
+        <a href="http://wechat2.shenbianvip.com/h5/r"><img width="100%" src="/img/logo.jpg" /></a>
+    </div>
+
+
+</div>
+
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+<script>
+  wx.config({
+      debug: false,
+      appId: '{{.AppId}}',
+      timestamp: {{.Ts}},
+      nonceStr: '{{.Nonce}}',
+      signature: '{{.Sign}}',
+      jsApiList: [
+        'checkJsApi'
+      ]
+  });
+</script>
+
+
+
+<script src="js/zepto.min.js"></script>
+<script src="js/ylb.js"> </script>
+
+
+
+
+</body>
+</html>

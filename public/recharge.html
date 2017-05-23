@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+		<meta charset="utf-8" />
+		<title>云喇叭优惠充流量</title>
+		<link rel="stylesheet" type="text/css" href="/css/weui.min.css" />
+		<link rel="stylesheet" type="text/css" href="/css/PhoneRecharge_my.css" />
+		<script src="/js/zepto.js" type="text/javascript " charset="UTF-8"></script>
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<div class="header_center">
+				<div style="padding: 1em;">
+					<div class="input_div">
+						<input id="num" style="font-size: 2.2em; outline:none;" class="weui_input" type="number" pattern="[0-9]*" placeholder="请输入手机号码" />
+					</div>
+
+				</div>
+				<div class="phone_detail">
+					<p>
+						<span>号码归属：</span>
+						<span id="phone_detail">未知</span>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="center">
+			<ul id="recharge_item">
+			</ul>
+			<div class="pret_li"></div>
+			<div class="weui_cells_tips">
+				<p>说明: </p>
+				<p>1、所有流量均为当月流量，<span style="color:red">月底清零</span>。</p>
+				<p>2、月底为流量结算期，请慎重充值。</p>
+			</div>
+		</div>
+		<div class="bottom">
+			<div class="bottom_top">
+				<div class="bottom_top_right">
+					<p class="pref_recharge">
+						<span class="money_label">优惠</span>
+						<span class="money_simbol">¥</span>
+						<span id="pref_money_value" class="money_value">0</span>
+					</p>
+				</div>
+				<div class="line"></div>
+				<div class="bottom_top_left">
+					<p class="real_recharge">
+						<span class="money_label">实际</span>
+						<span class="money_simbol">¥</span>
+						<span id="real_money_value" class="money_value">0</span>
+					</p>
+				</div>
+				
+				
+			</div>
+			<div id="go_to_recharge" class="bottom_bottom">
+				<p class="recharge">马上充值</p>
+			</div>
+		</div>
+
+		<script src="/js/PhoneRecharge.js" type="text/javascript" charset="UTF-8"></script>
+		<script type="text/javascript">
+			// 套餐初始化 
+
+
+			//监听输入框
+			listenInput();
+			//马上充值
+			$('#go_to_recharge').tap(function() {
+
+				
+				m = getcurrentPhone();
+				i = '{{.OpenId}}';
+				x = getcurChooseIndex();
+				t = getcurChooseName();
+				v = getcurChoosePrice(); 
+				y = getcurChoosePriceY(); 
+
+				if (x >= 0) {
+					// 提交订单 返回订单的基本信息，
+					// /api/v1/recharge/order   手机号码  套餐信息
+					$.getJSON('/api/v1/recharge/order?m='+m+'&x='+x+'&i='+i+'&t='+t+'&v='+v+'&y='+y, function (d) {
+				        if (d.msg == 'success') {
+				        	appid   = d.data.appId;
+				            ts 		= d.data.timeStamp ;
+				            nonce 	= d.data.nonceStr ;
+				            pck 	= d.data.pkg ;
+				            pid 	= d.data.pid ;
+				            uid 	= d.data.uid ;
+				            typ 	= d.data.signType;
+				            paysign = d.data.paySign;
+
+							// 开始微信支付 
+							wx.chooseWXPay({
+								timestamp: ts,
+								nonceStr: nonce,
+								package: pck,
+								signType: typ, 
+								paySign: paysign,
+								success: function (res) {
+									// 支付完成，通知后台确认 
+									//alert("pay ok");
+									$.getJSON('/api/v1/recharge/order-status?pid='+pid +'&uid='+uid, function (stat) {
+										if (stat.msg == 'success') {
+											//alert('充值成功');
+											$('#dialog2').show().on('click', '.weui_btn_dialog', function () {
+                    							$('#dialog2').off('click').hide();
+                							});
+										} else {
+											alert(stat.msg);
+										}
+									});	
+								},
+								fail: function (res) {
+									alert(res.errMsg);
+								}
+							});
+
+				        } else {
+				        	alert(d.msg);
+				            return;
+				        }
+				    });
+
+
+				}
+			})
+		</script>
+
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+		<script type="text/javascript">
+
+			//通过config接口注入权限验证配置
+			wx.config({
+				debug: false, 
+				appId: '{{.AppId}}',
+      			timestamp: {{.Ts}},
+      			nonceStr: '{{.Nonce}}',
+      			signature: '{{.Sign}}',
+				jsApiList: ['scanQRCode','chooseWXPay'] // 必填，需要使用的JS接口列表
+			});
+			//通过ready接口处理成功验证
+			wx.ready(function() {
+				var phonenum = document.getElementById('num');
+				phonenum.value = '{{.PhoneBind}}';
+				getPhoneDetailAndRechargeItemsDetail(phonenum.value);
+			});
+		</script>
+
+
+
+		<div class="weui_dialog_alert" id="dialog2" style="display: none;">
+		    <div class="weui_mask"></div>
+		    <div class="weui_dialog">
+		        <div class="weui_dialog_hd"><strong class="weui_dialog_title">云喇叭提示</strong></div>
+		        <div class="weui_dialog_bd">充值成功</div>
+		        <div class="weui_dialog_ft">
+		            <a href="javascript:;" class="weui_btn_dialog primary">确定</a>
+		        </div>
+		    </div>
+		</div>
+	</body>
+
+</html>
