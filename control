@@ -1,11 +1,9 @@
 #!/bin/bash
-
 WORKSPACE=$(cd $(dirname $0)/; pwd)
 cd $WORKSPACE
-
 mkdir -p var
 
-module=wechat2
+module=wechatv1
 app=go-$module
 conf=cfg.json
 pidfile=var/app.pid
@@ -13,7 +11,6 @@ logfile=var/app.log
 
 
 export GOPATH=$WORKSPACE
-
 
 function update(){
     go get  github.com/streadway/amqp
@@ -24,7 +21,6 @@ function update(){
     go get  github.com/chanxuehong/wechat
     go get  github.com/toolkits/net/httplib
     go get  github.com/astaxie/beego/session
-
     go get  github.com/dchest/captcha
 }
 
@@ -56,7 +52,7 @@ function start() {
         echo "Config file $conf doesn't exist, creating one."
         cp cfg.example.json $conf
     fi
-    nohup bin/$app -c $conf &> $logfile &
+    nohup bin/$app -c $conf >> $logfile &
     echo $! > $pidfile
     echo "$app started..., pid=$!"
 

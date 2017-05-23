@@ -1,0 +1,51 @@
+{
+    "debug": true,
+    "logs": "data/log.log",
+    "ad-msg": "",
+    "http": {
+        "enabled": true,
+        "listen": "127.0.0.1:6061"
+    },
+    "amqp": {
+        "addr": "amqp://admin:XaEp213K@100.98.152.208:5672/",
+        "addr1": "amqp://admin:XaEp213K@10.117.19.192:5672/",
+        "addr2": "amqp://admin:XaEp213K@10.161.208.254:5672/",
+        "maxIdle": 20
+    },
+    "worker": {
+        "wechat": 1
+    },
+    "db": {
+        "dsn": "root:dongdong@tcp(127.0.0.1:3306)/wechat2?loc=Local&parseTime=true",
+        "maxIdle": 4
+    },
+    "redis": {
+        "addr": "3dccf4d228694166.m.cnhza.kvstore.aliyuncs.com:6379",
+        "password": "3dccf4d228694166:MX117Bdd",
+        "maxIdle": 2,
+        "db": 5
+    },
+    "wechats": [
+        {
+            "WxId": "gh_8ac8a8821eb9",
+            "AppId": "wxaccxxxx",
+            "Token": "weixin",
+            "Aeskey": "aeskey",
+            "AutoAnswer": true,
+            "Welcome": "欢迎来到云喇叭，网购炫货求点赞，上传宝贝试一试！（努力开发中...）"
+        },
+        {
+            "WxId": "gh_8ac8a8821eb8",
+            "AppId": "wxaccxxxx",
+            "Token": "weixin",
+            "Aeskey": "aeskey",
+            "AutoAnswer": true,
+            "Welcome": "欢迎来到云喇叭，网购炫货求点赞，上传宝贝试一试！（努力开发中...）"
+        }
+    ],
+    "weixinpay": {
+        "addr": "",
+        "ip": "121.43.102.49",
+        "key": "3iKweiKK213kdkdi765iIYTKkdi26rxX"
+    }
+}
