@@ -73,3 +73,34 @@ main.main()
 2017/05/23 22:25:29 g.ParseConfig ok, file cfg.json
 2017/05/23 22:25:29 g.InitWxConfig ok
 2017/05/23 22:25:29 &{gh_8ac8a8821eb8  wxaccxxxx weixin aeskey   true 欢迎来到云喇叭，网购炫货求点赞，上传宝贝试一试！（努力开发中...）}
+2017/05/23 22:59:28 cfg.json
+2017/05/23 22:59:28 g.ParseConfig ok, file cfg.json
+2017/05/23 22:59:28 g.InitWxConfig ok
+panic: open logfile error
+
+goroutine 1 [running]:
+panic(0x223120, 0xc420013720)
+	/usr/local/Cellar/go/1.7/libexec/src/runtime/panic.go:500 +0x1a1
+main.main()
+	/Users/apple/go/wechatv1/main.go:29 +0x2e0
+2017/05/23 23:00:36 cfg.json
+2017/05/23 23:00:36 g.ParseConfig ok, file cfg.json
+2017/05/23 23:00:36 g.InitWxConfig ok
+2017/05/23 23:01:19 cfg.json
+2017/05/23 23:01:19 g.ParseConfig ok, file cfg.json
+2017/05/23 23:01:19 g.InitWxConfig ok
+2017/05/23 23:02:03 cfg.json
+2017/05/23 23:02:03 g.ParseConfig ok, file cfg.json
+2017/05/23 23:02:03 g.InitWxConfig ok
+2017/05/23 23:03:54 cfg.json
+2017/05/23 23:03:54 g.ParseConfig ok, file cfg.json
+2017/05/23 23:03:54 g.InitWxConfig ok
+2017/05/23 23:04:26 cfg.json
+2017/05/23 23:04:26 g.ParseConfig ok, file cfg.json
+2017/05/23 23:04:26 g.InitWxConfig ok
+2017/05/23 23:04:52 cfg.json
+2017/05/23 23:04:52 g.ParseConfig ok, file cfg.json
+2017/05/23 23:04:52 g.InitWxConfig ok
+2017/05/23 23:06:19 cfg.json
+2017/05/23 23:06:19 g.ParseConfig ok, file cfg.json
+2017/05/23 23:06:19 g.InitWxConfig ok

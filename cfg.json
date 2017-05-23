@@ -1,15 +1,13 @@
 {
     "debug": true,
-    "logs": "data/log.log",
+    "logs": "log.log",
     "ad-msg": "",
     "http": {
         "enabled": true,
         "listen": "127.0.0.1:6061"
     },
     "amqp": {
-        "addr": "amqp://admin:XaEp213K@100.98.152.208:5672/",
-        "addr1": "amqp://admin:XaEp213K@10.117.19.192:5672/",
-        "addr2": "amqp://admin:XaEp213K@10.161.208.254:5672/",
+        "addr": "amqp://admin:admin@172.18.49.126/",
         "maxIdle": 20
     },
     "worker": {
@@ -20,8 +18,8 @@
         "maxIdle": 4
     },
     "redis": {
-        "addr": "3dccf4d228694166.m.cnhza.kvstore.aliyuncs.com:6379",
-        "password": "3dccf4d228694166:MX117Bdd",
+        "addr": "localhost:6379",
+        "password": "",
         "maxIdle": 2,
         "db": 5
     },
@@ -42,10 +40,5 @@
             "AutoAnswer": true,
             "Welcome": "欢迎来到云喇叭，网购炫货求点赞，上传宝贝试一试！（努力开发中...）"
         }
-    ],
-    "weixinpay": {
-        "addr": "",
-        "ip": "121.43.102.49",
-        "key": "3iKweiKK213kdkdi765iIYTKkdi26rxX"
-    }
+    ]
 }
