@@ -1,6 +1,6 @@
 {
     "debug": true,
-    "logs": "log.log",
+    "logs": "stdout",
     "ad-msg": "",
     "http": {
         "enabled": true,
@@ -14,7 +14,7 @@
         "wechat": 1
     },
     "db": {
-        "dsn": "root:dongdong@tcp(127.0.0.1:3306)/wechat2?loc=Local&parseTime=true",
+        "dsn": "root:123@tcp(127.0.0.1:3306)/wechat2?loc=Local&parseTime=true",
         "maxIdle": 4
     },
     "redis": {

@@ -11,11 +11,11 @@ import (
 
 var (
 	ConfigFile string
-	config     *message.GlobalConfig
+	config     *mp.GlobalConfig
 	configLock = new(sync.RWMutex)
 )
 
-func Config() *message.GlobalConfig {
+func Config() *mp.GlobalConfig {
 	configLock.RLock()
 	defer configLock.RUnlock()
 	return config
@@ -38,7 +38,7 @@ func ParseConfig(cfg string) {
 		log.Fatalln("read config file", cfg, "error:", err.Error())
 	}
 
-	var c message.GlobalConfig
+	var c mp.GlobalConfig
 	err = json.Unmarshal([]byte(configContent), &c)
 	if err != nil {
 		log.Fatalln("parse config file", cfg, "error:", err.Error())

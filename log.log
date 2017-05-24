@@ -2,3 +2,15 @@ PID.13294 2017/05/23 23:03:54 main.go:36: nice
 2017/05/23 23:04:26 nice
 2017/05/23 23:04:52 main.go:36: nice
 PID.13736 2017/05/23 23:06:19 main.go:36: nice
+PID.8029 2017/05/24 11:43:12 main.go:38: <nil> sql: unknown driver "mysql" (forgotten import?)
+PID.9512 2017/05/24 12:05:21 db.go:52: &{0x3f0ab8 root:@tcp(127.0.0.1:3306)/wechat2?loc=Local&parseTime=true 0 {0 0} [0xc42005c460] [] 1 0xc420074300 false map[0xc42005c460:map[0xc42005c460:true]] map[] 4 0 0 <nil>}
+PID.9775 2017/05/24 12:17:52 db.go:52: {0x3f0ab8 root:@tcp(127.0.0.1:3306)/wechat2?loc=Local&parseTime=true 0 {0 0} [0xc42005c460] [] 1 0xc420074300 false map[0xc42005c460:map[0xc42005c460:true]] map[] 4 0 0 <nil>}
+PID.10579 2017/05/24 14:12:20 db.go:52: {0x3f0ab8 root:@tcp(127.0.0.1:3306)/wechat2?loc=Local&parseTime=true 0 {0 0} [0xc42005c460] [] 1 0xc420074300 false map[0xc42005c460:map[0xc42005c460:true]] map[] 4 0 0 <nil>}
+PID.10747 2017/05/24 14:13:35 db.go:52: {0x3f0ad8 root:@tcp(127.0.0.1:3306)/wechat2?loc=Local&parseTime=true 0 {0 0} [0xc42005c5b0] [] 1 0xc42007c360 false map[0xc42005c5b0:map[0xc42005c5b0:true]] map[] 4 0 0 <nil>}
+PID.10747 2017/05/24 14:13:35 main.go:39: &{0x3f0ad8 root:@tcp(127.0.0.1:3306)/wechat2?loc=Local&parseTime=true 0 {0 0} [0xc42005c5b0] [] 1 0xc42007c360 false map[0xc42005c5b0:map[0xc42005c5b0:true]] map[] 4 0 0 <nil>} <nil>
+PID.11148 2017/05/24 14:41:47 db.go:52: {0x3f0ad8 root:123@tcp(127.0.0.1:3306)/wechat2?loc=Local&parseTime=true 0 {0 0} [0xc42005c690] [] 1 0xc420074360 false map[0xc42005c690:map[0xc42005c690:true]] map[] 4 0 0 <nil>}
+PID.11148 2017/05/24 14:41:47 main.go:39: &{0x3f0ad8 root:123@tcp(127.0.0.1:3306)/wechat2?loc=Local&parseTime=true 0 {0 0} [0xc42005c690] [] 1 0xc420074360 false map[0xc42005c690:map[0xc42005c690:true]] map[] 4 0 0 <nil>} <nil>
+PID.11366 2017/05/24 14:44:52 db.go:52: {0x3f0ad8 root:123@tcp(127.0.0.1:3306)/wechat2?loc=Local&parseTime=true 0 {0 0} [0xc42005c690] [] 1 0xc420074360 false map[0xc42005c690:map[0xc42005c690:true]] map[] 4 0 0 <nil>}
+PID.11366 2017/05/24 14:44:52 main.go:39: &{0x3f0ad8 root:123@tcp(127.0.0.1:3306)/wechat2?loc=Local&parseTime=true 0 {0 0} [0xc42005c690] [] 1 0xc420074360 false map[0xc42005c690:map[0xc42005c690:true]] map[] 4 0 0 <nil>}
+PID.12265 2017/05/24 15:13:54 main.go:39: <nil>
+PID.12679 2017/05/24 15:17:43 main.go:38: <nil>

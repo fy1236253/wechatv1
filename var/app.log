@@ -104,3 +104,137 @@ main.main()
 2017/05/23 23:06:19 cfg.json
 2017/05/23 23:06:19 g.ParseConfig ok, file cfg.json
 2017/05/23 23:06:19 g.InitWxConfig ok
+2017/05/24 11:43:12 cfg.json
+2017/05/24 11:43:12 g.ParseConfig ok, file cfg.json
+2017/05/24 11:43:12 g.InitWxConfig ok
+2017/05/24 11:45:00 cfg.json
+2017/05/24 11:45:00 g.ParseConfig ok, file cfg.json
+2017/05/24 11:45:00 g.InitWxConfig ok
+panic: assignment to entry in nil map
+
+goroutine 1 [running]:
+panic(0x258e40, 0xc4200118f0)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/runtime/panic.go:500 +0x1a1
+g.GetDBConn(0x0, 0x0, 0x0, 0x0, 0x0)
+	/Users/fengya/go/wechatv1/src/g/db.go:43 +0x25c
+main.main()
+	/Users/fengya/go/wechatv1/main.go:37 +0x2d4
+2017/05/24 11:58:18 cfg.json
+2017/05/24 11:58:18 g.ParseConfig ok, file cfg.json
+2017/05/24 11:58:18 g.InitWxConfig ok
+panic: assignment to entry in nil map
+
+goroutine 1 [running]:
+panic(0x258e40, 0xc4200118f0)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/runtime/panic.go:500 +0x1a1
+g.GetDBConn(0x0, 0x0, 0x0, 0x0, 0x0)
+	/Users/fengya/go/wechatv1/src/g/db.go:55 +0x25c
+main.main()
+	/Users/fengya/go/wechatv1/main.go:37 +0x2d4
+2017/05/24 11:59:44 cfg.json
+2017/05/24 11:59:44 g.ParseConfig ok, file cfg.json
+2017/05/24 11:59:44 g.InitWxConfig ok
+panic: assignment to entry in nil map
+
+goroutine 1 [running]:
+panic(0x258e40, 0xc4200118f0)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/runtime/panic.go:500 +0x1a1
+g.GetDBConn(0x0, 0x0, 0x0, 0x0, 0x0)
+	/Users/fengya/go/wechatv1/src/g/db.go:56 +0x25c
+main.main()
+	/Users/fengya/go/wechatv1/main.go:37 +0x2d4
+2017/05/24 12:01:42 cfg.json
+2017/05/24 12:01:42 g.ParseConfig ok, file cfg.json
+2017/05/24 12:01:42 g.InitWxConfig ok
+panic: assignment to entry in nil map
+
+goroutine 1 [running]:
+panic(0x258e60, 0xc4200118f0)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/runtime/panic.go:500 +0x1a1
+g.GetDBConn(0x0, 0x0, 0x0, 0x0, 0x0)
+	/Users/fengya/go/wechatv1/src/g/db.go:56 +0x263
+main.main()
+	/Users/fengya/go/wechatv1/main.go:37 +0x2d4
+2017/05/24 12:05:21 cfg.json
+2017/05/24 12:05:21 g.ParseConfig ok, file cfg.json
+2017/05/24 12:05:21 g.InitWxConfig ok
+panic: assignment to entry in nil map
+
+goroutine 1 [running]:
+panic(0x258ec0, 0xc420011910)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/runtime/panic.go:500 +0x1a1
+g.GetDBConn(0x0, 0x0, 0x0, 0x0, 0x0)
+	/Users/fengya/go/wechatv1/src/g/db.go:57 +0x2d2
+main.main()
+	/Users/fengya/go/wechatv1/main.go:37 +0x2d4
+2017/05/24 12:17:52 cfg.json
+2017/05/24 12:17:52 g.ParseConfig ok, file cfg.json
+2017/05/24 12:17:52 g.InitWxConfig ok
+panic: assignment to entry in nil map
+
+goroutine 1 [running]:
+panic(0x258ee0, 0xc420011910)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/runtime/panic.go:500 +0x1a1
+g.GetDBConn(0x0, 0x0, 0x0, 0x0, 0x0)
+	/Users/fengya/go/wechatv1/src/g/db.go:57 +0x2ee
+main.main()
+	/Users/fengya/go/wechatv1/main.go:37 +0x2d4
+2017/05/24 14:12:20 cfg.json
+2017/05/24 14:12:20 g.ParseConfig ok, file cfg.json
+2017/05/24 14:12:20 g.InitWxConfig ok
+panic: assignment to entry in nil map
+
+goroutine 1 [running]:
+panic(0x258ee0, 0xc420011910)
+	/usr/local/Cellar/go/1.7.4_2/libexec/src/runtime/panic.go:500 +0x1a1
+g.GetDBConn(0x2a2c78, 0x6, 0x0, 0x0, 0x0)
+	/Users/fengya/go/wechatv1/src/g/db.go:57 +0x2ee
+main.main()
+	/Users/fengya/go/wechatv1/main.go:37 +0x2d7
+2017/05/24 14:13:35 cfg.json
+2017/05/24 14:13:35 g.ParseConfig ok, file cfg.json
+2017/05/24 14:13:35 g.InitWxConfig ok
+2017/05/24 14:13:35 g.InitDB ok
+2017/05/24 14:41:47 cfg.json
+2017/05/24 14:41:47 g.ParseConfig ok, file cfg.json
+2017/05/24 14:41:47 g.InitWxConfig ok
+2017/05/24 14:41:47 g.InitDB ok
+2017/05/24 14:44:52 cfg.json
+2017/05/24 14:44:52 g.ParseConfig ok, file cfg.json
+2017/05/24 14:44:52 g.InitWxConfig ok
+2017/05/24 14:44:52 g.InitDB ok
+2017/05/24 15:13:54 cfg.json
+2017/05/24 15:13:54 g.ParseConfig ok, file cfg.json
+2017/05/24 15:13:54 g.InitWxConfig ok
+2017/05/24 15:13:54 g.InitDB ok
+2017/05/24 15:17:43 cfg.json
+2017/05/24 15:17:43 g.ParseConfig ok, file cfg.json
+2017/05/24 15:17:43 g.InitWxConfig ok
+2017/05/24 15:17:43 g.InitDB ok
+2017/05/24 15:18:34 cfg.json
+2017/05/24 15:18:34 g.ParseConfig ok, file cfg.json
+2017/05/24 15:18:34 g.InitWxConfig ok
+2017/05/24 15:18:34 g.InitDB ok
+2017/05/24 15:18:34 http.Start ok, listening on 127.0.0.1:6061
+2017/05/24 15:19:11 cfg.json
+2017/05/24 15:19:11 g.ParseConfig ok, file cfg.json
+2017/05/24 15:19:11 g.InitWxConfig ok
+2017/05/24 15:19:11 g.InitDB ok
+2017/05/24 15:19:11 http.Start ok, listening on 127.0.0.1:6061
+2017/05/24 15:31:16 cfg.json
+2017/05/24 15:31:16 g.ParseConfig ok, file cfg.json
+2017/05/24 15:31:16 g.InitWxConfig ok
+2017/05/24 15:31:16 g.InitDB ok
+2017/05/24 15:31:16 http.Start ok, listening on 127.0.0.1:6061
+2017/05/24 15:38:16 cfg.json
+2017/05/24 15:38:16 g.ParseConfig ok, file cfg.json
+2017/05/24 15:38:16 g.InitWxConfig ok
+2017/05/24 15:38:16 g.InitDB ok
+2017/05/24 15:38:16 http.Start ok, listening on 127.0.0.1:6061
+2017/05/24 15:38:37 not find /public/index.html
+2017/05/24 15:38:42 not find /public/index.html
+2017/05/24 15:39:47 cfg.json
+2017/05/24 15:39:47 g.ParseConfig ok, file cfg.json
+2017/05/24 15:39:47 g.InitWxConfig ok
+2017/05/24 15:39:47 g.InitDB ok
+2017/05/24 15:39:47 http.Start ok, listening on 127.0.0.1:6061

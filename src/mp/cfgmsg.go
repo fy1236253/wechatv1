@@ -1,4 +1,4 @@
-package message
+package mp
 
 //GlobalConfig 微信配置结构体
 type GlobalConfig struct {

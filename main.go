@@ -4,8 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"g"
+	"http"
 	"log"
-	"net/http"
 	"os"
 )
 
@@ -18,10 +18,11 @@ func main() {
 		os.Exit(0)
 	}
 	log.Println(*cfg)
-	g.ParseConfig(*cfg)
-	g.InitWxConfig()
-	// log.Println(g.GetWechatConfig("gh_8ac8a8821eb8"))
-	// log.Println(g.Config().Debug)
+	g.ParseConfig(*cfg) //配置文件
+	g.InitWxConfig()    //微信相关参数
+	g.InitDB()          //db池
+	g.InitRootDir()     //全局参数
+	http.Start()
 	logTo := g.Config().Logs
 	if logTo != "stdout" {
 		f, err := os.OpenFile(logTo, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
@@ -31,8 +32,9 @@ func main() {
 		defer f.Close()
 		log.SetOutput(f)
 	}
+	// 日志追加pid和时间
 	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 	log.SetPrefix(fmt.Sprintf("PID.%d ", os.Getpid()))
-	log.Println("nice")
-	http.ListenAndServe(":8089", nil)
+	_, a := g.GetDBConn("defult")
+	log.Println(a)
 }

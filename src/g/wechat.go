@@ -7,13 +7,13 @@ import (
 )
 
 var (
-	Wxcfg     map[string]*message.WechatConfig
+	Wxcfg     map[string]*mp.WechatConfig
 	wxcfgLock = new(sync.RWMutex)
 )
 
 //InitWxConfig 初始化WeChat
 func InitWxConfig() {
-	Wxcfg = make(map[string]*message.WechatConfig)
+	Wxcfg = make(map[string]*mp.WechatConfig)
 	log.Println("g.InitWxConfig ok")
 	for _, c := range Config().Wechats {
 		Wxcfg[c.WxID] = c
@@ -21,7 +21,7 @@ func InitWxConfig() {
 
 }
 
-func GetWechatConfig(wxid string) *message.WechatConfig {
+func GetWechatConfig(wxid string) *mp.WechatConfig {
 	if wxid == "" {
 		wxid = "gh_8ac8a8821eb9"
 	}
