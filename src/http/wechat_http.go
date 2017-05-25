@@ -8,6 +8,9 @@ import (
 	"io/ioutil"
 	"log"
 	"model"
+	"mp"
+	"mp/message"
+	"mp/message/request"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -31,7 +34,7 @@ func configWechatRoutes() {
 				return
 			}
 		}()
-		var wxcfg *message.WechatConfig
+		var wxcfg *mp.WechatConfig
 		var queryValues url.Values
 
 		wxid := strings.Trim(req.URL.Path, "/wx/")
@@ -60,7 +63,7 @@ func configWechatRoutes() {
 					// 非加密码模式 不接入
 					model.WechatStrValid(queryValues.Get("encrypt_type"), "aes", "[ERROR] encryptType not support")
 					model.WechatMessageXmlValid(req, &aesBody)                                                  // xml 解析验证
-					model.WechatStrValid(aesBody.ToUserName, wxcfg.WxId, "[Warn] wechat id mismatch, from err") // 来源验证
+					model.WechatStrValid(aesBody.ToUserName, wxcfg.WxID, "[Warn] wechat id mismatch, from err") // 来源验证
 					model.WechatSignEncryptValid(wxcfg, queryValues, aesBody.EncryptedMsg)                      // 指纹验证
 
 					k, _ := util.AESKeyDecode(wxcfg.Aeskey)
@@ -69,8 +72,7 @@ func configWechatRoutes() {
 					// 解密
 					encryptedMsgBytes, _ := base64.StdEncoding.DecodeString(aesBody.EncryptedMsg)
 					_, rawMsgXML, appid, _ := util.AESDecryptMsg(encryptedMsgBytes, aeskey)
-					model.WechatStrValid(string(appid), wxcfg.AppId, "[Warn] AppId mismatch")
-
+					model.WechatStrValid(string(appid), wxcfg.AppID, "[Warn] AppId mismatch")
 					// 解密ok
 
 					log.Println(string(rawMsgXML))
@@ -81,18 +83,17 @@ func configWechatRoutes() {
 						return
 					}
 
-					model.WechatStrValid(mixedMsg.ToUserName, wxcfg.WxId, "[Warn] mixedMsg.ToUserName mismatch, from err") // 来源验证
+					model.WechatStrValid(mixedMsg.ToUserName, wxcfg.WxID, "[Warn] mixedMsg.ToUserName mismatch, from err") // 来源验证
 
-					textXml := ""
+					textXML := ""
 
 					switch mixedMsg.MsgType {
 
 					// text
 					case request.MsgTypeText:
 						{
-							textXml = model.ProcessWechatText(wxcfg, &mixedMsg) // 文本消息的处理逻辑
+							textXML = model.ProcessWechatText(wxcfg, &mixedMsg) // 文本消息的处理逻辑
 						}
-
 					// event
 					case request.MsgTypeEvent:
 						{
@@ -100,7 +101,6 @@ func configWechatRoutes() {
 						}
 
 					}
-
 					// 做同步响应
 					nonce := queryValues.Get("nonce")
 					timestamp := queryValues.Get("timestamp")
@@ -111,15 +111,14 @@ func configWechatRoutes() {
 
 					// 注意这不能返回 201
 					ts, _ := strconv.ParseInt(timestamp, 10, 64)
-					responseHttpBody := message.AesResponseBody{
-						EncryptedMsg: base64.StdEncoding.EncodeToString(util.AESEncryptMsg(random, []byte(textXml), wxcfg.AppId, aeskey)),
+					responseHTTPBody := message.AesResponseBody{
+						EncryptedMsg: base64.StdEncoding.EncodeToString(util.AESEncryptMsg(random, []byte(textXML), wxcfg.AppID, aeskey)),
 						Timestamp:    ts,
 						Nonce:        nonce,
 					}
-					responseHttpBody.MsgSignature = util.MsgSign(wxcfg.Token, timestamp, responseHttpBody.Nonce, responseHttpBody.EncryptedMsg)
+					responseHTTPBody.MsgSignature = util.MsgSign(wxcfg.Token, timestamp, responseHTTPBody.Nonce, responseHTTPBody.EncryptedMsg)
 					w.WriteHeader(200)
-					RenderXml(w, responseHttpBody) // 所有流程都采用异步处理， 所以不需要同步返回xml 数据
-
+					RenderXML(w, responseHTTPBody) // 所有流程都采用异步处理， 所以不需要同步返回xml 数据
 					return
 				} else {
 					var commonBody message.MixedMessage
@@ -131,7 +130,7 @@ func configWechatRoutes() {
 					}
 
 					//log.Println(commonBody.Content)
-					model.WechatStrValid(commonBody.ToUserName, wxcfg.WxId, "[Warn] commonBody.ToUserName mismatch, from err") // 来源验证
+					model.WechatStrValid(commonBody.ToUserName, wxcfg.WxID, "[Warn] commonBody.ToUserName mismatch, from err") // 来源验证
 					switch commonBody.MsgType {
 					// text
 					case request.MsgTypeText:
@@ -143,7 +142,6 @@ func configWechatRoutes() {
 						{
 							model.ProcessWechatEvent(wxcfg, &commonBody)
 						}
-
 					}
 					w.WriteHeader(200)
 					RenderText(w, "")

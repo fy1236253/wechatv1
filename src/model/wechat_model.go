@@ -1,8 +1,15 @@
 package model
 
 import (
+	"encoding/xml"
+	"log"
 	"mp"
+	"mp/message"
+	"mp/message/request"
+	"net/http"
 	"net/url"
+
+	"github.com/chanxuehong/wechat/util"
 )
 
 //WechatQueryParamsValid 检验微信回的消息是否完整
@@ -23,14 +30,90 @@ func WechatQueryParamsValid(m url.Values) {
 		panic("signature and msg_signature is nil")
 	}
 }
+
+//WechatSignValid 检查微信签名是否正确
 func WechatSignValid(wxcfg *mp.WechatConfig, m url.Values) {
 	nonce := m.Get("nonce")
 	timestamp := m.Get("timestamp")
 	signature := m.Get("signature")
 	//log.Println(echostr, nonce, timestamp, signature)
-	if mp.Sign(wxcfg.Token, timestamp, nonce) == signature {
+	if mp.Sign(wxcfg.Token, timestamp, nonce) != signature {
+		panic("signature not match")
+	}
+	return
+}
+
+func WechatStrValid(v, w, e string) {
+	if v != w {
+		panic(e)
+	}
+}
+
+// 加密模式的指纹验证方法
+func WechatSignEncryptValid(wxcfg *mp.WechatConfig, m url.Values, body string) {
+	nonce := m.Get("nonce")
+	timestamp := m.Get("timestamp")
+	signature := m.Get("msg_signature")
+	//log.Println(echostr, nonce, timestamp, signature)
+	if util.MsgSign(wxcfg.Token, timestamp, nonce, body) == signature {
 		return
 	} else {
 		panic("signature not match")
 	}
+}
+
+func WechatMessageXmlValid(req *http.Request, aesBody *message.AesRequestBody) {
+	if err := xml.NewDecoder(req.Body).Decode(aesBody); err != nil {
+		log.Println("[Warn] xml body", err)
+		panic("xml body parse err")
+	}
+}
+
+func WechatMessageXmlValidNormal(req *http.Request, normaleBody *message.NormalRequestBody) {
+	if err := xml.NewDecoder(req.Body).Decode(normaleBody); err != nil {
+		log.Println("[Warn] xml body", err)
+		panic("xml body parse err")
+	}
+}
+
+func ProcessWechatText(wxcfg *mp.WechatConfig, mixedMsg *message.MixedMessage) string {
+	txt := request.GetText(mixedMsg)
+	log.Println(txt)
+	return ""
+}
+
+//ProcessWechatEvent 处理微信推送的事件
+func ProcessWechatEvent(wxcfg *mp.WechatConfig, mixedMsg *message.MixedMessage) {
+
+	switch mixedMsg.Event {
+
+	// 关注
+	case request.EventTypeSubscribe:
+		{
+		}
+
+	// 取消关注
+	case request.EventTypeUnsubscribe:
+		{
+
+		}
+
+	// 扫码事件
+	case request.EventTypeScan:
+		{ // 已经关注后 扫码  老用户 扫码 完成绑定
+
+		}
+
+	case request.EventTypeClick:
+		{ // 菜单点击
+
+		}
+
+	// 给用户推送模板消息， 收到后的状态反馈， 需要推送到 open 平台、或业务系统
+	case request.EventTypeTempSendOk:
+		{ // 模板消息推送 ok
+
+		}
+	}
+
 }

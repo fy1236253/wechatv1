@@ -1,6 +1,7 @@
 package http
 
 import (
+	"encoding/xml"
 	"g"
 	"log"
 	"net/http"
@@ -13,6 +14,7 @@ func Start() {
 		http.FileServer(http.Dir(filepath.Join(g.Root, "/public"))).ServeHTTP(w, r)
 	})
 	WebHTTP()
+	configWechatRoutes()
 	// start http server
 	addr := g.Config().HTTP.Listen
 
@@ -23,4 +25,28 @@ func Start() {
 
 	log.Println("http.Start ok, listening on", addr)
 	log.Fatalln(s.ListenAndServe())
+}
+
+//RenderText200 只返回200和描述
+func RenderText200(w http.ResponseWriter, s string) {
+	w.Header().Set("Content-Type", "application/text; charset=UTF-8")
+	w.WriteHeader(200)
+	w.Write([]byte(s))
+}
+
+//RenderXML 只返回200和描述
+func RenderXML(w http.ResponseWriter, v interface{}) {
+	bs, err := xml.Marshal(v)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/xml; charset=UTF-8")
+	w.Write(bs)
+}
+
+//RenderText 只返回描述
+func RenderText(w http.ResponseWriter, s string) {
+	w.Header().Set("Content-Type", "application/text; charset=UTF-8")
+	w.Write([]byte(s))
 }
