@@ -10,11 +10,11 @@ import (
 
 func Start() {
 	// 静态资源请求
+	WebHTTP()
+	ConfigWechatRoutes()
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.FileServer(http.Dir(filepath.Join(g.Root, "/public"))).ServeHTTP(w, r)
 	})
-	WebHTTP()
-	ConfigWechatRoutes()
 	// start http server
 	addr := g.Config().HTTP.Listen
 

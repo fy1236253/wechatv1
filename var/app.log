@@ -254,3 +254,11 @@ main.main()
 2017/05/25 15:50:09 Runtime error caught: [Warn] wecat config not find
 2017/05/25 15:50:42 wxid --> gh_8ac8a8821eb9
 2017/05/25 15:50:42 Runtime error caught: nonce is nil
+2017/05/26 11:02:16 cfg.json
+2017/05/26 11:02:16 g.ParseConfig ok, file cfg.json
+2017/05/26 11:02:16 g.InitWxConfig ok
+2017/05/26 11:02:16 g.InitDB,get db fail
+2017/05/26 11:02:16 g.InitDB ok
+2017/05/26 11:02:16 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 11:02:48 wxid --> 
+2017/05/26 11:02:48 Runtime error caught: nonce is nil
