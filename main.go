@@ -17,14 +17,12 @@ func main() {
 		fmt.Println(g.VERSION)
 		os.Exit(0)
 	}
-	log.Println(*cfg)
 	g.ParseConfig(*cfg) //配置文件
 	g.InitWxConfig()    //微信相关参数
-	log.Println(g.GetWechatConfig("gh_8ac8a8821eb9"))
-	g.InitDB()      //db池
-	g.InitRootDir() //全局参数
-	http.Start()
+	g.InitDB()          //db池
+	g.InitRootDir()     //全局参数
 	logTo := g.Config().Logs
+	log.Println(logTo)
 	if logTo != "stdout" {
 		f, err := os.OpenFile(logTo, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 		if err != nil {
@@ -36,6 +34,5 @@ func main() {
 	// 日志追加pid和时间
 	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 	log.SetPrefix(fmt.Sprintf("PID.%d ", os.Getpid()))
-	_, a := g.GetDBConn("defult")
-	log.Println(a)
+	http.Start()
 }
