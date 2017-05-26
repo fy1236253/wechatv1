@@ -22,7 +22,7 @@ func configWechatRoutes() {
 
 	//快递员 主叫号码设置 接口 ，
 	//get
-	http.HandleFunc("/wx/gh_", func(w http.ResponseWriter, req *http.Request) {
+	http.HandleFunc("/wx/", func(w http.ResponseWriter, req *http.Request) {
 
 		// 捕获异常
 		defer func() {
