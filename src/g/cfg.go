@@ -11,14 +11,14 @@ import (
 
 var (
 	ConfigFile string
-	config     *mp.GlobalConfig
+	WXconfig   *mp.GlobalConfig
 	configLock = new(sync.RWMutex)
 )
 
 func Config() *mp.GlobalConfig {
 	configLock.RLock()
 	defer configLock.RUnlock()
-	return config
+	return WXconfig
 }
 
 // ParseConfig 解析配置文件
@@ -46,6 +46,6 @@ func ParseConfig(cfg string) {
 	// set config
 	ConfigLock.Lock()
 	defer ConfigLock.Unlock()
-	config = &c
+	WXconfig = &c
 	log.Println("g.ParseConfig ok, file", cfg)
 }

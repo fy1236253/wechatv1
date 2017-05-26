@@ -270,3 +270,65 @@ main.main()
 2017/05/26 11:19:58 http.Start ok, listening on 127.0.0.1:6061
 2017/05/26 11:20:18 wxid --> 
 2017/05/26 11:20:18 Runtime error caught: nonce is nil
+2017/05/26 13:27:47 wxid --> gh_f353e8a82fe5
+2017/05/26 13:27:47 Runtime error caught: [Warn] wecat config not find
+2017/05/26 13:32:43 cfg.json
+2017/05/26 13:32:43 g.ParseConfig ok, file cfg.json
+2017/05/26 13:32:43 g.InitWxConfig ok
+2017/05/26 13:32:43 g.InitDB,get db fail
+2017/05/26 13:32:43 g.InitDB ok
+2017/05/26 13:32:43 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 13:34:27 wxid --> gh_f353e8a82fe5
+2017/05/26 13:34:27 Runtime error caught: [Warn] wecat config not find
+2017/05/26 13:35:25 cfg.json
+2017/05/26 13:35:25 g.ParseConfig ok, file cfg.json
+2017/05/26 13:35:25 g.InitWxConfig ok
+2017/05/26 13:35:25 g.InitDB,get db fail
+2017/05/26 13:35:25 g.InitDB ok
+2017/05/26 13:35:25 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 13:35:29 cfg.json
+2017/05/26 13:35:29 g.ParseConfig ok, file cfg.json
+2017/05/26 13:35:29 g.InitWxConfig ok
+2017/05/26 13:35:29 g.InitDB,get db fail
+2017/05/26 13:35:29 g.InitDB ok
+2017/05/26 13:35:29 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 13:35:33 wxid --> gh_f353e8a82fe5
+2017/05/26 13:35:33 Runtime error caught: [Warn] wecat config not find
+2017/05/26 13:36:08 cfg.json
+2017/05/26 13:36:08 g.ParseConfig ok, file cfg.json
+2017/05/26 13:36:08 g.InitWxConfig ok
+2017/05/26 13:36:08 g.InitDB,get db fail
+2017/05/26 13:36:08 g.InitDB ok
+<nil>
+2017/05/26 13:36:08 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 13:36:15 wxid --> gh_f353e8a82fe5
+2017/05/26 13:36:15 Runtime error caught: [Warn] wecat config not find
+2017/05/26 13:39:53 cfg.json
+2017/05/26 13:39:53 g.ParseConfig ok, file cfg.json
+2017/05/26 13:39:53 g.InitWxConfig ok
+2017/05/26 13:39:53 g.InitDB,get db fail
+2017/05/26 13:39:53 g.InitDB ok
+2017/05/26 13:39:53 &{true stdout  0xc4200ce800 0xc420014500 0xc42000d7d0 <nil> 0xc4200ce900 0xc4200116c8 [0xc42000e240 0xc42000e2d0] <nil>}
+2017/05/26 13:39:53 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 13:40:14 cfg.json
+2017/05/26 13:40:14 g.ParseConfig ok, file cfg.json
+2017/05/26 13:40:14 g.InitWxConfig ok
+2017/05/26 13:40:14 g.InitDB,get db fail
+2017/05/26 13:40:14 g.InitDB ok
+<nil>
+2017/05/26 13:40:14 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 13:41:55 cfg.json
+2017/05/26 13:41:55 g.ParseConfig ok, file cfg.json
+2017/05/26 13:41:55 g.InitWxConfig ok
+2017/05/26 13:41:55 g.InitDB,get db fail
+2017/05/26 13:41:55 g.InitDB ok
+<nil>
+2017/05/26 13:41:55 map[gh_8ac8a8821eb9:0xc4200a2120 gh_8ac8a8821eb8:0xc4200a21b0]
+2017/05/26 13:41:55 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 13:42:36 cfg.json
+2017/05/26 13:42:36 g.ParseConfig ok, file cfg.json
+2017/05/26 13:42:36 g.InitWxConfig ok
+2017/05/26 13:42:36 g.InitDB,get db fail
+2017/05/26 13:42:36 g.InitDB ok
+&{gh_8ac8a8821eb9  wxaccxxxx weixin aeskey   true 欢迎来到云喇叭，网购炫货求点赞，上传宝贝试一试！（努力开发中...）}
+2017/05/26 13:42:36 http.Start ok, listening on 127.0.0.1:6061
