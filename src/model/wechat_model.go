@@ -8,8 +8,6 @@ import (
 	"mp/message/request"
 	"net/http"
 	"net/url"
-
-	"github.com/chanxuehong/wechat/util"
 )
 
 //WechatQueryParamsValid 检验微信回的消息是否完整
@@ -55,7 +53,7 @@ func WechatSignEncryptValid(wxcfg *mp.WechatConfig, m url.Values, body string) {
 	timestamp := m.Get("timestamp")
 	signature := m.Get("msg_signature")
 	//log.Println(echostr, nonce, timestamp, signature)
-	if util.MsgSign(wxcfg.Token, timestamp, nonce, body) == signature {
+	if mp.MsgSign(wxcfg.Token, timestamp, nonce, body) == signature {
 		return
 	} else {
 		panic("signature not match")
