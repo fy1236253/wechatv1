@@ -332,3 +332,92 @@ main.main()
 2017/05/26 13:42:36 g.InitDB ok
 &{gh_8ac8a8821eb9  wxaccxxxx weixin aeskey   true 欢迎来到云喇叭，网购炫货求点赞，上传宝贝试一试！（努力开发中...）}
 2017/05/26 13:42:36 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 13:47:17 wxid --> gh_8ac8a8821eb9
+2017/05/26 13:47:17 Runtime error caught: runtime error: index out of range
+2017/05/26 13:58:30 cfg.json
+2017/05/26 13:58:30 g.ParseConfig ok, file cfg.json
+2017/05/26 13:58:30 g.InitWxConfig ok
+2017/05/26 13:58:30 0 &{gh_8ac8a8821eb9  wxaccxxxx weixin aeskey   true 欢迎来到云喇叭，网购炫货求点赞，上传宝贝试一试！（努力开发中...）}
+2017/05/26 13:58:30 1 &{gh_8ac8a8821eb8  wxaccxxxx weixin aeskey   true 欢迎来到云喇叭，网购炫货求点赞，上传宝贝试一试！（努力开发中...）}
+2017/05/26 13:58:30 g.InitDB,get db fail
+2017/05/26 13:58:30 g.InitDB ok
+2017/05/26 13:58:30 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 14:00:03 cfg.json
+2017/05/26 14:00:03 g.ParseConfig ok, file cfg.json
+2017/05/26 14:00:03 g.InitWxConfig ok
+2017/05/26 14:00:03 &{gh_8ac8a8821eb9  wxaccxxxx weixin aeskey   true 欢迎来到云喇叭，网购炫货求点赞，上传宝贝试一试！（努力开发中...）}
+2017/05/26 14:00:03 g.InitDB,get db fail
+2017/05/26 14:00:03 g.InitDB ok
+2017/05/26 14:00:03 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 14:00:23 wxid --> gh_8ac8a8821eb9
+2017/05/26 14:00:23 Runtime error caught: runtime error: index out of range
+2017/05/26 14:02:39 wxid --> gh_f353e8a82fe5
+2017/05/26 14:02:39 Runtime error caught: [Warn] wecat config not find
+2017/05/26 14:02:55 cfg.json
+2017/05/26 14:02:55 g.ParseConfig ok, file cfg.json
+2017/05/26 14:02:55 g.InitWxConfig ok
+2017/05/26 14:02:55 <nil>
+2017/05/26 14:02:55 g.InitDB,get db fail
+2017/05/26 14:02:55 g.InitDB ok
+2017/05/26 14:02:55 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 14:03:19 wxid --> gh_f353e8a82fe5
+2017/05/26 14:03:19 Runtime error caught: runtime error: index out of range
+2017/05/26 14:06:14 cfg.json
+2017/05/26 14:06:14 g.ParseConfig ok, file cfg.json
+2017/05/26 14:06:14 g.InitWxConfig ok
+2017/05/26 14:06:14 <nil>
+2017/05/26 14:06:14 g.InitDB,get db fail
+2017/05/26 14:06:14 g.InitDB ok
+2017/05/26 14:06:14 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 14:06:31 wxid --> gh_f353e8a82fe5
+2017/05/26 14:06:31 测试
+2017/05/26 14:06:31 Runtime error caught: runtime error: index out of range
+2017/05/26 14:07:15 cfg.json
+2017/05/26 14:07:15 g.ParseConfig ok, file cfg.json
+2017/05/26 14:07:15 g.InitWxConfig ok
+2017/05/26 14:07:15 <nil>
+2017/05/26 14:07:15 g.InitDB,get db fail
+2017/05/26 14:07:15 g.InitDB ok
+2017/05/26 14:07:15 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 14:07:19 wxid --> gh_f353e8a82fe5
+2017/05/26 14:07:19 Runtime error caught: runtime error: index out of range
+2017/05/26 14:07:42 cfg.json
+2017/05/26 14:07:42 g.ParseConfig ok, file cfg.json
+2017/05/26 14:07:42 g.InitWxConfig ok
+2017/05/26 14:07:42 <nil>
+2017/05/26 14:07:42 g.InitDB,get db fail
+2017/05/26 14:07:42 g.InitDB ok
+2017/05/26 14:07:42 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 14:07:47 wxid --> gh_f353e8a82fe5
+2017/05/26 14:07:47 测试
+2017/05/26 14:07:47 Runtime error caught: runtime error: index out of range
+2017/05/26 14:08:28 cfg.json
+2017/05/26 14:08:28 g.ParseConfig ok, file cfg.json
+2017/05/26 14:08:28 g.InitWxConfig ok
+2017/05/26 14:08:28 <nil>
+2017/05/26 14:08:28 g.InitDB,get db fail
+2017/05/26 14:08:28 g.InitDB ok
+2017/05/26 14:08:28 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 14:08:37 wxid --> gh_f353e8a82fe5
+2017/05/26 14:08:37 Runtime error caught: runtime error: index out of range
+2017/05/26 14:10:24 cfg.json
+2017/05/26 14:10:24 g.ParseConfig ok, file cfg.json
+2017/05/26 14:10:24 g.InitWxConfig ok
+2017/05/26 14:10:24 <nil>
+2017/05/26 14:10:24 g.InitDB,get db fail
+2017/05/26 14:10:24 g.InitDB ok
+2017/05/26 14:10:24 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 14:10:31 wxid --> gh_f353e8a82fe5
+2017/05/26 14:10:31 测试
+2017/05/26 14:10:33 wxid --> gh_f353e8a82fe5
+2017/05/26 14:10:33 测试
+2017/05/26 14:10:45 wxid --> gh_f353e8a82fe5
+2017/05/26 14:10:45 测试
+2017/05/26 14:11:12 cfg.json
+2017/05/26 14:11:12 g.ParseConfig ok, file cfg.json
+2017/05/26 14:11:12 g.InitWxConfig ok
+2017/05/26 14:11:12 <nil>
+2017/05/26 14:11:12 g.InitDB,get db fail
+2017/05/26 14:11:12 g.InitDB ok
+2017/05/26 14:11:12 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 14:11:14 wxid --> gh_f353e8a82fe5

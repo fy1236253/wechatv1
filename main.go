@@ -20,8 +20,9 @@ func main() {
 	log.Println(*cfg)
 	g.ParseConfig(*cfg) //配置文件
 	g.InitWxConfig()    //微信相关参数
-	g.InitDB()          //db池
-	g.InitRootDir()     //全局参数
+	log.Println(g.GetWechatConfig("gh_8ac8a8821eb9"))
+	g.InitDB()      //db池
+	g.InitRootDir() //全局参数
 	http.Start()
 	logTo := g.Config().Logs
 	if logTo != "stdout" {

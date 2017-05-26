@@ -135,6 +135,10 @@ elif [ "$1" == "update" ];then
     update
 elif [ "$1" == "test" ];then
     test
+elif [ "$1" == "all" ];then
+    build
+    restart
+    tailf
 else
     help
 fi

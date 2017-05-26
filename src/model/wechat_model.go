@@ -8,6 +8,7 @@ import (
 	"mp/message/request"
 	"net/http"
 	"net/url"
+	"util"
 )
 
 //WechatQueryParamsValid 检验微信回的消息是否完整
@@ -34,11 +35,12 @@ func WechatSignValid(wxcfg *mp.WechatConfig, m url.Values) {
 	nonce := m.Get("nonce")
 	timestamp := m.Get("timestamp")
 	signature := m.Get("signature")
-	//log.Println(echostr, nonce, timestamp, signature)
-	if mp.Sign(wxcfg.Token, timestamp, nonce) != signature {
+	// log.Println(echostr, nonce, timestamp, signature)
+	if util.Sign(wxcfg.Token, timestamp, nonce) == signature {
+		return
+	} else {
 		panic("signature not match")
 	}
-	return
 }
 
 func WechatStrValid(v, w, e string) {
