@@ -14,7 +14,7 @@ func Start() {
 		http.FileServer(http.Dir(filepath.Join(g.Root, "/public"))).ServeHTTP(w, r)
 	})
 	WebHTTP()
-	configWechatRoutes()
+	ConfigWechatRoutes()
 	// start http server
 	addr := g.Config().HTTP.Listen
 

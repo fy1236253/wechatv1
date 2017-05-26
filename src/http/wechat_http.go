@@ -18,7 +18,7 @@ import (
 	"util"
 )
 
-func configWechatRoutes() {
+func ConfigWechatRoutes() {
 
 	//快递员 主叫号码设置 接口 ，
 	//get
