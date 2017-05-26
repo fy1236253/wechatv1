@@ -262,3 +262,11 @@ main.main()
 2017/05/26 11:02:16 http.Start ok, listening on 127.0.0.1:6061
 2017/05/26 11:02:48 wxid --> 
 2017/05/26 11:02:48 Runtime error caught: nonce is nil
+2017/05/26 11:19:58 cfg.json
+2017/05/26 11:19:58 g.ParseConfig ok, file cfg.json
+2017/05/26 11:19:58 g.InitWxConfig ok
+2017/05/26 11:19:58 g.InitDB,get db fail
+2017/05/26 11:19:58 g.InitDB ok
+2017/05/26 11:19:58 http.Start ok, listening on 127.0.0.1:6061
+2017/05/26 11:20:18 wxid --> 
+2017/05/26 11:20:18 Runtime error caught: nonce is nil

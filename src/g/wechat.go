@@ -23,7 +23,7 @@ func InitWxConfig() {
 
 func GetWechatConfig(wxid string) *mp.WechatConfig {
 	if wxid == "" {
-		wxid = "gh_8ac8a8821eb9"
+		wxid = "gh_f353e8a82fe5"
 	}
 	wxcfgLock.RLock()
 	defer wxcfgLock.RUnlock()
