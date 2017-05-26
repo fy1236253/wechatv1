@@ -15,8 +15,7 @@ import (
 	"net/url"
 	"strconv"
 	"strings"
-
-	"github.com/chanxuehong/wechat/util"
+	"util"
 )
 
 func configWechatRoutes() {
