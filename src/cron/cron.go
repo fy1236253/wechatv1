@@ -1,6 +1,6 @@
 package cron
 
 func Start() {
-	StartToken()
+	// StartToken()
 	CheckToken()
 }
