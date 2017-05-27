@@ -8,6 +8,9 @@ import (
 	"http"
 	"log"
 	"os"
+	"os/signal"
+	"redis"
+	"syscall"
 )
 
 func main() {
@@ -36,7 +39,23 @@ func main() {
 	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 	log.SetPrefix(fmt.Sprintf("PID.%d ", os.Getpid()))
 
-	http.Start()
+	go http.Start()
 	go cron.Start()
-	log.Println("dfa")
+	sigs := make(chan os.Signal, 1)
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
+	go func() {
+		<-sigs
+		log.Println("all service stopping...")
+		// cron.Stop()
+		// http.Stop()
+		// proc.Stop()
+
+		// mq.ConnPool.Close() // 关闭连接池
+		redis.ConnPool.Close()
+
+		log.Println("all service stop ok ")
+		os.Exit(0)
+	}()
+
+	select {}
 }
