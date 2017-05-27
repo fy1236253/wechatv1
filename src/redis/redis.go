@@ -29,21 +29,21 @@ func InitConnPool() {
 		TestOnBorrow: PingRedis,
 	}
 
-	ConnPoolLocalNet = &redis.Pool{
-		MaxIdle:     g.Config().RedisLocalNet.MaxIdle,
-		IdleTimeout: 240 * time.Second,
-		Dial: func() (redis.Conn, error) {
-			c, err := redis.Dial("tcp",
-				g.Config().RedisLocalNet.Addr,
-				redis.DialPassword(g.Config().RedisLocalNet.Password),
-				redis.DialDatabase(g.Config().RedisLocalNet.Db))
-			if err != nil {
-				return nil, err
-			}
-			return c, err
-		},
-		TestOnBorrow: PingRedis,
-	}
+	// ConnPoolLocalNet = &redis.Pool{
+	// 	MaxIdle:     g.Config().RedisLocalNet.MaxIdle,
+	// 	IdleTimeout: 240 * time.Second,
+	// 	Dial: func() (redis.Conn, error) {
+	// 		c, err := redis.Dial("tcp",
+	// 			g.Config().RedisLocalNet.Addr,
+	// 			redis.DialPassword(g.Config().RedisLocalNet.Password),
+	// 			redis.DialDatabase(g.Config().RedisLocalNet.Db))
+	// 		if err != nil {
+	// 			return nil, err
+	// 		}
+	// 		return c, err
+	// 	},
+	// 	TestOnBorrow: PingRedis,
+	// }
 }
 
 func PingRedis(c redis.Conn, t time.Time) error {
