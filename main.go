@@ -21,11 +21,12 @@ func main() {
 		fmt.Println(g.VERSION)
 		os.Exit(0)
 	}
-	g.ParseConfig(*cfg) //配置文件
-	g.InitWxConfig()    //微信相关参数
-	log.Println(g.GetWechatConfig("123424"))
-	g.InitDB()      //db池
-	g.InitRootDir() //全局参数
+	g.ParseConfig(*cfg)  //配置文件
+	g.InitWxConfig()     //微信相关参数
+	g.InitDB()           //db池
+	g.InitRootDir()      //全局参数
+	redis.InitConnPool() //redis 链接初始化
+
 	logTo := g.Config().Logs
 	if logTo != "stdout" {
 		f, err := os.OpenFile(logTo, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
