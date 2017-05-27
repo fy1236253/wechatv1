@@ -10,11 +10,14 @@ import (
 )
 
 var (
+	//ConfigFile 配置文件
 	ConfigFile string
+	//WXconfig 微信解析后的配置信息
 	WXconfig   *mp.GlobalConfig
 	configLock = new(sync.RWMutex)
 )
 
+//Config 获取配置信息
 func Config() *mp.GlobalConfig {
 	configLock.RLock()
 	defer configLock.RUnlock()

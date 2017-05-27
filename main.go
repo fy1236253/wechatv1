@@ -1,6 +1,7 @@
 package main
 
 import (
+	"cron"
 	"flag"
 	"fmt"
 	"g"
@@ -19,10 +20,11 @@ func main() {
 	}
 	g.ParseConfig(*cfg) //配置文件
 	g.InitWxConfig()    //微信相关参数
-	g.InitDB()          //db池
-	g.InitRootDir()     //全局参数
+	log.Println(g.GetWechatConfig("123424"))
+	g.InitDB()      //db池
+	g.InitRootDir() //全局参数
+
 	logTo := g.Config().Logs
-	log.Println(logTo)
 	if logTo != "stdout" {
 		f, err := os.OpenFile(logTo, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 		if err != nil {
@@ -34,5 +36,7 @@ func main() {
 	// 日志追加pid和时间
 	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 	log.SetPrefix(fmt.Sprintf("PID.%d ", os.Getpid()))
-	http.Start()
+
+	go http.Start()
+	go cron.Start()
 }

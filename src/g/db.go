@@ -5,15 +5,17 @@ import (
 	"log"
 	"sync"
 
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql" //mysql 相关配置
 )
 
 var (
 	dbLock    sync.RWMutex
 	dbConnMap map[string]*sql.DB
-	DB        *sql.DB
+	//DB mysql链接
+	DB *sql.DB
 )
 
+// InitDB 初始化DB
 func InitDB() {
 	var err error
 	DB, err = makeDBConn()

@@ -55,8 +55,8 @@ type WechatConfig struct {
 	AppID       string `json:"AppId"`
 	Token       string `json:"Token"`
 	Aeskey      string `json:"Aeskey"`
-	accessToken string // 这个是通过接口请求获取到的
-	jsapiTicket string
+	AccessToken string // 这个是通过接口请求获取到的
+	JsapiTicket string
 	AutoAnswer  bool   `json:"AutoAnswer"`
 	Welcome     string `json:"Welcome"`
 }

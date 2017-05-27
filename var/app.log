@@ -421,3 +421,18 @@ main.main()
 2017/05/26 14:11:12 g.InitDB ok
 2017/05/26 14:11:12 http.Start ok, listening on 127.0.0.1:6061
 2017/05/26 14:11:14 wxid --> gh_f353e8a82fe5
+2017/05/27 09:52:37 g.ParseConfig ok, file cfg.json
+2017/05/27 09:52:37 g.InitWxConfig ok
+2017/05/27 09:52:37 <nil>
+2017/05/27 09:52:37 g.InitDB,get db fail
+2017/05/27 09:52:37 g.InitDB ok
+2017/05/27 09:52:37 stdout
+PID.27909 2017/05/27 09:52:37 http.go:26: http.Start ok, listening on 127.0.0.1:6061
+PID.27909 2017/05/27 09:52:37 http.go:27: listen tcp 127.0.0.1:6061: bind: address already in use
+2017/05/27 09:53:28 g.ParseConfig ok, file cfg.json
+2017/05/27 09:53:28 g.InitWxConfig ok
+2017/05/27 09:53:28 <nil>
+2017/05/27 09:53:28 g.InitDB,get db fail
+2017/05/27 09:53:28 g.InitDB ok
+2017/05/27 09:53:28 stdout
+PID.27986 2017/05/27 09:53:28 http.go:26: http.Start ok, listening on 127.0.0.1:6061

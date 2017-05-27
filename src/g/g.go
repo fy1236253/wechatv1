@@ -10,8 +10,10 @@ const (
 	VERSION = "wechatv1 0.1.0"
 )
 
+// Root 获取当前路径
 var Root string
 
+// InitRootDir 初始化路径
 func InitRootDir() {
 	var err error
 	Root, err = os.Getwd()
