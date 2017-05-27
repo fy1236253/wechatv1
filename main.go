@@ -23,7 +23,6 @@ func main() {
 	log.Println(g.GetWechatConfig("123424"))
 	g.InitDB()      //db池
 	g.InitRootDir() //全局参数
-
 	logTo := g.Config().Logs
 	if logTo != "stdout" {
 		f, err := os.OpenFile(logTo, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
@@ -37,6 +36,7 @@ func main() {
 	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 	log.SetPrefix(fmt.Sprintf("PID.%d ", os.Getpid()))
 
-	go http.Start()
+	http.Start()
 	go cron.Start()
+	log.Println("dfa")
 }
