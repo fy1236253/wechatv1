@@ -14,7 +14,6 @@ import (
 func monitorToken() {
 	for {
 		rc := redispool.ConnPool.Get()
-		log.Println(rc)
 		for _, c := range g.Config().Wechats {
 			key := "wx_acc_tkn_" + c.WxID // 判断 redis中这个token 是否存
 			t, _ := redis.Int64(rc.Do("TTL", key))

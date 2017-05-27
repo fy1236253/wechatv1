@@ -24,9 +24,6 @@ func InitWxConfig() {
 
 // GetWechatConfig 通过wxid获取配置信息
 func GetWechatConfig(wxid string) *mp.WechatConfig {
-	if wxid == "" {
-		wxid = "gh_f353e8a82fe5"
-	}
 	wxcfgLock.RLock()
 	defer wxcfgLock.RUnlock()
 	return Wxcfg[wxid]
