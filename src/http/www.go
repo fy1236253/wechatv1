@@ -10,7 +10,8 @@ import (
 	"github.com/toolkits/file"
 )
 
-func WebHTTP() {
+// ConfigWebHTTP 对外http
+func ConfigWebHTTP() {
 	http.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
 		//log.Println(openid)
 		var f string // 模板文件路径
@@ -33,4 +34,5 @@ func WebHTTP() {
 
 		return
 	})
+
 }

@@ -18,6 +18,7 @@ import (
 	"util"
 )
 
+// ConfigWechatRoutes 微信页面路由
 func ConfigWechatRoutes() {
 
 	//快递员 主叫号码设置 接口 ，
@@ -61,7 +62,7 @@ func ConfigWechatRoutes() {
 					var mixedMsg message.MixedMessage
 					// 非加密码模式 不接入
 					model.WechatStrValid(queryValues.Get("encrypt_type"), "aes", "[ERROR] encryptType not support")
-					model.WechatMessageXmlValid(req, &aesBody)                                                  // xml 解析验证
+					model.WechatMessageXMLValid(req, &aesBody)                                                  // xml 解析验证
 					model.WechatStrValid(aesBody.ToUserName, wxcfg.WxID, "[Warn] wechat id mismatch, from err") // 来源验证
 					model.WechatSignEncryptValid(wxcfg, queryValues, aesBody.EncryptedMsg)                      // 指纹验证
 

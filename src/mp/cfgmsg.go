@@ -13,6 +13,13 @@ type GlobalConfig struct {
 	Worker        *WorkerConfig    `json:"worker"`
 	Wechats       []*WechatConfig  `json:"wechats"`
 	WeixinPay     *WeixinPayConfig `json:"weixinpay"`
+	Admins        []*AdminsConfig  `json:"admins"`
+}
+
+//AdminsConfig 端口绑定
+type AdminsConfig struct {
+	Openid   string `json:"openid"`
+	Nickname string `json:"nickname"`
 }
 
 //HTTPConfig 端口绑定

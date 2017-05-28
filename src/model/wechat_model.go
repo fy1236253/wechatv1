@@ -43,13 +43,14 @@ func WechatSignValid(wxcfg *mp.WechatConfig, m url.Values) {
 	}
 }
 
+// WechatStrValid 检查是否可用
 func WechatStrValid(v, w, e string) {
 	if v != w {
 		panic(e)
 	}
 }
 
-// 加密模式的指纹验证方法
+//WechatSignEncryptValid 加密模式的指纹验证方法
 func WechatSignEncryptValid(wxcfg *mp.WechatConfig, m url.Values, body string) {
 	nonce := m.Get("nonce")
 	timestamp := m.Get("timestamp")
@@ -62,23 +63,31 @@ func WechatSignEncryptValid(wxcfg *mp.WechatConfig, m url.Values, body string) {
 	}
 }
 
-func WechatMessageXmlValid(req *http.Request, aesBody *message.AesRequestBody) {
+//WechatMessageXMLValid 微信message验证
+func WechatMessageXMLValid(req *http.Request, aesBody *message.AesRequestBody) {
 	if err := xml.NewDecoder(req.Body).Decode(aesBody); err != nil {
 		log.Println("[Warn] xml body", err)
 		panic("xml body parse err")
 	}
 }
 
-func WechatMessageXmlValidNormal(req *http.Request, normaleBody *message.NormalRequestBody) {
+//WechatMessageXMLValidNormal 微信message验证
+func WechatMessageXMLValidNormal(req *http.Request, normaleBody *message.NormalRequestBody) {
 	if err := xml.NewDecoder(req.Body).Decode(normaleBody); err != nil {
 		log.Println("[Warn] xml body", err)
 		panic("xml body parse err")
 	}
 }
 
+// ProcessWechatText 微信捕获文字消息
 func ProcessWechatText(wxcfg *mp.WechatConfig, mixedMsg *message.MixedMessage) string {
 	txt := request.GetText(mixedMsg)
 	log.Println(txt)
+	txtContent := txt.Content
+	log.Println(txtContent)
+	if txtContent == "只恐夜深花睡去" {
+		SendMessageText(wxcfg.WxID, mixedMsg.FromUserName, "放下屠刀立地成佛！")
+	}
 	return ""
 }
 
@@ -90,6 +99,7 @@ func ProcessWechatEvent(wxcfg *mp.WechatConfig, mixedMsg *message.MixedMessage) 
 	// 关注
 	case request.EventTypeSubscribe:
 		{
+
 		}
 
 	// 取消关注

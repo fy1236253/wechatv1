@@ -1,9 +1,5 @@
 package template
 
-import (
-//"encoding/json"
-)
-
 type TemplateMessage struct {
 	ToUser     string `json:"touser"`             // 必须, 接受者OpenID
 	TemplateId string `json:"template_id"`        // 必须, 模版ID
