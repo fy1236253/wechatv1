@@ -55,6 +55,6 @@ func SearchMenu(wxid string) {
 		menuJson.Menu.Buttons[buttonLength-1].SubButtons = append(menuJson.Menu.Buttons[buttonLength-1].SubButtons, Button)
 	}
 	log.Println(menuJson)
-	bytes, _ := json.Marshal(menuJson)
+	bytes, _ := json.Marshal(menuJson.Menu)
 	CreateMenu(string(bytes), g.GetWechatAccessToken(wxid))
 }
