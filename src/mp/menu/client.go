@@ -44,15 +44,19 @@ func SearchMenu(wxid string) {
 	resp, _ := r.String()
 	log.Println(resp)
 	var menuJson MenuJSON
-	var Button Button
+	var Bt Button
 	json.Unmarshal([]byte(resp), &menuJson)
 	buttonLength := len(menuJson.Menu.Buttons)
 	log.Println(buttonLength)
 	if buttonLength > 1 {
-		Button.Name = "我的传播"
-		Button.Type = "view"
-		Button.URL = "http://www.baidu.com"
-		menuJson.Menu.Buttons[buttonLength-1].SubButtons = append(menuJson.Menu.Buttons[buttonLength-1].SubButtons, Button)
+		Bt.Name = "我的传播"
+		Bt.Type = "view"
+		Bt.URL = "http://www.baidu.com"
+		var bt []Button
+		bt = append(bt, Bt)
+		bt = append(bt, menuJson.Menu.Buttons[buttonLength-1].SubButtons...)
+		menuJson.Menu.Buttons[buttonLength-1].SubButtons = bt
+		// menuJson.Menu.Buttons[buttonLength-1].SubButtons = append(menuJson.Menu.Buttons[buttonLength-1].SubButtons, Bt)
 	}
 	log.Println(menuJson)
 	bytes, _ := json.Marshal(menuJson.Menu)
