@@ -43,4 +43,13 @@ func SearchMenu(wxid string) {
 	r := httplib.Get(url).SetTimeout(3*time.Second, 1*time.Minute)
 	resp, _ := r.String()
 	log.Println(resp)
+	var menuJson MenuJSON
+	json.Unmarshal([]byte(resp), &menuJson)
+	buttonLength := len(menuJson.Menu.Buttons)
+	if buttonLength > 1 {
+		menuJson.Menu.Buttons[buttonLength+1].Type = "view"
+		menuJson.Menu.Buttons[buttonLength+1].Name = "新增列"
+		menuJson.Menu.Buttons[buttonLength+1].URL = "http://www.sougou.com"
+	}
+	log.Println(menuJson)
 }

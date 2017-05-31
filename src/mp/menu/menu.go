@@ -56,3 +56,8 @@ type Button struct {
 	MediaId    string   `json:"media_id,omitempty"`   // 非必须; 调用新增永久素材接口返回的合法media_id
 	SubButtons []Button `json:"sub_button,omitempty"` // 非必须; 二级菜单数组, 个数应为1~5个
 }
+
+// MenuJSON 菜单json结构体
+type MenuJSON struct {
+	Menu Menu `json:"menu"`
+}
