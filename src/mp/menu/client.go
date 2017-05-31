@@ -52,7 +52,7 @@ func SearchMenu(wxid string) {
 		Button.Name = "我的传播"
 		Button.Type = "view"
 		Button.URL = "http://www.baidu.com"
-		menuJson.Menu.Buttons[buttonLength].SubButtons = append(menuJson.Menu.Buttons[buttonLength].SubButtons, Button)
+		menuJson.Menu.Buttons[buttonLength-1].SubButtons = append(menuJson.Menu.Buttons[buttonLength-1].SubButtons, Button)
 	}
 	log.Println(menuJson)
 }
