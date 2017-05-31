@@ -47,7 +47,7 @@ type Menu struct {
 	Buttons []Button `json:"button,omitempty"` // 一级菜单数组, 个数应为1~3个
 }
 
-// 菜单的按钮
+//Button 菜单的按钮
 type Button struct {
 	Type       string   `json:"type,omitempty"`       // 非必须; 菜单的响应动作类型
 	Name       string   `json:"name,omitempty"`       // 必须;  菜单标题, 不超过16个字节, 子菜单不超过40个字节

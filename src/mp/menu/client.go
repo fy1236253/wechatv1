@@ -7,6 +7,8 @@ import (
 	"net/url"
 	"time"
 
+	"g"
+
 	"github.com/toolkits/net/httplib"
 )
 
@@ -33,4 +35,12 @@ func CreateMenu(obj interface{}, accesstoken string) (err error) {
 		return
 	}
 	return
+}
+
+// SearchMenu 查询菜单选项
+func SearchMenu(wxid string) {
+	url := "https://api.weixin.qq.com/cgi-bin/menu/get?" + g.GetWechatAccessToken(wxid)
+	r := httplib.Get(url).SetTimeout(3*time.Second, 1*time.Minute)
+	resp, _ := r.String()
+	log.Println(resp)
 }

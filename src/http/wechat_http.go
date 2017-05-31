@@ -21,8 +21,6 @@ import (
 // ConfigWechatRoutes 微信页面路由
 func ConfigWechatRoutes() {
 
-	//快递员 主叫号码设置 接口 ，
-	//get
 	http.HandleFunc("/wx/", func(w http.ResponseWriter, req *http.Request) {
 
 		// 捕获异常
