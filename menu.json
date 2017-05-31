@@ -1,0 +1,40 @@
+{
+    "button": [
+        {
+            "name": "今日歌曲",
+            "sub_button": [
+                {
+                    "type": "view",
+                    "name": "二级菜单01",
+                    "url": "http:\/\/www.baidu.com"
+                },
+                {
+                    "type": "view",
+                    "name": "二级菜单02",
+                    "url": "http:\/\/www.baidu.com"
+                }
+            ]
+        },
+        {
+            "type": "view",
+            "name": "今日头条",
+            "url": "http:\/\/www.baidu.com",
+            "sub_button": []
+        },
+        {
+            "name": "新增菜单",
+            "sub_button": [
+                {
+                    "type": "view",
+                    "name": "二级菜单04",
+                    "url": "http:\/\/www.baidu.com"
+                },
+                {
+                    "type": "view",
+                    "name": "二级菜单05",
+                    "url": "http:\/\/www.baidu.com"
+                }
+            ]
+        }
+    ]
+}
