@@ -39,7 +39,7 @@ func CreateMenu(obj interface{}, accesstoken string) (err error) {
 
 // SearchMenu 查询菜单选项
 func SearchMenu(wxid string) {
-	url := "https://api.weixin.qq.com/cgi-bin/menu/get?" + g.GetWechatAccessToken(wxid)
+	url := "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=" + g.GetWechatAccessToken(wxid)
 	r := httplib.Get(url).SetTimeout(3*time.Second, 1*time.Minute)
 	resp, _ := r.String()
 	log.Println(resp)
