@@ -41,6 +41,7 @@ func ConfigAPIRoutes() {
 		}
 		defer file.Close()
 		fmt.Fprintf(w, "%v", handler.Header)
+		log.Println(g.Root)
 		f, err := os.OpenFile(g.Root+"/public/img/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
 		if err != nil {
 			fmt.Println(err)
