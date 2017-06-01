@@ -27,7 +27,7 @@ func ConfigAPIRoutes() {
 	})
 	http.HandleFunc("/api/v1/upload/image", func(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
-		fmt.Println(r.PostForm)
+		fmt.Println(r.FormFile("file"))
 		queryValues, err := url.ParseQuery(r.URL.RawQuery)
 		log.Println("ParseQuery", queryValues)
 		if err != nil {
