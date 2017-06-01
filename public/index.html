@@ -12,17 +12,16 @@
 <body>
     <h1>Hello world</h1>
     <form id="postFile" enctype="multipart/form-data" method="POST">
-        <input type="file" name="uploadfile">
-        <input type="submit" value="upload" onclick="upload();">
+        <input type="file" name="uploadfile" id="file">
+        <input type="button" value="upload" onclick="upload();">
     </form>
 </body>
 <script>
     function upload() {
-        var formData = new FormData($("#postFile")[0]);
         $.ajax({
             url: '/api/v1/upload/image',
             type: 'POST',
-            data: formData,
+            data: {imgPath:$("#file").val()},
             success: function (returndata) {
                 alert(returndata);
             },
