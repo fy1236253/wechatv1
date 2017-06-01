@@ -17,7 +17,7 @@ func UpLodePIC(wxid string) {
 	defer file.Close()
 	reqs, errs := req.Post(url, req.FileUpload{
 		File:      file,
-		FieldName: "file",       // FieldName 是表单字段名
+		FieldName: "media",      // FieldName 是表单字段名
 		FileName:  "avatar.png", // Filename 是要上传的文件的名称，我们使用它来猜测mimetype，并将其上传到服务器上
 	})
 	log.Println(errs)
