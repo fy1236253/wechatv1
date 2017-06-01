@@ -2,6 +2,7 @@ package material
 
 import (
 	"g"
+	"time"
 
 	"log"
 	"os"
@@ -15,7 +16,7 @@ func UpLodePIC(wxid string) {
 	file, err := os.Open("/usr/local/src/wechatv1/public/img/u1604.png")
 	log.Println(err)
 	defer file.Close()
-	req := httplib.Post(url)
+	req := httplib.Post(url).SetTimeout(3*time.Second, 1*time.Minute)
 	req.PostFile("media", g.Root+"/public/img/u1355.png")
 	// reqs, errs := req.Post(url, req.FileUpload{
 	// 	File:      file,
