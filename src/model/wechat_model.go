@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"log"
 	"mp"
+	"mp/material"
 	"mp/message"
 	"mp/message/request"
 	"net/http"
@@ -89,7 +90,7 @@ func ProcessWechatText(wxcfg *mp.WechatConfig, mixedMsg *message.MixedMessage) s
 		SendMessageText(wxcfg.WxID, mixedMsg.FromUserName, "放下屠刀立地成佛！")
 	} else if txtContent == "佛讲缘我讲钱" {
 		SendMessageText(wxcfg.WxID, mixedMsg.FromUserName, "欢迎您管理员！")
-
+		material.UpLodePIC("gh_f353e8a82fe5")
 	}
 	return ""
 }
