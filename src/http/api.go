@@ -5,7 +5,6 @@ import (
 	"g"
 	"io"
 	"log"
-	"mime/multipart"
 	"mp/menu"
 	"net/http"
 	"net/url"
@@ -39,8 +38,7 @@ func ConfigAPIRoutes() {
 			return
 		}
 		r.ParseMultipartForm(32 << 20)
-		form := r.MultipartForm
-		logMultipartForm(form)
+		// form := r.MultipartForm
 		file, head, err := r.FormFile("file")
 		if err != nil {
 			fmt.Println(err)
@@ -59,17 +57,6 @@ func ConfigAPIRoutes() {
 			fmt.Println("文件保存失败")
 			return
 		}
-
+		log.Println("保存成功" + head.Filename)
 	})
-}
-
-func logMultipartForm(form *multipart.Form) {
-	log.Print("Values:", form.Value)
-	log.Print("Files:")
-	for key := range form.File {
-		headers := form.File[key]
-		for _, header := range headers {
-			log.Printf("Key: %v, Filename: %v, Header: %v", key, header.Filename, header.Header)
-		}
-	}
 }
