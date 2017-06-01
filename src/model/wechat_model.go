@@ -88,7 +88,7 @@ func ProcessWechatText(wxcfg *mp.WechatConfig, mixedMsg *message.MixedMessage) s
 	log.Println(txtContent)
 	if txtContent == "只恐夜深花睡去" {
 		SendMessageText(wxcfg.WxID, mixedMsg.FromUserName, "放下屠刀立地成佛！")
-		go material.UpLodePIC("gh_f353e8a82fe5")
+		material.UpLodePIC("gh_f353e8a82fe5")
 	} else if txtContent == "佛讲缘我讲钱" {
 		SendMessageText(wxcfg.WxID, mixedMsg.FromUserName, "欢迎您管理员！")
 	}
