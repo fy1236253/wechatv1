@@ -9,6 +9,8 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+
+	"github.com/imroc/req"
 )
 
 // ConfigAPIRoutes api相关接口
@@ -52,6 +54,13 @@ func ConfigAPIRoutes() {
 			return
 		}
 		defer fW.Close()
+
+		url := "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=" + g.GetWechatAccessToken("gh_f353e8a82fe5") + "&type=image"
+		req.Post(url, req.FileUpload{
+			File:      file,
+			FieldName: "file",       // FieldName 是表单字段名
+			FileName:  "avatar.png", // Filename 是要上传的文件的名称，我们使用它来猜测mimetype，并将其上传到服务器上
+		})
 		_, err = io.Copy(fW, file)
 		if err != nil {
 			fmt.Println("文件保存失败")
