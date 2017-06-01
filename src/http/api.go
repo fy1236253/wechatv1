@@ -1,15 +1,12 @@
 package http
 
 import (
-	"fmt"
 	"g"
-	"io"
-	"io/ioutil"
 	"log"
+	"mime/multipart"
 	"mp/menu"
 	"net/http"
 	"net/url"
-	"os"
 )
 
 // ConfigAPIRoutes api相关接口
@@ -30,11 +27,7 @@ func ConfigAPIRoutes() {
 		r.ParseForm()
 		log.Println(r.Method)
 		if "POST" == r.Method {
-			result, _ := ioutil.ReadAll(r.Body)
-			r.Body.Close()
-			fmt.Printf("%s\n", result)
 		}
-		fmt.Println(r.FormFile("file"))
 		queryValues, err := url.ParseQuery(r.URL.RawQuery)
 		log.Println("ParseQuery", queryValues)
 		if err != nil {
@@ -43,20 +36,18 @@ func ConfigAPIRoutes() {
 			return
 		}
 		r.ParseMultipartForm(32 << 20)
-		file, handler, err := r.FormFile("uploadfile")
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		defer file.Close()
-		fmt.Fprintf(w, "%v", handler.Header)
-		log.Println(g.Root)
-		f, err := os.OpenFile(g.Root+"/public/img/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		defer f.Close()
-		io.Copy(f, file)
+		form := r.MultipartForm
+		logMultipartForm(form)
 	})
+}
+
+func logMultipartForm(form *multipart.Form) {
+	log.Print("Values:", form.Value)
+	log.Print("Files:")
+	for key := range form.File {
+		headers := form.File[key]
+		for _, header := range headers {
+			log.Printf("Key: %v, Filename: %v, Header: %v", key, header.Filename, header.Header)
+		}
+	}
 }
