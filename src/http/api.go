@@ -26,6 +26,8 @@ func ConfigAPIRoutes() {
 		menu.CreateMenu(cfg, g.GetWechatAccessToken(wxid))
 	})
 	http.HandleFunc("/api/v1/upload/image", func(w http.ResponseWriter, r *http.Request) {
+		log.Println(r)
+		log.Println(r.Context())
 		queryValues, err := url.ParseQuery(r.URL.RawQuery)
 		log.Println("ParseQuery", queryValues)
 		if err != nil {
