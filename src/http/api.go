@@ -1,6 +1,7 @@
 package http
 
 import (
+	"fmt"
 	"g"
 	"log"
 	"mime/multipart"
@@ -38,6 +39,14 @@ func ConfigAPIRoutes() {
 		r.ParseMultipartForm(32 << 20)
 		form := r.MultipartForm
 		logMultipartForm(form)
+		file, head, err := r.FormFile("file")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		log.Println(file)
+		log.Println(head)
+		defer file.Close()
 	})
 }
 
