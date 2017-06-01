@@ -18,21 +18,28 @@
 </body>
 <script>
     function upload() {
-        // var  formdata = new FormData()
-        var fileObj = document.getElementById("file").files
-        console.log(fileObj[0])
-        // formdata.append("imgFile",fileObj[0]) 
+        var formData = new FormData();
+        formData.append("file", $("#file")[0].files[0]);
         $.ajax({
-            url: '/api/v1/upload/image',
+            url: "/api/v1/upload/image",
             type: 'POST',
-            data: { "file": fileObj[0] },
-            contentType: false,
+            data: formData,
+            // 告诉jQuery不要去处理发送的数据
             processData: false,
-            success: function (returndata) {
-                alert(returndata);
+            // 告诉jQuery不要去设置Content-Type请求头
+            contentType: false,
+            beforeSend: function () {
+                console.log("正在进行，请稍候");
             },
-            error: function (returndata) {
-                alert(returndata);
+            success: function (responseStr) {
+                if (responseStr.status === 0) {
+                    console.log("成功" + responseStr);
+                } else {
+                    console.log("失败");
+                }
+            },
+            error: function (responseStr) {
+                console.log("error");
             }
         });
     }
