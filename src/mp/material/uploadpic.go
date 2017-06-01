@@ -1,7 +1,6 @@
 package material
 
 import (
-	"g"
 	"os"
 
 	"github.com/imroc/req"
@@ -11,11 +10,11 @@ import (
 
 // UpLodePIC 上传图片素材
 func UpLodePIC(wxid string) {
-	url := "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=" + g.GetWechatAccessToken(wxid) + "&type=image"
+	url := "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=V_IXTnNdFxalRPh3wlfHRWHg0Kw-7Tjp4f7tpe2o60Qi6CXZ9NE8xv9rEqTHbAJAuqR8SvRM6K6lVE-THkQskF0BK8dbx3mvcLIOzlXctphCczeHPDSzBuI797CIK0m7ZNYdADAHVG&type=image"
 	// urls := "/api/v1/upload/image"
 	file, err := os.Open("/usr/local/src/wechatv1/public/img/duo1.jpeg")
-	// log.Println(err)
-	// defer file.Close()
+	log.Println(err)
+	defer file.Close()
 	// req := httplib.Post(urls).SetTimeout(3*time.Second, 1*time.Minute)
 	// req.PostFile("file", g.Root+"/public/img/duo1.jpeg")
 	reqs, errs := req.Post(url, req.FileUpload{
