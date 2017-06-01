@@ -3,11 +3,13 @@ package http
 import (
 	"fmt"
 	"g"
+	"io"
 	"log"
 	"mime/multipart"
 	"mp/menu"
 	"net/http"
 	"net/url"
+	"os"
 )
 
 // ConfigAPIRoutes api相关接口
@@ -44,9 +46,20 @@ func ConfigAPIRoutes() {
 			fmt.Println(err)
 			return
 		}
-		log.Println(file)
-		log.Println(head)
 		defer file.Close()
+		//创建文件
+		fW, err := os.Create(g.Root + "/public/img/" + head.Filename)
+		if err != nil {
+			fmt.Println("文件创建失败")
+			return
+		}
+		defer fW.Close()
+		_, err = io.Copy(fW, file)
+		if err != nil {
+			fmt.Println("文件保存失败")
+			return
+		}
+
 	})
 }
 
