@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"g"
 	"io"
+	"io/ioutil"
 	"log"
 	"mp/menu"
 	"net/http"
@@ -27,6 +28,12 @@ func ConfigAPIRoutes() {
 	})
 	http.HandleFunc("/api/v1/upload/image", func(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
+		log.Println(r.Method)
+		if "POST" == r.Method {
+			result, _ := ioutil.ReadAll(r.Body)
+			r.Body.Close()
+			fmt.Printf("%s\n", result)
+		}
 		fmt.Println(r.FormFile("file"))
 		queryValues, err := url.ParseQuery(r.URL.RawQuery)
 		log.Println("ParseQuery", queryValues)
