@@ -19,7 +19,8 @@
 <script>
     function upload() {
         var  formdata = new FormData()
-        formdata.append("imgFile",document.getElementById("file").files[0]) 
+        var fileObj=document.getElementById("fileToUpload").files
+        formdata.append("imgFile",fileObj[0]) 
         $.ajax({
             url: '/api/v1/upload/image',
             type: 'POST',
