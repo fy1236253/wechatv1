@@ -18,10 +18,12 @@
 </body>
 <script>
     function upload() {
+        var  formdata = new FormData()
+        formdata.append("imgFile",document.getElementById("file").files) 
         $.ajax({
             url: '/api/v1/upload/image',
             type: 'POST',
-            data: {imgPath:$("#file").val()},
+            data: formdata,
             success: function (returndata) {
                 alert(returndata);
             },
