@@ -17,7 +17,7 @@ func UpLodePIC(wxid string) {
 	log.Println(err)
 	defer file.Close()
 	req := httplib.Post(url).SetTimeout(3*time.Second, 1*time.Minute)
-	req.PostFile("media", g.Root+"/public/img/u1355.png")
+	req.PostFile("media", g.Root+"/public/img/duo1.jpeg")
 	// reqs, errs := req.Post(url, req.FileUpload{
 	// 	File:      file,
 	// 	FieldName: "media",     // FieldName 是表单字段名
