@@ -28,8 +28,6 @@ func ConfigAPIRoutes() {
 	http.HandleFunc("/api/v1/upload/image", func(w http.ResponseWriter, r *http.Request) {
 		r.ParseForm()
 		log.Println(r.Method)
-		if "POST" == r.Method {
-		}
 		queryValues, err := url.ParseQuery(r.URL.RawQuery)
 		log.Println("ParseQuery", queryValues)
 		if err != nil {
@@ -46,7 +44,7 @@ func ConfigAPIRoutes() {
 		}
 		defer file.Close()
 		//创建文件
-		fW, err := os.Create(g.Root + "/public/img/" + head.Filename)
+		fW, err := os.Create(g.Root + "/public/images/" + head.Filename)
 		if err != nil {
 			fmt.Println("文件创建失败")
 			return
