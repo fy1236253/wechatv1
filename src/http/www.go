@@ -15,7 +15,6 @@ func ConfigWebHTTP() {
 	http.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
 		//log.Println(openid)
 		var f string // 模板文件路径
-
 		f = filepath.Join(g.Root, "/public", "index.html")
 		if !file.IsExist(f) {
 			log.Println("not find", f)

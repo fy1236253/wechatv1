@@ -47,7 +47,6 @@ func SearchMenu(wxid string) {
 	var Bt Button
 	json.Unmarshal([]byte(resp), &menuJson)
 	buttonLength := len(menuJson.Menu.Buttons)
-	log.Println(buttonLength)
 	if buttonLength > 1 {
 		Bt.Name = "我的传播"
 		Bt.Type = "view"
@@ -61,4 +60,12 @@ func SearchMenu(wxid string) {
 	log.Println(menuJson)
 	bytes, _ := json.Marshal(menuJson.Menu)
 	CreateMenu(string(bytes), g.GetWechatAccessToken(wxid))
+}
+
+// DeleteMenu 删除菜单
+func DeleteMenu(wxid string) {
+	url := "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=" + g.GetWechatAccessToken(wxid)
+	r := httplib.Get(url).SetTimeout(3*time.Second, 1*time.Minute)
+	resp, _ := r.String()
+	log.Println("[删除菜单]" + resp)
 }
