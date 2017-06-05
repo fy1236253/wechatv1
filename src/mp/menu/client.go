@@ -48,9 +48,9 @@ func SearchMenu(wxid string) {
 	json.Unmarshal([]byte(resp), &menuJson)
 	buttonLength := len(menuJson.Menu.Buttons)
 	if buttonLength > 1 {
-		Bt.Name = "我的传播"
-		Bt.Type = "view"
-		Bt.URL = "http://www.baidu.com"
+		Bt.Name = "我要传播"
+		Bt.Type = "click"
+		Bt.Key = "sendNews"
 		var bt []Button
 		bt = append(bt, Bt)
 		bt = append(bt, menuJson.Menu.Buttons[buttonLength-1].SubButtons...)

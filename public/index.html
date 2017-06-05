@@ -19,7 +19,13 @@
 <script>
     function upload() {
         var formData = new FormData();
-        formData.append("file", $("#file")[0].files[0]);
+        var localFile = $("#file")[0].files[0]
+        console.log(localFile)
+        if (localFile.size>10000){
+            console.log("图片大于10kb")
+            return
+        }
+        formData.append("file", localFile );
         $.ajax({
             url: "/api/v1/upload/image",
             type: 'POST',

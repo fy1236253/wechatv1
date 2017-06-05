@@ -11,12 +11,9 @@ import (
 	"os/signal"
 	"redis"
 	"syscall"
-
-	"github.com/imroc/req"
 )
 
 func main() {
-	req.Debug = true
 	cfg := flag.String("c", "cfg.json", "specify config file")
 	version := flag.Bool("v", false, "show version")
 	flag.Parse()
@@ -62,4 +59,5 @@ func main() {
 	}()
 
 	select {}
+
 }
