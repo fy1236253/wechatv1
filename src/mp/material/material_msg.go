@@ -1,7 +1,9 @@
 package material
 
 // News 多图文结构
-type News []Article
+type News struct {
+	Article []Article `json:"article"`
+}
 
 // Article 图文消息结构体
 type Article struct {

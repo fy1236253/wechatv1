@@ -7,9 +7,6 @@ import (
 	"mime/multipart"
 	"net/http"
 	"os"
-	"time"
-
-	"github.com/toolkits/net/httplib"
 
 	"log"
 )
@@ -43,7 +40,6 @@ func UploadLocalPic(url, filepath, filename string) {
 		log.Println(err)
 		return
 	}
-
 	req.Header.Set("Content-Type", w.FormDataContentType())
 	client := &http.Client{}
 	res, err := client.Do(req)
@@ -53,29 +49,38 @@ func UploadLocalPic(url, filepath, filename string) {
 }
 
 // UpLodePIC 上传图片素材
-func UpLodePIC() {
-	// url := "https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=JMJCtJ4L8T2Nbigv9fYgQ92oczZAljvgDfP3gp5OOSK_d1eVJ6OWsW0fcjJdDI-QlQTBsSH8i0rt9Yti8oX7BLpu77HOXdqEK3mAkTshFM4IhRAzjubE_J8uLPLj60NAKJEhAEADCX"
-	url := "http://39.108.14.29/api/v1/upload/image"
-	file, _ := os.Open("/Users/fengya/go/localtest/header.jpeg")
-	defer file.Close()
-	req := httplib.Post(url).SetTimeout(3*time.Second, 10*time.Second)
-	req.PostFile("file", "header.jpeg")
-	resp, err := req.String()
-	log.Println(resp, err)
+func UpLodePIC(url, filepath, filename string) {
+	pr, pw := io.Pipe()
+	ws := multipart.NewWriter(pw)
+	go func() {
+		f, err := os.Open("header.jpeg")
+		if err != nil {
+			return
+		}
+		defer f.Close()
+		fw, err := ws.CreateFormFile("file", "header.jpeg")
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		io.Copy(fw, f)
+		ws.Close()
+		pw.Close()
+	}()
+	log.Println("开始从管道读取数据")
+	cli := http.Client{}
+	resp, err := cli.Post(url, ws.FormDataContentType(), pr)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	log.Println("POST传输完成")
 
-	// url := "https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=JMJCtJ4L8T2Nbigv9fYgQ92oczZAljvgDfP3gp5OOSK_d1eVJ6OWsW0fcjJdDI-QlQTBsSH8i0rt9Yti8oX7BLpu77HOXdqEK3mAkTshFM4IhRAzjubE_J8uLPLj60NAKJEhAEADCX"
-	// file, err := os.Open("/Users/fengya/go/wechatv1/sea.jpeg")
-	// log.Println(err)
-	// defer file.Close()
-	// req.SetTimeout(30 * time.Second)
+	body := resp.Body
+	defer body.Close()
 
-	// reqs, errs := req.Post(url, req.FileUpload{
-	// 	File:      file,
-	// 	FieldName: "file",     // FieldName 是表单字段名
-	// 	FileName:  "sea.jpeg", // Filename 是要上传的文件的名称，我们使用它来猜测mimetype，并将其上传到服务器上
-	// })
-	// log.Println(errs)
-	// resp := reqs.String()
-	// log.Println(resp, err)
-
+	if body_bytes, err := ioutil.ReadAll(body); err == nil {
+		log.Println("response:", string(body_bytes))
+	} else {
+		log.Fatalln(err)
+	}
 }

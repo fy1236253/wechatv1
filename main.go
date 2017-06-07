@@ -57,6 +57,5 @@ func main() {
 		log.Println("all service stop ok ")
 		os.Exit(0)
 	}()
-
 	select {}
 }

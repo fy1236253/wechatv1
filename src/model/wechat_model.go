@@ -99,7 +99,12 @@ func ProcessWechatText(wxcfg *mp.WechatConfig, mixedMsg *message.MixedMessage) s
 func ProcessWechatEvent(wxcfg *mp.WechatConfig, mixedMsg *message.MixedMessage) {
 
 	switch mixedMsg.Event {
-
+	// 地理位置上报
+	case request.EventTypeLocation:
+		{
+			localtion := request.GetLocationEvent(mixedMsg)
+			log.Println(localtion)
+		}
 	// 关注
 	case request.EventTypeSubscribe:
 		{
