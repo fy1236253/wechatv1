@@ -10,7 +10,6 @@ import (
 func Config3rdWechatRoutes() {
 
 	http.HandleFunc("/tuike/", func(w http.ResponseWriter, req *http.Request) {
-
 		// 捕获异常
 		defer func() {
 			if r := recover(); r != nil {
