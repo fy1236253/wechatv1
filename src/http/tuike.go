@@ -9,7 +9,7 @@ import (
 // Config3rdWechatRoutes 微信页面路由
 func Config3rdWechatRoutes() {
 
-	http.HandleFunc("/3rd/", func(w http.ResponseWriter, req *http.Request) {
+	http.HandleFunc("/tuike/", func(w http.ResponseWriter, req *http.Request) {
 
 		// 捕获异常
 		defer func() {
