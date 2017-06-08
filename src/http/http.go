@@ -14,7 +14,7 @@ func Start() {
 	ConfigWebHTTP()
 	ConfigAPIRoutes()
 	ConfigWechatRoutes()
-	Config3rdWechatRoutes()
+	// Config3rdWechatRoutes()
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		http.FileServer(http.Dir(filepath.Join(g.Root, "/public"))).ServeHTTP(w, r)
 	})
