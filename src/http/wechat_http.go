@@ -34,7 +34,7 @@ func ConfigWechatRoutes() {
 	// 	log.Println(queryValues)
 	// })
 
-	http.HandleFunc("/wx/", func(w http.ResponseWriter, req *http.Request) {
+	http.HandleFunc("/coolwx/", func(w http.ResponseWriter, req *http.Request) {
 
 		// 捕获异常
 		defer func() {
@@ -48,7 +48,7 @@ func ConfigWechatRoutes() {
 		var wxcfg *mp.WechatConfig
 		var queryValues url.Values
 
-		wxid := strings.Trim(req.URL.Path, "/wx/")
+		wxid := strings.Trim(req.URL.Path, "/coolwx/")
 		log.Println("wxid -->", wxid)   //    /gh_8ac8a8821eb9
 		wxcfg = g.GetWechatConfig(wxid) // 通过微信id 获取 对接的配置信息
 		if wxcfg == nil {
