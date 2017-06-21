@@ -34,6 +34,7 @@ func ConfigWebHTTP() {
 			http.Redirect(w, r, addr, 302)
 			return
 		}
+		log.Println(code)
 		openid, _ := util.GetAccessTokenFromCode(wxcfg.AppID, wxcfg.AppSecret, code)
 		log.Println(openid)
 		var f string // 模板文件路径
