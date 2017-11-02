@@ -4,12 +4,9 @@ import (
 	"g"
 	"html/template"
 	"log"
-	"math/rand"
 	"net/http"
 	"net/url"
 	"path/filepath"
-	"strconv"
-	"time"
 	"util"
 
 	"github.com/toolkits/file"
@@ -66,12 +63,7 @@ func ConfigWebHTTP() {
 			http.NotFound(w, r)
 			return
 		}
-
 		// 基本参数设置
-		rand.Seed(time.Now().UnixNano())
-		nonce := strconv.Itoa(rand.Intn(9999999999))
-		ts := time.Now().Unix()
-		sign := util.WXConfigSign(g.GetJsApiTicket(wxid), nonce, strconv.FormatInt(ts, 10), fullurl)
 		data := struct {
 			//Couriers 	string
 			Wxid string
