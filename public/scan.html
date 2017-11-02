@@ -43,6 +43,9 @@
         padding: 10px 0;
         bottom: 0;
     }
+    .scan-ok{
+        display: none;
+    }
 </style>
 
 <body>
@@ -63,9 +66,20 @@
     <div class="text-center bottom-hint">
         请保持小票平整，小票票头，票尾在框内
     </div>
-    <button type="button" class="btn  btn-lg btn-block basic-bg">
+    <div class="mtop20">
         <img src="img/camera.png" class="img-responsive middle-box" id="scanner" width="60" alt="Image">
-    </button>
+        <div class="scan-ok">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <img src="img/camera.png" class="img-responsive middle-box" id="scanner" width="60" alt="Image">                        
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <img src="img/ok.png" class="img-responsive middle-box" id="scanner" width="60" alt="Image">                            
+                </div>
+            </div>
+
+        </div>
+    </div>
 </body>
 
 </html>
@@ -88,7 +102,9 @@
                 sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 success: function (res) {
                     var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                    $("#localImg").attr("src",localIds)
+                    $("#localImg").attr("src", localIds);
+                    $("#scanner").hide();
+                    $(".scan-ok").show();
                 }
             });
         })
