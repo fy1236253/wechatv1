@@ -4,9 +4,12 @@ import (
 	"g"
 	"html/template"
 	"log"
+	"math/rand"
 	"net/http"
 	"net/url"
 	"path/filepath"
+	"strconv"
+	"time"
 	"util"
 
 	"github.com/toolkits/file"
@@ -73,7 +76,7 @@ func ConfigWebHTTP() {
 			//Couriers 	string
 			Wxid string
 		}{
-			Wxid:  "",
+			Wxid: "",
 		}
 
 		t, err := template.ParseFiles(f)
@@ -82,6 +85,6 @@ func ConfigWebHTTP() {
 			log.Println(err)
 		}
 		return
-	}）
+	})
 
 }
