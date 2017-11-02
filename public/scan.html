@@ -57,6 +57,8 @@
     </header>
     <div class="panel-body basic-panel">
 
+        <img src="" class="img-responsive" alt="Image" id="localImg">
+
     </div>
     <div class="text-center bottom-hint">
         请保持小票平整，小票票头，票尾在框内
@@ -67,16 +69,29 @@
 </body>
 
 </html>
-<script href="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script>
-    $("#scanner").click(function () {
-        wx.chooseImage({
-            count: 1, // 默认9
-            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-            success: function (res) {
-                var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-            }
-        });
+    wx.config({
+        debug: false,
+        appId: '{{.AppId}}',
+        timestamp: {{.Ts }},
+        nonceStr: '{{.Nonce}}',
+        signature: '{{.Sign}}',
+        jsApiList: ['chooseImage'] // 必填，需要使用的JS接口列表
+    });
+    wx.ready(function () {
+        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后
+        $("#scanner").click(function () {
+            wx.chooseImage({
+                count: 1, // 默认9
+                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                success: function (res) {
+                    var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                    $("#localImg").attr("src",localIds)
+                }
+            });
+        })
     })
+
 </script>

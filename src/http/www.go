@@ -4,9 +4,12 @@ import (
 	"g"
 	"html/template"
 	"log"
+	"math/rand"
 	"net/http"
 	"net/url"
 	"path/filepath"
+	"strconv"
+	"time"
 	"util"
 
 	"github.com/toolkits/file"
@@ -56,19 +59,33 @@ func ConfigWebHTTP() {
 		return
 	})
 	http.HandleFunc("/scanner", func(w http.ResponseWriter, r *http.Request) {
+		fullurl := "http://" + r.Host + r.RequestURI
+		wxid := "gh_8ac8a8821eb9"
+		wxcfg := g.GetWechatConfig(wxid)
+		appid := wxcfg.AppID
 		var f string // 模板文件路径
-		f = filepath.Join(g.Root, "/public", "scan.html")
+		f = filepath.Join(g.Root, "/public", "h5-send.html")
 		if !file.IsExist(f) {
 			log.Println("not find", f)
 			http.NotFound(w, r)
 			return
 		}
 		// 基本参数设置
+		rand.Seed(time.Now().UnixNano())
+		nonce := strconv.Itoa(rand.Intn(9999999999))
+		ts := time.Now().Unix()
+		sign := util.WXConfigSign(g.GetJsAPITicket(wxid), nonce, strconv.FormatInt(ts, 10), fullurl)
 		data := struct {
 			//Couriers 	string
-			Wxid string
+			AppId string
+			Ts    int64
+			Nonce string
+			Sign  string
 		}{
-			Wxid: "",
+			AppId: appid,
+			Ts:    ts,
+			Nonce: nonce,
+			Sign:  sign,
 		}
 
 		t, err := template.ParseFiles(f)
