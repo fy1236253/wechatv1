@@ -60,9 +60,8 @@ func ConfigWebHTTP() {
 	})
 	http.HandleFunc("/scanner", func(w http.ResponseWriter, r *http.Request) {
 		fullurl := "http://" + r.Host + r.RequestURI
-		wxid := "gh_8ac8a8821eb9"
-		wxcfg := g.GetWechatConfig(wxid)
-		appid := wxcfg.AppID
+		wxid := "gh_f353e8a82fe5"
+		appid := "wxdfac68fcc7a48fca"
 		var f string // 模板文件路径
 		f = filepath.Join(g.Root, "/public", "h5-send.html")
 		if !file.IsExist(f) {
