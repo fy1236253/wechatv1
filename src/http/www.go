@@ -63,7 +63,7 @@ func ConfigWebHTTP() {
 		wxid := "gh_f353e8a82fe5"
 		appid := "wxdfac68fcc7a48fca"
 		var f string // 模板文件路径
-		f = filepath.Join(g.Root, "/public", "h5-send.html")
+		f = filepath.Join(g.Root, "/public", "scan.html")
 		if !file.IsExist(f) {
 			log.Println("not find", f)
 			http.NotFound(w, r)
