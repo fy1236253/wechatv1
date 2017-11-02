@@ -55,5 +55,33 @@ func ConfigWebHTTP() {
 		}
 		return
 	})
+	http.HandleFunc("/scanner", func(w http.ResponseWriter, r *http.Request) {
+		var f string // 模板文件路径
+		f = filepath.Join(g.Root, "/public", "scan.html")
+		if !file.IsExist(f) {
+			log.Println("not find", f)
+			http.NotFound(w, r)
+			return
+		}
+
+		// 基本参数设置
+		rand.Seed(time.Now().UnixNano())
+		nonce := strconv.Itoa(rand.Intn(9999999999))
+		ts := time.Now().Unix()
+		sign := util.WXConfigSign(g.GetJsApiTicket(wxid), nonce, strconv.FormatInt(ts, 10), fullurl)
+		data := struct {
+			//Couriers 	string
+			Wxid string
+		}{
+			Wxid:  "",
+		}
+
+		t, err := template.ParseFiles(f)
+		err = t.Execute(w, data)
+		if err != nil {
+			log.Println(err)
+		}
+		return
+	}）
 
 }
