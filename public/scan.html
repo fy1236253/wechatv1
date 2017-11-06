@@ -63,7 +63,7 @@
     </header>
     <div class="panel-body basic-panel">
 
-        <img src="" class="img-responsive" alt="Image" id="localImg">
+        <img src="" class="img-responsive" alt="" id="localImg">
 
     </div>
     <div class="text-center bottom-hint">
@@ -109,7 +109,9 @@
             });
         });
         $("#reload").click(function(){
-            window.location.href="/scanner";
+            $("#localimg").attr("src","")
+            $("#scanner").show();
+            $(".scan-ok").hide();
         });
     })
 </script>
