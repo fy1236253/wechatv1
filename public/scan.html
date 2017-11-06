@@ -76,7 +76,7 @@
                         <img src="img/camera.png" class="img-responsive middle-box" id="reload" width="60" alt="Image">                        
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <img src="img/ok.png" class="img-responsive middle-box"  width="60" alt="Image">                            
+                        <img src="img/ok.png" class="img-responsive middle-box"  id="submit" width="60" alt="Image">                            
                 </div>
         </div>
     </div>
@@ -113,5 +113,8 @@
             $("#scanner").show();
             $(".scan-ok").hide();
         });
+        $("#submit").click(function(){
+            window.location.href = "/consumer"
+        })
     })
 </script>
