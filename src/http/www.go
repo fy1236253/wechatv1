@@ -94,5 +94,40 @@ func ConfigWebHTTP() {
 		}
 		return
 	})
+	http.HandleFunc("/scanner/consumer", func(w http.ResponseWriter, r *http.Request) {
+		fullurl := "http://" + r.Host + r.RequestURI
+		wxid := "gh_f353e8a82fe5"
+		appid := "wxdfac68fcc7a48fca"
+		var f string // 模板文件路径
+		f = filepath.Join(g.Root, "/public", "scanFinish.html")
+		if !file.IsExist(f) {
+			log.Println("not find", f)
+			http.NotFound(w, r)
+			return
+		}
+		// 基本参数设置
+		rand.Seed(time.Now().UnixNano())
+		nonce := strconv.Itoa(rand.Intn(9999999999))
+		ts := time.Now().Unix()
+		sign := util.WXConfigSign(g.GetJsAPITicket(wxid), nonce, strconv.FormatInt(ts, 10), fullurl)
+		data := struct {
+			//Couriers 	string
+			AppId string
+			Ts    int64
+			Nonce string
+			Sign  string
+		}{
+			AppId: appid,
+			Ts:    ts,
+			Nonce: nonce,
+			Sign:  sign,
+		}
 
+		t, err := template.ParseFiles(f)
+		err = t.Execute(w, data)
+		if err != nil {
+			log.Println(err)
+		}
+		return
+	})
 }
