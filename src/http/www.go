@@ -94,7 +94,7 @@ func ConfigWebHTTP() {
 		}
 		return
 	})
-	http.HandleFunc("/scanner/consumer", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/consumer", func(w http.ResponseWriter, r *http.Request) {
 		fullurl := "http://" + r.Host + r.RequestURI
 		wxid := "gh_f353e8a82fe5"
 		appid := "wxdfac68fcc7a48fca"
