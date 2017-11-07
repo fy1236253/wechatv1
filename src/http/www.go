@@ -130,4 +130,28 @@ func ConfigWebHTTP() {
 		}
 		return
 	})
+	http.HandleFunc("/credits", func(w http.ResponseWriter, r *http.Request) {
+		appid := "wxdfac68fcc7a48fca"
+		var f string // 模板文件路径
+		f = filepath.Join(g.Root, "/public", "scanIndex.html")
+		if !file.IsExist(f) {
+			log.Println("not find", f)
+			http.NotFound(w, r)
+			return
+		}
+		// 基本参数设置
+		data := struct {
+			//Couriers 	string
+			AppId string
+		}{
+			AppId: appid,
+		}
+
+		t, err := template.ParseFiles(f)
+		err = t.Execute(w, data)
+		if err != nil {
+			log.Println(err)
+		}
+		return
+	})
 }
