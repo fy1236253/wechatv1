@@ -1,9 +1,6 @@
 .content-body {
     background: #000;
 }
-.container{
-    position: relative;
-}
 
 .basic-panel {
     min-height: 360px;
@@ -42,13 +39,12 @@
     display: none;
 }
 .scan-ok{
-    display: block;
-    position: fixed;
     bottom: 0;
     width: 100%;
     padding: 20px 0;
-    overflow: hidden;
     background: #000;
+    position: fixed;
+    
 }
 .company-img {
     width: 100%;
