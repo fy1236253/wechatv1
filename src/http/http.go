@@ -1,6 +1,7 @@
 package http
 
 import (
+	"encoding/json"
 	"encoding/xml"
 	"g"
 	"log"
@@ -52,4 +53,13 @@ func RenderXML(w http.ResponseWriter, v interface{}) {
 func RenderText(w http.ResponseWriter, s string) {
 	w.Header().Set("Content-Type", "application/text; charset=UTF-8")
 	w.Write([]byte(s))
+}
+func RenderJson(w http.ResponseWriter, v interface{}) {
+	bs, err := json.Marshal(v)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.Write(bs)
 }

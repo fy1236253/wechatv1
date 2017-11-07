@@ -154,4 +154,17 @@ func ConfigWebHTTP() {
 		}
 		return
 	})
+	http.HandleFunc("/handle", func(w http.ResponseWriter, r *http.Request) {
+		type Res struct {
+			Name   string
+			Amount string
+		}
+		var res Res
+		// match, _ := regexp.MatchString("", "peach")
+		// log.Println(match)
+		res.Name = "测试商店"
+		res.Amount = "100"
+		RenderJson(w, res)
+		return
+	})
 }
