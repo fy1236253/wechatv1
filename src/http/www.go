@@ -133,7 +133,7 @@ func ConfigWebHTTP() {
 	http.HandleFunc("/credits", func(w http.ResponseWriter, r *http.Request) {
 		appid := "wxdfac68fcc7a48fca"
 		var f string // 模板文件路径
-		f = filepath.Join(g.Root, "/public", "scanIndex.html")
+		f = filepath.Join(g.Root, "/public", "scannerIndex.html")
 		if !file.IsExist(f) {
 			log.Println("not find", f)
 			http.NotFound(w, r)
