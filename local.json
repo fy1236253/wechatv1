@@ -1,0 +1,492 @@
+{
+    "log_id": 209669364,
+    "words_result_num": 54,
+    "words_result": [
+        {
+            "location": {
+                "width": 147,
+                "top": 92,
+                "height": 17,
+                "left": 196
+            },
+            "words": "联医约连钡等售甲"
+        },
+        {
+            "location": {
+                "width": 37,
+                "top": 111,
+                "height": 13,
+                "left": 256
+            },
+            "words": "重打印"
+        },
+        {
+            "location": {
+                "width": 168,
+                "top": 138,
+                "height": 21,
+                "left": 175
+            },
+            "words": "聚仁堂连锁店0575-88337037"
+        },
+        {
+            "location": {
+                "width": 152,
+                "top": 155,
+                "height": 17,
+                "left": 174
+            },
+            "words": "时间:2017-10-0120:34:38"
+        },
+        {
+            "location": {
+                "width": 144,
+                "top": 169,
+                "height": 19,
+                "left": 175
+            },
+            "words": "单据号:300011712833872"
+        },
+        {
+            "location": {
+                "width": 55,
+                "top": 198,
+                "height": 13,
+                "left": 175
+            },
+            "words": "品名/规格"
+        },
+        {
+            "location": {
+                "width": 48,
+                "top": 200,
+                "height": 13,
+                "left": 304
+            },
+            "words": "商品编码"
+        },
+        {
+            "location": {
+                "width": 24,
+                "top": 214,
+                "height": 12,
+                "left": 176
+            },
+            "words": "单位"
+        },
+        {
+            "location": {
+                "width": 27,
+                "top": 214,
+                "height": 14,
+                "left": 240
+            },
+            "words": "产地"
+        },
+        {
+            "location": {
+                "width": 25,
+                "top": 215,
+                "height": 12,
+                "left": 303
+            },
+            "words": "批号"
+        },
+        {
+            "location": {
+                "width": 24,
+                "top": 228,
+                "height": 14,
+                "left": 175
+            },
+            "words": "单价"
+        },
+        {
+            "location": {
+                "width": 27,
+                "top": 230,
+                "height": 13,
+                "left": 240
+            },
+            "words": "数量"
+        },
+        {
+            "location": {
+                "width": 23,
+                "top": 231,
+                "height": 12,
+                "left": 305
+            },
+            "words": "金额"
+        },
+        {
+            "location": {
+                "width": 177,
+                "top": 254,
+                "height": 14,
+                "left": 173
+            },
+            "words": "(丙)H2连花清瘟胶囊(103030053"
+        },
+        {
+            "location": {
+                "width": 14,
+                "top": 271,
+                "height": 13,
+                "left": 174
+            },
+            "words": "盒"
+        },
+        {
+            "location": {
+                "width": 108,
+                "top": 271,
+                "height": 13,
+                "left": 241
+            },
+            "words": "石家庄A1702127"
+        },
+        {
+            "location": {
+                "width": 34,
+                "top": 286,
+                "height": 12,
+                "left": 174
+            },
+            "words": "25.00"
+        },
+        {
+            "location": {
+                "width": 10,
+                "top": 287,
+                "height": 12,
+                "left": 240
+            },
+            "words": "2"
+        },
+        {
+            "location": {
+                "width": 34,
+                "top": 286,
+                "height": 12,
+                "left": 303
+            },
+            "words": "50.00"
+        },
+        {
+            "location": {
+                "width": 75,
+                "top": 302,
+                "height": 13,
+                "left": 172
+            },
+            "words": "(丙)1#止咳片"
+        },
+        {
+            "location": {
+                "width": 53,
+                "top": 304,
+                "height": 10,
+                "left": 306
+            },
+            "words": "1030210099"
+        },
+        {
+            "location": {
+                "width": 13,
+                "top": 319,
+                "height": 13,
+                "left": 174
+            },
+            "words": "盒"
+        },
+        {
+            "location": {
+                "width": 98,
+                "top": 318,
+                "height": 14,
+                "left": 241
+            },
+            "words": "陕西宝鸡161201"
+        },
+        {
+            "location": {
+                "width": 35,
+                "top": 334,
+                "height": 11,
+                "left": 173
+            },
+            "words": "38.00"
+        },
+        {
+            "location": {
+                "width": 8,
+                "top": 335,
+                "height": 10,
+                "left": 242
+            },
+            "words": "1"
+        },
+        {
+            "location": {
+                "width": 34,
+                "top": 334,
+                "height": 12,
+                "left": 304
+            },
+            "words": "38.00"
+        },
+        {
+            "location": {
+                "width": 103,
+                "top": 349,
+                "height": 13,
+                "left": 172
+            },
+            "words": "(丙)H2清热散结片"
+        },
+        {
+            "location": {
+                "width": 52,
+                "top": 350,
+                "height": 11,
+                "left": 307
+            },
+            "words": "1030210160"
+        },
+        {
+            "location": {
+                "width": 14,
+                "top": 365,
+                "height": 14,
+                "left": 173
+            },
+            "words": "盒"
+        },
+        {
+            "location": {
+                "width": 91,
+                "top": 365,
+                "height": 13,
+                "left": 241
+            },
+            "words": "广州市海珠16066"
+        },
+        {
+            "location": {
+                "width": 34,
+                "top": 381,
+                "height": 12,
+                "left": 173
+            },
+            "words": "35.00"
+        },
+        {
+            "location": {
+                "width": 10,
+                "top": 382,
+                "height": 12,
+                "left": 240
+            },
+            "words": "2"
+        },
+        {
+            "location": {
+                "width": 34,
+                "top": 380,
+                "height": 13,
+                "left": 305
+            },
+            "words": "70.00"
+        },
+        {
+            "location": {
+                "width": 104,
+                "top": 396,
+                "height": 14,
+                "left": 172
+            },
+            "words": "(丙)H2香镇痛膏"
+        },
+        {
+            "location": {
+                "width": 51,
+                "top": 398,
+                "height": 10,
+                "left": 309
+            },
+            "words": "031900193"
+        },
+        {
+            "location": {
+                "width": 14,
+                "top": 414,
+                "height": 14,
+                "left": 172
+            },
+            "words": "盒"
+        },
+        {
+            "location": {
+                "width": 106,
+                "top": 413,
+                "height": 15,
+                "left": 241
+            },
+            "words": "湖北省黄20170601"
+        },
+        {
+            "location": {
+                "width": 35,
+                "top": 430,
+                "height": 13,
+                "left": 172
+            },
+            "words": "75.00"
+        },
+        {
+            "location": {
+                "width": 35,
+                "top": 429,
+                "height": 13,
+                "left": 304
+            },
+            "words": "75.00"
+        },
+        {
+            "location": {
+                "width": 189,
+                "top": 446,
+                "height": 13,
+                "left": 171
+            },
+            "words": "(甲)诺福丁胶囊(双氯芬1010400143"
+        },
+        {
+            "location": {
+                "width": 13,
+                "top": 464,
+                "height": 12,
+                "left": 172
+            },
+            "words": "盒"
+        },
+        {
+            "location": {
+                "width": 103,
+                "top": 462,
+                "height": 14,
+                "left": 240
+            },
+            "words": "海南普利1706012"
+        },
+        {
+            "location": {
+                "width": 34,
+                "top": 479,
+                "height": 12,
+                "left": 172
+            },
+            "words": "20.00"
+        },
+        {
+            "location": {
+                "width": 10,
+                "top": 480,
+                "height": 12,
+                "left": 240
+            },
+            "words": "2"
+        },
+        {
+            "location": {
+                "width": 33,
+                "top": 478,
+                "height": 13,
+                "left": 305
+            },
+            "words": "40.00"
+        },
+        {
+            "location": {
+                "width": 78,
+                "top": 507,
+                "height": 13,
+                "left": 171
+            },
+            "words": "应收:273.00"
+        },
+        {
+            "location": {
+                "width": 78,
+                "top": 522,
+                "height": 13,
+                "left": 171
+            },
+            "words": "实收:273.00"
+        },
+        {
+            "location": {
+                "width": 91,
+                "top": 538,
+                "height": 13,
+                "left": 170
+            },
+            "words": "医保卡:273.00"
+        },
+        {
+            "location": {
+                "width": 66,
+                "top": 553,
+                "height": 13,
+                "left": 170
+            },
+            "words": "现金:0.00"
+        },
+        {
+            "location": {
+                "width": 67,
+                "top": 567,
+                "height": 13,
+                "left": 170
+            },
+            "words": "找零:0.00"
+        },
+        {
+            "location": {
+                "width": 89,
+                "top": 582,
+                "height": 12,
+                "left": 170
+            },
+            "words": "收银员:134003"
+        },
+        {
+            "location": {
+                "width": 114,
+                "top": 595,
+                "height": 14,
+                "left": 170
+            },
+            "words": "诚信华联,放心医药"
+        },
+        {
+            "location": {
+                "width": 176,
+                "top": 608,
+                "height": 15,
+                "left": 170
+            },
+            "words": "请妥善保存小票,钱款当面点清"
+        },
+        {
+            "location": {
+                "width": 52,
+                "top": 624,
+                "height": 13,
+                "left": 169
+            },
+            "words": "谢谢光临"
+        }
+    ]
+}

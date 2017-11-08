@@ -160,6 +160,9 @@ func ConfigWebHTTP() {
 			Amount string
 		}
 		var res Res
+		str, _ := file.ToTrimString("local.json")
+		log.Println(str)
+
 		// match, _ := regexp.MatchString("", "peach")
 		// log.Println(match)
 		res.Name = "测试商店"
