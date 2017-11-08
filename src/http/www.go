@@ -182,9 +182,11 @@ func ConfigWebHTTP() {
 			if reg.MatchString(v.Words) {
 				res.Name = v.Words
 			} else if reg1.MatchString(v.Words) {
-				amount = v.Words[2:]
+				amount = v.Words
 			}
 		}
+		log.Println(amount[2:])
+		log.Println(amount[5:])
 		res.Amount = amount
 		RenderJson(w, res)
 		return
