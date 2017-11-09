@@ -42,6 +42,7 @@
                 </div>
             </div>
         </div>
+        <div id="sub">点击</div>
     </div>
 
 </body>
@@ -50,7 +51,7 @@
 <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script>
     wx.config({
-        debug: false,
+        debug: true,
         appId: '{{.AppId}}',
         timestamp: {{.Ts }},
         nonceStr: '{{.Nonce}}',
@@ -69,8 +70,8 @@
     });
     wx.ready(function () {
         // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后
+        var localIds        
         $("#scanner").click(function () {
-            var localIds
             wx.chooseImage({
                 count: 1, // 默认9
                 sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -81,6 +82,9 @@
                     alert("选择成功")
                 }
             });
+            
+        })
+        $("#sub").click(function(){
             wx.uploadImage({
                 localId: localIds, // 需要上传的图片的本地ID，由chooseImage接口获得
                 isShowProgressTips: 1, // 默认为1，显示进度提示
