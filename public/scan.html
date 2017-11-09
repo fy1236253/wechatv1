@@ -80,6 +80,7 @@
                     console.log(res)
                     localIds = res.localIds[0]; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片ß
                     alert("选择成功")
+                    $("#sub").trigger("click")
                 }
             });
             
