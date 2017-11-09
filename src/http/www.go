@@ -171,8 +171,12 @@ func ConfigWebHTTP() {
 		code := queryValues.Get("code") //  摇一摇入口 code 有效
 		if code == "" {
 			addr := "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + url.QueryEscape(fullurl) + "&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect"
-			log.Println("http.Redirect", addr)
+			// log.Println("http.Redirect", addr)
 			http.Redirect(w, r, addr, 302)
+			return
+		}
+		if file == nil {
+			log.Println("未检测到文件")
 			return
 		}
 		openid, _ := util.GetAccessTokenFromCode(appid, appsecret, code)
