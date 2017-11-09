@@ -4,10 +4,12 @@ import (
 	"encoding/json"
 	"g"
 	"html/template"
+	"io"
 	"log"
 	"math/rand"
 	"net/http"
 	"net/url"
+	"os"
 	"path/filepath"
 	"regexp"
 	"strconv"
@@ -154,6 +156,17 @@ func ConfigWebHTTP() {
 		if err != nil {
 			log.Println(err)
 		}
+		return
+	})
+	http.HandleFunc("/uploadImg", func(w http.ResponseWriter, r *http.Request) {
+		r.ParseMultipartForm(32 << 20)
+		file, _, _ := r.FormFile("img")
+		timestamp := time.Now().UnixNano()
+		uuid := strconv.FormatInt(timestamp, 10)
+		f, _ := os.Open("public/upload/" + uuid + ".jpg")
+		defer f.Close()
+		io.Copy(f, file)
+		defer file.Close()
 		return
 	})
 	http.HandleFunc("/hand_operation", func(w http.ResponseWriter, r *http.Request) {
