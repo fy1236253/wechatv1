@@ -163,7 +163,7 @@ func ConfigWebHTTP() {
 		file, _, _ := r.FormFile("img")
 		timestamp := time.Now().UnixNano()
 		uuid := strconv.FormatInt(timestamp, 10)
-		f, e := os.Create("/public/upload/" + uuid + ".jpg")
+		f, e := os.Create(g.Root + "/public/upload/" + uuid + ".jpg")
 		log.Println(e)
 		defer f.Close()
 		io.Copy(f, file)
