@@ -65,27 +65,24 @@
                 sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
                 sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 success: function (res) {
-                    var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                    var localPath = ""
-                    // $("#localImg").attr("src", localIds);
-                    // $("#scanner").hide();
-                    // $(".scan-ok").show();
+                    var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片ß
                     wx.getLocalImgData({
                         localId: localIds, // 图片的localID
                         success: function (res) {
-                            localPath = res.localData; // localData是图片的base64数据，可以用img标签显示
+                            var localPath = res.localData; // localData是图片的base64数据，可以用img标签显示
+                            $.ajax({
+                                url: "/uploadImg",
+                                type: "POST",
+                                data: {
+                                    "baseImg": localPath
+                                },
+                                success: function () {
+                                    alert("success")
+                                }
+                            })
                         }
                     });
-                    $.ajax({
-                        url: "/uploadImg",
-                        type: "POST",
-                        data: {
-                            "baseImg":localPath
-                        },
-                        success: function () {
-                            alert("success")
-                        }
-                    })
+
                     // window.location.href = "/consumer"
                 }
             });
