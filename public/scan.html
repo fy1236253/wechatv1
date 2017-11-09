@@ -69,6 +69,17 @@
                     // $("#localImg").attr("src", localIds);
                     // $("#scanner").hide();
                     // $(".scan-ok").show();
+                    var form = new FormData();
+                    form.append("img", localIds);
+                    $.ajax({
+                        url: "/uploadImg",
+                        contentType:"multipart/form-data",
+                        method: "POST",
+                        data:form,
+                        success: function () { 
+                            alert("success")
+                        }
+                    })
                     window.location.href = "/consumer"
                 }
             });
