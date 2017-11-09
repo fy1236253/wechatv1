@@ -67,11 +67,12 @@
                 success: function (res) {
                     var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片ß
                     alert("选择成功")
-                    wx.getLocalImgData({
-                        localId: localIds, // 图片的localID
-                        success: function (res) {
-                            alert("获取本地路径成功"+localId)
-                            var localPath = res.localData; // localData是图片的base64数据，可以用img标签显示
+                    $("#localImg").attr("src",localIds)
+                    // wx.getLocalImgData({
+                    //     localId: localIds, // 图片的localID
+                    //     success: function (res) {
+                    //         alert("获取本地路径成功"+localId)
+                    //         var localPath = res.localData;
                             // $.ajax({
                             //     url: "/uploadImg",
                             //     type: "POST",
@@ -85,8 +86,8 @@
                             //         alert("上传成功")
                             //     }
                             // })
-                        }
-                    })
+                    //     }
+                    // })
 
                     // window.location.href = "/consumer"
                 }
