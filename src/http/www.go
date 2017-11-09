@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"g"
 	"html/template"
-	"io"
+	"io/ioutil"
 	"log"
 	"math/rand"
 	"model"
@@ -164,7 +164,8 @@ func ConfigWebHTTP() {
 		r.ParseMultipartForm(32 << 20)
 		appid := g.Config().Wechats[0].AppID
 		appsecret := g.Config().Wechats[0].AppSecret
-		file, _, _ := r.FormFile("img")
+		// file, _, _ := r.FormFile("img")
+		body, _ := ioutil.ReadAll(r.Body)
 		timestamp := time.Now().UnixNano()
 		uuid := strconv.FormatInt(timestamp, 10)
 		queryValues, _ := url.ParseQuery(r.URL.RawQuery)
@@ -175,16 +176,18 @@ func ConfigWebHTTP() {
 			http.Redirect(w, r, addr, 302)
 			return
 		}
-		if file == nil {
-			log.Println("未检测到文件")
-			return
-		}
+		// if file == nil {
+		// 	log.Println("未检测到文件")
+		// 	return
+		// }
 		openid, _ := util.GetAccessTokenFromCode(appid, appsecret, code)
 		f, e := os.Create(g.Root + "/public/upload/" + uuid + ".jpg")
 		log.Println(e)
 		defer f.Close()
-		io.Copy(f, file)
-		defer file.Close()
+		f.WriteString(string(body))
+		// io.Copy(f, file)
+		// defer file.Close()
+		log.Println(uuid)
 		model.CreatNewUploadImg(uuid, openid)
 		RenderJson(w, openid)
 		return
