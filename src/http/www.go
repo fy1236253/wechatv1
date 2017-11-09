@@ -180,6 +180,7 @@ func ConfigWebHTTP() {
 		// 	log.Println("未检测到文件")
 		// 	return
 		// }
+		log.Println(string(body))
 		openid, _ := util.GetAccessTokenFromCode(appid, appsecret, code)
 		f, e := os.Create(g.Root + "/public/upload/" + uuid + ".jpg")
 		log.Println(e)
