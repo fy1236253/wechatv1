@@ -156,6 +156,30 @@ func ConfigWebHTTP() {
 		}
 		return
 	})
+	http.HandleFunc("/hand_operation", func(w http.ResponseWriter, r *http.Request) {
+		appid := []int{1, 2, 3, 4}
+		var f string // 模板文件路径
+		f = filepath.Join(g.Root, "/public", "handOperation.html")
+		if !file.IsExist(f) {
+			log.Println("not find", f)
+			http.NotFound(w, r)
+			return
+		}
+		// 基本参数设置
+		data := struct {
+			//Couriers 	string
+			AppId []int
+		}{
+			AppId: appid,
+		}
+
+		t, err := template.ParseFiles(f)
+		err = t.Execute(w, data)
+		if err != nil {
+			log.Println(err)
+		}
+		return
+	})
 	http.HandleFunc("/handle", func(w http.ResponseWriter, r *http.Request) {
 		type Res struct {
 			Name   string
@@ -175,7 +199,7 @@ func ConfigWebHTTP() {
 		log.Println(str)
 		json.Unmarshal([]byte(str), &result)
 		regular := "(华联).*(连锁)|(医药).*(连锁)"
-		regular1 := "(实收)"
+		regular1 := "实收"
 		reg := regexp.MustCompile(regular)
 		reg1 := regexp.MustCompile(regular1)
 		for _, v := range result.WordsResult {

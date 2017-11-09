@@ -49,14 +49,14 @@
 </html>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script>
-    wx.config({
-        debug: false,
-        appId: '{{.AppId}}',
-        timestamp: {{.Ts }},
-        nonceStr: '{{.Nonce}}',
-        signature: '{{.Sign}}',
-        jsApiList: ['chooseImage'] // 必填，需要使用的JS接口列表
-    });
+    // wx.config({
+    //     debug: false,
+    //     appId: '{{.AppId}}',
+    //     timestamp: {{.Ts }},
+    //     nonceStr: '{{.Nonce}}',
+    //     signature: '{{.Sign}}',
+    //     jsApiList: ['chooseImage'] // 必填，需要使用的JS接口列表
+    // });
     wx.ready(function () {
         // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后
         $("#scanner").click(function () {
