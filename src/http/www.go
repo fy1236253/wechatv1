@@ -161,6 +161,7 @@ func ConfigWebHTTP() {
 	})
 	http.HandleFunc("/uploadImg", func(w http.ResponseWriter, r *http.Request) {
 		fullurl := "http://" + r.Host + r.RequestURI
+		log.Println("have img uploading")
 		r.ParseMultipartForm(32 << 20)
 		appid := g.Config().Wechats[0].AppID
 		appsecret := g.Config().Wechats[0].AppSecret
