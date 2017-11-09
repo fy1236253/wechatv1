@@ -67,25 +67,34 @@
                 success: function (res) {
                     var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片ß
                     alert("选择成功")
-                    $("#localImg").attr("src",localIds)
+                    $("#localImg").attr("src", localIds)
+                    wx.uploadImage({
+                        localId: localIds, // 需要上传的图片的本地ID，由chooseImage接口获得
+                        isShowProgressTips: 1, // 默认为1，显示进度提示
+                        success: function (res) {
+                            var serverId = res.serverId; // 返回图片的服务器端ID
+                            $.ajax({
+                                url: "/uploadImg",
+                                type: "POST",
+                                data: {
+                                    "serverid": serverId
+                                },
+                                success: function () {
+                                    alert("success")
+                                },
+                                complete: function () {
+                                    alert("上传成功")
+                                }
+                            })
+
+                        }
+                    });
                     // wx.getLocalImgData({
                     //     localId: localIds, // 图片的localID
                     //     success: function (res) {
                     //         alert("获取本地路径成功"+localId)
                     //         var localPath = res.localData;
-                            // $.ajax({
-                            //     url: "/uploadImg",
-                            //     type: "POST",
-                            //     data: {
-                            //         "baseImg": localPath
-                            //     },
-                            //     success: function () {
-                            //         alert("success")
-                            //     },
-                            //     complete:function(){
-                            //         alert("上传成功")
-                            //     }
-                            // })
+
                     //     }
                     // })
 
