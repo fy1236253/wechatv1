@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"math/rand"
+	"model"
 	"net/http"
 	"net/url"
 	"os"
@@ -159,16 +160,29 @@ func ConfigWebHTTP() {
 		return
 	})
 	http.HandleFunc("/uploadImg", func(w http.ResponseWriter, r *http.Request) {
+		fullurl := "http://" + r.Host + r.RequestURI
 		r.ParseMultipartForm(32 << 20)
+		appid := g.Config().Wechats[0].AppID
+		appsecret := g.Config().Wechats[0].AppSecret
 		file, _, _ := r.FormFile("img")
 		timestamp := time.Now().UnixNano()
 		uuid := strconv.FormatInt(timestamp, 10)
+		queryValues, _ := url.ParseQuery(r.URL.RawQuery)
+		code := queryValues.Get("code") //  摇一摇入口 code 有效
+		if code == "" {
+			addr := "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + url.QueryEscape(fullurl) + "&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect"
+			log.Println("http.Redirect", addr)
+			http.Redirect(w, r, addr, 302)
+			return
+		}
+		openid, _ := util.GetAccessTokenFromCode(appid, appsecret, code)
 		f, e := os.Create(g.Root + "/public/upload/" + uuid + ".jpg")
 		log.Println(e)
 		defer f.Close()
 		io.Copy(f, file)
 		defer file.Close()
-		RenderJson(w, "success")
+		model.CreatNewUploadImg(uuid, openid)
+		RenderJson(w, openid)
 		return
 	})
 	http.HandleFunc("/hand_operation", func(w http.ResponseWriter, r *http.Request) {
