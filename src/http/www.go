@@ -163,10 +163,11 @@ func ConfigWebHTTP() {
 		file, _, _ := r.FormFile("img")
 		timestamp := time.Now().UnixNano()
 		uuid := strconv.FormatInt(timestamp, 10)
-		f, _ := os.Open("public/upload/" + uuid + ".jpg")
+		f, _ := os.Create("public/upload/" + uuid + ".jpg")
 		defer f.Close()
 		io.Copy(f, file)
 		defer file.Close()
+		RenderJson(w, "success")
 		return
 	})
 	http.HandleFunc("/hand_operation", func(w http.ResponseWriter, r *http.Request) {
