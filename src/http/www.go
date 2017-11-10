@@ -14,6 +14,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"strconv"
+	"strings"
 	"time"
 	"util"
 
@@ -174,26 +175,14 @@ func ConfigWebHTTP() {
 		return
 	})
 	http.HandleFunc("/uploadImg", func(w http.ResponseWriter, r *http.Request) {
-		// fullurl := "http://" + r.Host + r.RequestURI
 		r.ParseMultipartForm(32 << 20)
-		// appid := g.Config().Wechats[0].AppID
-		// appsecret := g.Config().Wechats[0].AppSecret
 		file, _, _ := r.FormFile("img")
 		timestamp := time.Now().UnixNano()
 		uuid := strconv.FormatInt(timestamp, 10)
-		// queryValues, _ := url.ParseQuery(r.URL.RawQuery)
-		// code := queryValues.Get("code") //  摇一摇入口 code 有效
-		// if code == "" {
-		// 	addr := "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + url.QueryEscape(fullurl) + "&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect"
-		// 	// log.Println("http.Redirect", addr)
-		// 	http.Redirect(w, r, addr, 302)
-		// 	return
-		// }
 		if file == nil {
 			log.Println("未检测到文件")
 			return
 		}
-		// openid, _ := util.GetAccessTokenFromCode(appid, appsecret, code)
 		f, e := os.Create(g.Root + "/public/upload/" + uuid + ".jpg")
 		log.Println(e)
 		defer f.Close()
@@ -208,7 +197,7 @@ func ConfigWebHTTP() {
 		return
 	})
 	http.HandleFunc("/hand_operation", func(w http.ResponseWriter, r *http.Request) {
-		appid := []int{1, 2, 3, 4}
+		imgItems := model.GetUploadImgInfo()
 		var f string // 模板文件路径
 		f = filepath.Join(g.Root, "/public", "handOperation.html")
 		if !file.IsExist(f) {
@@ -219,9 +208,33 @@ func ConfigWebHTTP() {
 		// 基本参数设置
 		data := struct {
 			//Couriers 	string
-			AppId []int
+			ImgItems []string
 		}{
-			AppId: appid,
+			ImgItems: imgItems,
+		}
+
+		t, err := template.ParseFiles(f)
+		err = t.Execute(w, data)
+		if err != nil {
+			log.Println(err)
+		}
+		return
+	})
+	http.HandleFunc("/edit_img", func(w http.ResponseWriter, r *http.Request) {
+		ID := strings.Trim(r.URL.Path, "/edit_img/")
+		log.Println(ID)
+		var f string // 模板文件路径
+		f = filepath.Join(g.Root, "/public", "edit.html")
+		if !file.IsExist(f) {
+			log.Println("not find", f)
+			http.NotFound(w, r)
+			return
+		}
+		// 基本参数设置
+		data := struct {
+			UUID string
+		}{
+			UUID: ID,
 		}
 
 		t, err := template.ParseFiles(f)
