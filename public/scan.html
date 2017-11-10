@@ -68,6 +68,7 @@ var uploadCustomFileList = [];
 weui.uploader('#uploaderCustom', {
     url: '/uploadImg',
     auto: false,
+    fileVal: 'img',
     onQueued: function() {
         uploadCustomFileList.push(this);
     }
