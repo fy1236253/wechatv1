@@ -8,7 +8,6 @@ import (
 
 func CreatNewUploadImg(uuid, openid string) {
 	conn, _ := g.GetDBConn("default")
-	defer conn.Close()
 	stmt, _ := conn.Prepare("INSERT img_order SET uuid=?,openid=?")
 	stmt.Exec(uuid, openid)
 }
@@ -22,6 +21,10 @@ func GetUploadImgInfo() (arr []string) {
 	conn, _ := g.GetDBConn("default")
 	var rows *sql.Rows
 	rows, _ = conn.Query("select uuid from img_order")
+	if rows == nil {
+		log.Println("rows nil ")
+		return
+	}
 	defer rows.Close()
 	for rows.Next() {
 		var uuid string
