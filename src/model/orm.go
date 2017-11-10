@@ -2,7 +2,6 @@ package model
 
 import (
 	"database/sql"
-	"encoding/json"
 	"g"
 	"log"
 )
@@ -24,20 +23,13 @@ func GetUploadImgInfo() (arr []string) {
 	var rows *sql.Rows
 	rows, _ = conn.Query("select uuid from img_order")
 	defer rows.Close()
-	var d ImgUuid
 	for rows.Next() {
 		var uuid string
 		if e := rows.Scan(&uuid); e != nil {
 			log.Println("[ERROR] get row fail", e)
 		} else {
 			log.Println(uuid)
-			e := json.Unmarshal([]byte(uuid), &d)
-			if e != nil {
-				log.Println("json 解析失败: %s", e)
-				continue
-			}
-
-			arr = append(arr, d.UUID) // 保存id 集合
+			arr = append(arr, uuid) // 保存id 集合
 		}
 	}
 	return arr
