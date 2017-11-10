@@ -30,6 +30,7 @@ func GetUploadImgInfo() (arr []string) {
 		if e := rows.Scan(&uuid); e != nil {
 			log.Println("[ERROR] get row fail", e)
 		} else {
+			log.Println(uuid)
 			e := json.Unmarshal([]byte(uuid), &d)
 			if e != nil {
 				log.Println("json 解析失败: %s", e)
