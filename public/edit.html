@@ -8,7 +8,7 @@
     <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
     <link rel="stylesheet" href="css/scan.css">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">    
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
     <title>手工填写图片信息</title>
 </head>
 
@@ -42,12 +42,11 @@
 <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.3/weui.min.js"></script>
 <script type="text/javascript">
     $(function () {
-
         $("#subInfo").click(function () {
             var name = document.getElementById("name").value;
             var amount = document.getElementById("amount").value;
             if (name == "" || amount == "") {
-                weui.toast('药店名称和金额不能为空', 2000);
+                weui.alert('药店和金额必须填写');
                 return
             }
             $.post("/save_user_info", { "name": name, "amount": amount }, function (e) {
