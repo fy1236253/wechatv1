@@ -182,7 +182,7 @@ func ConfigWebHTTP() {
 			log.Println("未检测到文件")
 			return
 		}
-		f, e := os.Create(g.Root + "/public/upload/" + uuid + ".jpg")
+		f, e := os.Create(g.Root + "/public/img/" + uuid + ".jpg")
 		log.Println(e)
 		defer f.Close()
 		log.Println(f.Name())
