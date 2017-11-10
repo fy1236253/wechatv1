@@ -1,19 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
     <title>手工填写图片信息</title>
 </head>
+
 <body>
     <div class="container">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <img src="upload/{{.UUID}}.jpg" class="img-responsive" alt="Image">
         </div>
-        
+        <div class="weui-tab__panel">
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">药店名称</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="tel" required="" pattern="^\d{11}$" maxlength="11" placeholder="输入你现在的手机号" emptytips="请输入手机号"
+                            notmatchtips="请输入正确的手机号"> </div>
+                    <div class="weui-cell__ft">
+                        <i class="weui-icon-warn"></i>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">消费金额</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" required="" pattern="REG_IDNUM" maxlength="18" placeholder="输入你的身份证号码" emptytips="请输入身份证号码"
+                            notmatchtips="请输入正确的身份证号码"> </div>
+                    <div class="weui-cell__ft">
+                        <i class="weui-icon-warn"></i>
+                    </div>
+                </div>
+                <div class="weui-btn-area">
+                    <a id="formSubmitBtn" href="javascript:" class="weui-btn weui-btn_primary">提交</a>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
+
 </html>
