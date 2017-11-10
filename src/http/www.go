@@ -185,6 +185,7 @@ func ConfigWebHTTP() {
 		log.Println(f.Name())
 		io.Copy(f, file)
 		defer file.Close()
+		os.Remove(g.Root + "/public/upload/" + uuid + ".jpg")
 		// model.CreatNewUploadImg(uuid, openid)
 		RenderJson(w, "123")
 		return
