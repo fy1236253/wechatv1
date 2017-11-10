@@ -78,6 +78,9 @@ weui.uploader('#uploaderCustom', {
 document.getElementById("uploaderCustomBtn").addEventListener('click', function(){
     uploadCustomFileList.forEach(function(file){
         file.upload();
+        if (this.status=="success"){
+            weui.toast('操作成功', 2000);
+        }
     });
 });
 
