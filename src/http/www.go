@@ -14,7 +14,6 @@ import (
 	"path/filepath"
 	"regexp"
 	"strconv"
-	"strings"
 	"time"
 	"util"
 
@@ -189,7 +188,7 @@ func ConfigWebHTTP() {
 		log.Println(f.Name())
 		io.Copy(f, file)
 		defer file.Close()
-		os.Remove(g.Root + "/public/upload/" + uuid + ".jpg")
+		// os.Remove(g.Root + "/public/upload/" + uuid + ".jpg")
 		sess, _ := globalSessions.SessionStart(w, r)
 		defer sess.SessionRelease(w)
 		model.CreatNewUploadImg(uuid, sess.Get("openid").(string))
@@ -221,8 +220,9 @@ func ConfigWebHTTP() {
 		return
 	})
 	http.HandleFunc("/edit_img", func(w http.ResponseWriter, r *http.Request) {
-		ID := strings.Trim(r.URL.Path, "/edit_img/")
-		log.Println(ID)
+		urlParse, _ := url.ParseQuery(r.URL.RawQuery)
+		uuid := urlParse.Get("uuid")
+		log.Println(uuid)
 		var f string // 模板文件路径
 		f = filepath.Join(g.Root, "/public", "edit.html")
 		if !file.IsExist(f) {
@@ -234,7 +234,7 @@ func ConfigWebHTTP() {
 		data := struct {
 			UUID string
 		}{
-			UUID: ID,
+			UUID: uuid,
 		}
 
 		t, err := template.ParseFiles(f)

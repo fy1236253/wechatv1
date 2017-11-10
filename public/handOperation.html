@@ -53,7 +53,7 @@
         $("#edit").click(function () {
             i = $(this).index();
             uuid = {{.ImgItems}};
-            window.location.href = "/edit_img/" + uuid[i]
+            window.location.href = "/edit_img?uuid=" + uuid[i]
         })
     })
 </script>
