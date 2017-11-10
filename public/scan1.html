@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/scan.css">
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+    <!-- <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <title>药品单扫描</title>
+</head>
+
+<body class="content-body">
+    <div class="container">
+        <header>
+            <div class="row mtop20">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-xs-4  col-sm-4 col-md-4 col-lg-4 col-md-offset-4 col-xs-offset-4 col-sm-offset-4 col-lg-offset-4">
+                        <img src="img/company.png" class="img-responsive company-img" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="panel-body basic-panel">
+
+            <img src="" class="img-responsive" alt="" id="localImg">
+
+        </div>
+        <div class="text-center bottom-hint">
+            请保持小票平整，小票票头，票尾在框内
+        </div>
+        <div class="mtop20">
+            <img src="img/camera.png" class="img-responsive middle-box" id="scanner" width="60" alt="Image">
+            <div class="hide-box">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <img src="img/camera.png" class="img-responsive middle-box" id="reload" width="60" alt="Image">
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <img src="img/ok.png" class="img-responsive middle-box" id="submit" width="60" alt="Image">
+                </div>
+            </div>
+        </div>
+        <div id="sub">点击</div>
+        <div class="weui-cells weui-cells_form" id="uploader">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <div class="weui-uploader">
+                        <div class="weui-uploader__hd">
+                            <p class="weui-uploader__title">图片上传</p>
+                            <div class="weui-uploader__info">
+                                <span id="uploadCount">0</span>/5</div>
+                        </div>
+                        <div class="weui-uploader__bd">
+                            <ul class="weui-uploader__files" id="uploaderFiles"></ul>
+                            <div class="weui-uploader__input-box">
+                                <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" capture="camera" multiple="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.3/weui.min.js"></script>
+<!-- <script>
+    weui.alert('普通的alert');
+    wx.config({
+        debug: true,
+        appId: '{{.AppId}}',
+        timestamp: {{.Ts }},
+        nonceStr: '{{.Nonce}}',
+        signature: '{{.Sign}}',
+        jsApiList : [
+            'checkJsApi', 'onMenuShareTimeline', 'onMenuShareAppMessage',
+            'onMenuShareQQ', 'onMenuShareWeibo', 'hideMenuItems',
+            'showMenuItems', 'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem', 'translateVoice', 'startRecord',
+            'stopRecord', 'onRecordEnd', 'playVoice', 'pauseVoice',
+            'stopVoice', 'uploadVoice', 'downloadVoice', 'chooseImage',
+            'previewImage', 'uploadImage', 'downloadImage', 'getNetworkType',
+            'openLocation', 'getLocation', 'hideOptionMenu', 'showOptionMenu',
+            'closeWindow', 'scanQRCode', 'chooseWXPay',
+            'openProductSpecificView', 'addCard', 'chooseCard', 'openCard']
+    });
+    wx.ready(function () {
+        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后
+        var localIds
+        $("#scanner").click(function () {
+            wx.chooseImage({
+                count: 1, // 默认9
+                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                success: function (res) {
+                    console.log(res)
+                    localIds = res.localIds[0]; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片ß
+                    $("#sub").trigger("click");
+                }
+            });
+
+        })
+        $("#sub").click(function () {
+            wx.uploadImage({
+                localId: localIds, // 需要上传的图片的本地ID，由chooseImage接口获得
+                isShowProgressTips: 1, // 默认为1，显示进度提示
+                success: function (res) {
+                    var serverId = res.serverId; // 返回图片的服务器端ID
+                    alert(serverId)
+                    $.ajax({
+                        url: "/uploadImg",
+                        type: "POST",
+                        data: {
+                            "serverid": serverId
+                        },
+                        success: function () {
+                        },
+                        complete: function () {
+                        }
+                    })
+
+                }
+            });
+        })
+    })
+</script> -->
+<!-- <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.3/weui.min.js"></script>
+<script type="text/javascript">
+var uploadCount = 0;
+weui.uploader('#uploader', {
+   url: '/uploadImg',
+   auto: true,
+   type: 'file',
+   fileVal: 'img',
+   compress: {
+       width: 1600,
+       height: 1600,
+       quality: .8
+   },
+   onBeforeQueued: function(files) {
+       // `this` 是轮询到的文件, `files` 是所有文件
+
+       if(["image/jpg", "image/jpeg", "image/png", "image/gif"].indexOf(this.type) < 0){
+           weui.alert('请上传图片');
+           return false; // 阻止文件添加
+       }
+       if(this.size > 10 * 1024 * 1024){
+           weui.alert('请上传不超过10M的图片');
+           return false;
+       }
+       if (files.length > 5) { // 防止一下子选择过多文件
+           weui.alert('最多只能上传5张图片，请重新选择');
+           return false;
+       }
+       if (uploadCount + 1 > 5) {
+           weui.alert('最多只能上传5张图片');
+           return false;
+       }
+
+       ++uploadCount;
+
+       // return true; // 阻止默认行为，不插入预览图的框架
+   },
+   onQueued: function(){
+       console.log(this);
+
+       // console.log(this.status); // 文件的状态：'ready', 'progress', 'success', 'fail'
+       // console.log(this.base64); // 如果是base64上传，file.base64可以获得文件的base64
+
+       // this.upload(); // 如果是手动上传，这里可以通过调用upload来实现；也可以用它来实现重传。
+       // this.stop(); // 中断上传
+
+       // return true; // 阻止默认行为，不显示预览图的图像
+   },
+   onBeforeSend: function(data, headers){
+       console.log(this, data, headers);
+       // $.extend(data, { test: 1 }); // 可以扩展此对象来控制上传参数
+       // $.extend(headers, { Origin: 'http://127.0.0.1' }); // 可以扩展此对象来控制上传头部
+
+       // return false; // 阻止文件上传
+   },
+   onProgress: function(procent){
+       console.log(this, procent);
+       // return true; // 阻止默认行为，不使用默认的进度显示
+   },
+   onSuccess: function (ret) {
+       console.log(this, ret);
+       // return true; // 阻止默认行为，不使用默认的成功态
+   },
+   onError: function(err){
+       console.log(this, err);
+       // return true; // 阻止默认行为，不使用默认的失败态
+   }
+});
+</script> -->
