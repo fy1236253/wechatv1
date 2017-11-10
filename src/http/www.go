@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"math/rand"
+	"model"
 	"net/http"
 	"net/url"
 	"os"
@@ -65,13 +66,27 @@ func ConfigWebHTTP() {
 	http.HandleFunc("/scanner", func(w http.ResponseWriter, r *http.Request) {
 		fullurl := "http://" + r.Host + r.RequestURI
 		wxid := "gh_f353e8a82fe5"
-		appid := "wxdfac68fcc7a48fca"
+		appid := g.Config().Wechats[0].AppID
+		appsecret := g.Config().Wechats[0].AppSecret
+		queryValues, _ := url.ParseQuery(r.URL.RawQuery)
+		code := queryValues.Get("code") //  摇一摇入口 code 有效
+		if code == "" {
+			addr := "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + url.QueryEscape(fullurl) + "&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect"
+			http.Redirect(w, r, addr, 302)
+			return
+		}
+		openid, _ := util.GetAccessTokenFromCode(appid, appsecret, code)
 		var f string // 模板文件路径
 		f = filepath.Join(g.Root, "/public", "scan.html")
 		if !file.IsExist(f) {
 			log.Println("not find", f)
 			http.NotFound(w, r)
 			return
+		}
+		sess, _ := globalSessions.SessionStart(w, r)
+		defer sess.SessionRelease(w)
+		if sess.Get("openid") == nil {
+			sess.Set("openid", openid)
 		}
 		// 基本参数设置
 		rand.Seed(time.Now().UnixNano())
@@ -186,7 +201,9 @@ func ConfigWebHTTP() {
 		io.Copy(f, file)
 		defer file.Close()
 		os.Remove(g.Root + "/public/upload/" + uuid + ".jpg")
-		// model.CreatNewUploadImg(uuid, openid)
+		sess, _ := globalSessions.SessionStart(w, r)
+		defer sess.SessionRelease(w)
+		model.CreatNewUploadImg(uuid, sess.Get("openid").(string))
 		RenderJson(w, "123")
 		return
 	})
