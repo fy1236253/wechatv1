@@ -25,17 +25,34 @@
             <img src="upload/{{.UUID}}.jpg" class="img-responsive" alt="Image">
         </div>
         <div class="form-group">
-            <label for="exampleInputEmail1">药店名称</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="">
+            <label for="name">药店名称</label>
+            <input type="text" class="form-control" id="name" placeholder="">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">金额汇总</label>
-            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="">
+            <label for="amount">金额汇总</label>
+            <input type="number" class="form-control" id="amount" placeholder="">
         </div>
         <div class="form-group">
-                <button type="button" class="btn btn-primary btn-lg btn-block">提交</button>    
+                <button id="subInfo" type="button" class="btn btn-primary btn-lg btn-block">提交</button>    
             </div>
     </div>
 </body>
+<script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.3/weui.min.js"></script>
+<script>
+    $(function(){
+        var name = document.getElementById("name").value;
+        var amount = document.getElementById("amount").value;
+        $("#subInfo").click(function(){
+            if (name==""||amount==""){
+                weui.toast('药店名称和金额不能为空', 2000);
+                return
+            }
+            $.post("/save_user_info",{"name":name,"amount":amount},function(e){
+                weui.toast('上传成功', 2000);
+                console.log(e)
+            })
+         })
+    })
 
+</script>
 </html>

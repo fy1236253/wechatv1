@@ -219,6 +219,16 @@ func ConfigWebHTTP() {
 		}
 		return
 	})
+	http.HandleFunc("/save_user_info", func(w http.ResponseWriter, r *http.Request) {
+		name := r.FormValue("name")
+		amount := r.FormValue("amount")
+		if name == "" || amount == "" {
+			log.Println("[no paramas]")
+			return
+		}
+		log.Println(name, amount)
+		return
+	})
 	http.HandleFunc("/edit_img", func(w http.ResponseWriter, r *http.Request) {
 		urlParse, _ := url.ParseQuery(r.URL.RawQuery)
 		uuid := urlParse.Get("uuid")
