@@ -48,7 +48,7 @@ func ImportDatbase() {
 	conn, _ := g.GetDBConn("default")
 	f, _ := os.Open("data/m.csv")
 	r := bufio.NewReader(f)
-	var fields []string
+	fields := []string{}
 	for {
 		line, err := file.ReadLine(r)
 		if err == io.EOF {
