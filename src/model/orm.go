@@ -48,15 +48,14 @@ func ImportDatbase() {
 	conn, _ := g.GetDBConn("default")
 	f, _ := os.Open("data/m.csv")
 	r := bufio.NewReader(f)
-	fields := []string{}
 	for {
 		line, err := file.ReadLine(r)
 		if err == io.EOF {
 			break
 		}
-		fields = strings.Split(string(line), ",")
+		fields := strings.Split(string(line), ",")
 		stmt, _ := conn.Prepare("INSERT medicine_info SET name=?,province=?,city=?,origin=?,address=?,method=?")
-		_, e := stmt.Exec(fields[0], fields[1], fields[2], fields[3], fields[4])
+		_, e := stmt.Exec(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5])
 		log.Println(e)
 	}
 }
