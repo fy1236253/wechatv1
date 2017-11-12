@@ -46,7 +46,7 @@ func GetUploadImgInfo() (arr []string) {
 
 func ImportDatbase() {
 	conn, _ := g.GetDBConn("default")
-	f, _ := os.Open("data/m.rtf")
+	f, _ := os.Open("data/m.txt")
 	r := bufio.NewReader(f)
 	for {
 		line, err := file.ReadLine(r)
