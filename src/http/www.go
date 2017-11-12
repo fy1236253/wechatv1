@@ -1,7 +1,6 @@
 package http
 
 import (
-	"encoding/json"
 	"g"
 	"html/template"
 	"io"
@@ -12,7 +11,6 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
-	"regexp"
 	"strconv"
 	"time"
 	"util"
@@ -255,38 +253,7 @@ func ConfigWebHTTP() {
 		return
 	})
 	http.HandleFunc("/handle", func(w http.ResponseWriter, r *http.Request) {
-		type Res struct {
-			Name   string
-			Amount string
-		}
-		type WResult struct {
-			Words string `json:"words"`
-		}
-		type Result struct {
-			WordsResult []WResult `json:"words_result"`
-		}
-
-		var res Res
-		var result Result
-		var amount string
-		str, _ := file.ToTrimString("local.json")
-		log.Println(str)
-		json.Unmarshal([]byte(str), &result)
-		regular := "(华联).*(连锁)|(医药).*(连锁)"
-		regular1 := "实收"
-		reg := regexp.MustCompile(regular)
-		reg1 := regexp.MustCompile(regular1)
-		for _, v := range result.WordsResult {
-			if reg.MatchString(v.Words) {
-				res.Name = v.Words
-			} else if reg1.MatchString(v.Words) {
-				amount = v.Words
-			}
-		}
-		log.Println(amount[2:])
-		log.Println(amount[5:])
-		res.Amount = amount
-		RenderJson(w, res)
+		model.ImportDatbase()
 		return
 	})
 }

@@ -1,9 +1,15 @@
 package model
 
 import (
+	"bufio"
 	"database/sql"
 	"g"
+	"io"
 	"log"
+	"os"
+	"strings"
+
+	"github.com/toolkits/file"
 )
 
 func CreatNewUploadImg(uuid, openid string) {
@@ -36,4 +42,21 @@ func GetUploadImgInfo() (arr []string) {
 		}
 	}
 	return arr
+}
+
+func ImportDatbase() {
+	conn, _ := g.GetDBConn("default")
+	f, _ := os.Open("data/m.csv")
+	r := bufio.NewReader(f)
+	var fields []string
+	for {
+		line, err := file.ReadLine(r)
+		if err == io.EOF {
+			break
+		}
+		fields = strings.Split(string(line), ",")
+		stmt, _ := conn.Prepare("INSERT medicine_info SET name=?,province=?,city=?,origin=?,address=?,method=?")
+		_, e := stmt.Exec(fields[0], fields[1], fields[2], fields[3], fields[4])
+		log.Println(e)
+	}
 }
