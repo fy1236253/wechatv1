@@ -53,8 +53,10 @@ func ImportDatbase() {
 		if err == io.EOF {
 			break
 		}
-		log.Println(string(line))
-		fields := strings.Split(string(line), ",")
+		str := string(line)
+		str = strings.Trim(str, " ")
+		log.Println(str)
+		fields := strings.Split(str, ",")
 		stmt, _ := conn.Prepare("INSERT medicine_info SET name=?,province=?,city=?,origin=?,address=?,method=?")
 		_, e := stmt.Exec(fields[0], fields[1], fields[2], fields[3], fields[4], fields[5])
 		log.Println(e)
