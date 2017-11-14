@@ -73,8 +73,8 @@
             uploadCustomFileList.push(this);
         },
         onSuccess: function (res) {
+            weui.loading('loading').hide(); 
             weui.toast('操作成功', 2000);
-            loading.hide();
             //    console.log(this,res);
             // weui.alert(res)
             window.location.href = "/consumer?name=" + res.data.shop_name + "&amount=" + res.data.total_amount + "&unionid=" + res.data.unionid;
@@ -82,7 +82,7 @@
         },
         onError: function (err) {
             console.log(this, err);
-            loading.hide();            
+            weui.loading('loading').hide();            
             // return true; // 阻止默认行为，不使用默认的失败态
         },
         onBeforeQueued: function (files) {
@@ -110,11 +110,8 @@
 
     // 手动上传按钮
     document.getElementById("uploaderCustomBtn").addEventListener('click', function () {
-        var loading = weui.loading('loading', {
-            className: 'custom-classname'
-        });
         uploadCustomFileList.forEach(function (file) {
-            var loading = weui.loading('loading');            
+            weui.loading('loading');            
             file.upload();
         });
     });
