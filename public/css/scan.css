@@ -55,10 +55,6 @@
     text-align: center;
 }
 
-html, body{
-    height: 100%;
-    background-color: #f8f8f8;
-}
 body{
     font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
 }
