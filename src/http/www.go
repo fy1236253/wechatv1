@@ -172,10 +172,13 @@ func ConfigWebHTTP() {
 	})
 	http.HandleFunc("/uploadImg", func(w http.ResponseWriter, r *http.Request) {
 		r.ParseMultipartForm(32 << 20)
+		sess, _ := globalSessions.SessionStart(w, r)
+		defer sess.SessionRelease(w)
+		openid := sess.Get("openid").(string)
 		file, _, _ := r.FormFile("img")
 		timestamp := time.Now().UnixNano()
 		uuid := strconv.FormatInt(timestamp, 10)
-		if file == nil {
+		if file == nil || openid == "" {
 			log.Println("未检测到文件")
 			return
 		}
@@ -189,9 +192,8 @@ func ConfigWebHTTP() {
 			return
 		}
 		var result model.CommonResult
-		sess, _ := globalSessions.SessionStart(w, r)
-		defer sess.SessionRelease(w)
-		model.CreatNewUploadImg(uuid, sess.Get("openid").(string))
+
+		model.CreatNewUploadImg(uuid, openid)
 		result.ErrMsg = "success"
 		result.DataInfo = res
 		RenderJson(w, result)
