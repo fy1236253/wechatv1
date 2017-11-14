@@ -184,7 +184,7 @@ func ConfigWebHTTP() {
 		n, _ := file.Read(sourcebuffer)
 		base64Str := base64.StdEncoding.EncodeToString(sourcebuffer[:n])
 		res := model.LocalImageRecognition(base64Str)
-		if res.ShopName == "" {
+		if res == nil {
 			log.Println("fail to upload")
 			return
 		}
