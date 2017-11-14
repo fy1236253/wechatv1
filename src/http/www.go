@@ -1,15 +1,14 @@
 package http
 
 import (
+	"encoding/base64"
 	"g"
 	"html/template"
-	"io"
 	"log"
 	"math/rand"
 	"model"
 	"net/http"
 	"net/url"
-	"os"
 	"path/filepath"
 	"strconv"
 	"time"
@@ -180,17 +179,22 @@ func ConfigWebHTTP() {
 			log.Println("未检测到文件")
 			return
 		}
-		f, e := os.Create(g.Root + "/public/upload/" + uuid + ".jpg")
-		log.Println(e)
-		defer f.Close()
-		log.Println(f.Name())
-		io.Copy(f, file)
 		defer file.Close()
-		// os.Remove(g.Root + "/public/upload/" + uuid + ".jpg")
+		sourcebuffer := make([]byte, 4*1024*1024) //最大4M
+		n, _ := file.Read(sourcebuffer)
+		base64Str := base64.StdEncoding.EncodeToString(sourcebuffer[:n])
+		res := model.LocalImageRecognition(base64Str)
+		if res.ShopName == "" {
+			log.Println("fail to upload")
+			return
+		}
+		var result model.CommonResult
 		sess, _ := globalSessions.SessionStart(w, r)
 		defer sess.SessionRelease(w)
 		model.CreatNewUploadImg(uuid, sess.Get("openid").(string))
-		RenderJson(w, "123")
+		result.ErrMsg = "success"
+		result.DataInfo = res
+		RenderJson(w, result)
 		return
 	})
 	http.HandleFunc("/hand_operation", func(w http.ResponseWriter, r *http.Request) {
