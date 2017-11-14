@@ -192,7 +192,8 @@ func ConfigWebHTTP() {
 			return
 		}
 		var result model.CommonResult
-		model.CreatNewUploadImg(uuid, openid)
+		log.Println(uuid)
+		// model.CreatNewUploadImg(uuid, openid)
 		result.ErrMsg = "success"
 		result.DataInfo = res
 		RenderJson(w, result)
