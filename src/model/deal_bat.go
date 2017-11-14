@@ -79,6 +79,7 @@ func LocalImageRecognition(base64 string) *RecognizeResult {
 	}
 	result.TotalAmount = amount
 	result.Uninoid = unionid
+	result.ShopName = shop
 	if shop == "" || unionid == "" || 0 == amount {
 		log.Println("order info have error")
 		return nil
