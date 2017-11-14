@@ -49,7 +49,7 @@ func BatImageRecognition(base64Str string) string {
 }
 
 // LocalImageRecognition 自由图片处理 提取数据
-func LocalImageRecognition(base64 string) (result *RecognizeResult) {
+func LocalImageRecognition(base64 string) (result RecognizeResult) {
 	resp := BatImageRecognition(base64)
 	if resp == "" {
 		log.Println("request BAT fail")
