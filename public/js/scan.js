@@ -7,6 +7,7 @@ $(function () {
         $(".scan-ok").hide();
     });
     $("#submit").click(function () {
+
         window.location.href = "/credits"
     })
     $("#reload").click(function(){

@@ -124,7 +124,6 @@ func ConfigWebHTTP() {
 		}
 		// 基本参数设置
 		data := struct {
-			//Couriers 	string
 			Unionid string
 			Name    string
 			Amount  string
@@ -133,7 +132,6 @@ func ConfigWebHTTP() {
 			Name:    name,
 			Amount:  amount,
 		}
-
 		t, err := template.ParseFiles(f)
 		err = t.Execute(w, data)
 		if err != nil {
