@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/scan.css">
-    <!-- <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
-     -->
+    <!-- <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script> -->
     <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
     <!-- <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
@@ -63,13 +62,13 @@
 <script type="text/javascript">
 /* 图片手动上传 */
 var uploadCustomFileList = [];
-
+var uploadCount = 0;
 // 这里是简单的调用，其余api请参考文档
 weui.uploader('#uploaderCustom', {
-    url: 'http://active.91coolshe.com/uploadImg',
+    url: '/uploadImg',
     auto: false,
     fileVal: 'img',
-    onQueued: function() {
+    onQueued: function() {        
         uploadCustomFileList.push(this);
     },
     onSuccess: function (ret) {
@@ -80,6 +79,27 @@ weui.uploader('#uploaderCustom', {
    onError: function(err){
        console.log(this, err);
        // return true; // 阻止默认行为，不使用默认的失败态
+   },   
+   onBeforeQueued: function(files) {
+       // `this` 是轮询到的文件, `files` 是所有文件
+
+       if(["image/jpg", "image/jpeg", "image/png", "image/gif"].indexOf(this.type) < 0){
+           weui.alert('请上传图片');
+           return false; // 阻止文件添加
+       }
+       if(this.size > 10 * 1024 * 1024){
+           weui.alert('请上传不超过10M的图片');
+           return false;
+       }
+       if (files.length > 1) { // 防止一下子选择过多文件
+           weui.alert('最多只能上传1张图片，请重新选择');
+           return false;
+       }
+       if (uploadCount + 1 > 1) {
+           weui.alert('最多只能上传1张图片');
+           return false;
+       }
+       ++uploadCount;
    }
 });
 
