@@ -55,6 +55,7 @@ func LocalImageRecognition(base64 string) *RecognizeResult {
 		log.Println("request BAT fail")
 		return nil
 	}
+	log.Println(resp)
 	var res BATResult
 	var amountFloat, amount float64
 	var unionid string

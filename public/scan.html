@@ -73,9 +73,10 @@ weui.uploader('#uploaderCustom', {
     },
     onSuccess: function (res) {
        weui.toast('操作成功', 2000);
-       console.log(this,res);
-        weui.alert(res)
-    //    window.location.href = "/consumer";
+    //    console.log(this,res);
+        // weui.alert(res)
+
+    //    window.location.href = "/consumer?name="+res.data.shop_name;
        // return true; // 阻止默认行为，不使用默认的成功态
    },
    onError: function(err){
