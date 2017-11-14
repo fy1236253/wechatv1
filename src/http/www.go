@@ -177,18 +177,19 @@ func ConfigWebHTTP() {
 			return
 		}
 		defer file.Close()
+		var result model.CommonResult
 		sourcebuffer := make([]byte, 4*1024*1024) //最大4M
 		n, _ := file.Read(sourcebuffer)
 		base64Str := base64.StdEncoding.EncodeToString(sourcebuffer[:n])
 		res := model.LocalImageRecognition(base64Str)
+		result.ErrMsg = "success"
 		if res == nil {
 			log.Println("fail to upload")
+			result.ErrMsg = "1" //表示有错误
 			return
 		}
-		var result model.CommonResult
 		log.Println(uuid)
 		// model.CreatNewUploadImg(uuid, openid)
-		result.ErrMsg = "success"
 		result.DataInfo = res
 		RenderJson(w, result)
 		log.Println(*res)

@@ -73,16 +73,28 @@
             uploadCustomFileList.push(this);
         },
         onSuccess: function (res) {
-            weui.loading('loading').hide(); 
-            weui.toast('操作成功', 2000);
-            //    console.log(this,res);
-            // weui.alert(res)
-            window.location.href = "/consumer?name=" + res.data.shop_name + "&amount=" + res.data.total_amount + "&unionid=" + res.data.unionid;
-            // return true; // 阻止默认行为，不使用默认的成功态
+            if (res.errMsg == "success") {
+                weui.loading('loading').hide();
+                weui.toast('操作成功', 2000);
+                window.location.href = "/consumer?name=" + res.data.shop_name + "&amount=" + res.data.total_amount + "&unionid=" + res.data.unionid;
+            } else {
+                weui.alert('图片识别失败，请重新上传');
+                var index;
+                for (var i = 0, len = uploadCustomFileList.length; i < len; ++i) {
+                    var file = uploadCustomFileList[i];
+                    if (file.id == id) {
+                        index = i;
+                        break;
+                    }
+                }
+                if (index !== undefined) uploadCustomFileList.splice(index, 1);
+                --uploadCount
+                target.remove();
+            }
         },
         onError: function (err) {
             console.log(this, err);
-            weui.loading('loading').hide();            
+            weui.loading('loading').hide();
             // return true; // 阻止默认行为，不使用默认的失败态
         },
         onBeforeQueued: function (files) {
@@ -111,7 +123,7 @@
     // 手动上传按钮
     document.getElementById("uploaderCustomBtn").addEventListener('click', function () {
         uploadCustomFileList.forEach(function (file) {
-            weui.loading('loading');            
+            weui.loading('loading');
             file.upload();
         });
     });

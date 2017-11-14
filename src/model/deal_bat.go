@@ -30,8 +30,7 @@ type RecognizeResult struct {
 
 // CommonResult api接口返回数据
 type CommonResult struct {
-	ErrData  string      `json:"errMsg"`
-	ErrMsg   string      `json:"msgInfo"`
+	ErrMsg   string      `json:"errMsg"`
 	DataInfo interface{} `json:"data"`
 }
 
@@ -60,14 +59,14 @@ func LocalImageRecognition(base64 string) *RecognizeResult {
 	log.Println(resp)
 	var res BATResult
 	var amountFloat, amount float64
-	var unionid string
+	var unionid, shop string
 	result := new(RecognizeResult)
 	json.Unmarshal([]byte(resp), &res)
 	for _, v := range res.WordsResult { //轮训关键字
 		log.Println(v)
 		name := recongnitionName(v.Words)
 		if name != "" {
-			result.ShopName = name
+			shop = name
 		}
 		amountFloat = recongnitionAmount(v.Words)
 		if amountFloat >= amount {
@@ -80,6 +79,10 @@ func LocalImageRecognition(base64 string) *RecognizeResult {
 	}
 	result.TotalAmount = amount
 	result.Uninoid = unionid
+	if shop == "" || unionid == "" || 0 == amount {
+		log.Println("order info have error")
+		return nil
+	}
 	return result
 }
 
