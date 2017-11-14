@@ -72,9 +72,10 @@ weui.uploader('#uploaderCustom', {
         uploadCustomFileList.push(this);
     },
     onSuccess: function (res) {
-       weui.toast('操作成功', 2000)
-       console.log(this)
-       window.location.href = "/consumer"
+       weui.toast('操作成功', 2000);
+       console.log(this,res);
+        weui.alert(res)
+    //    window.location.href = "/consumer";
        // return true; // 阻止默认行为，不使用默认的成功态
    },
    onError: function(err){

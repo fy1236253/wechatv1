@@ -197,7 +197,7 @@ func ConfigWebHTTP() {
 		result.ErrMsg = "success"
 		result.DataInfo = res
 		RenderJson(w, result)
-		log.Println(result)
+		log.Println(*res)
 		return
 	})
 	http.HandleFunc("/hand_operation", func(w http.ResponseWriter, r *http.Request) {
