@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/scan.css">
-    <!-- <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script> -->
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
     <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
     <!-- <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
@@ -79,7 +79,7 @@
                 window.location.href = "/consumer?name=" + res.data.shop_name + "&amount=" + res.data.total_amount + "&unionid=" + res.data.unionid;
             } else {
                 weui.alert('图片识别失败，请重新上传');
-                $(".weui-uploader__files").remove()
+                $(".weui-uploader__files").remove();
             }
         },
         onError: function (err) {
