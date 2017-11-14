@@ -137,7 +137,7 @@ document.querySelector('#uploaderCustomFiles').addEventListener('click', functio
                     }
                 }
                 if(index !== undefined) uploadCustomFileList.splice(index, 1);
-
+                --uploadCount
                 target.remove();
                 gallery.hide();
             });
