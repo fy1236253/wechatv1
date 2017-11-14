@@ -172,12 +172,12 @@ func ConfigWebHTTP() {
 		file, _, _ := r.FormFile("img")
 		timestamp := time.Now().UnixNano()
 		uuid := strconv.FormatInt(timestamp, 10)
+		var result model.CommonResult
 		if file == nil || openid == "" {
 			log.Println("未检测到文件")
 			return
 		}
 		defer file.Close()
-		var result model.CommonResult
 		sourcebuffer := make([]byte, 4*1024*1024) //最大4M
 		n, _ := file.Read(sourcebuffer)
 		base64Str := base64.StdEncoding.EncodeToString(sourcebuffer[:n])
@@ -187,12 +187,12 @@ func ConfigWebHTTP() {
 			log.Println("fail to upload")
 			result.ErrMsg = "1" //表示有错误
 			// return
+		} else {
+			result.DataInfo = res
 		}
 		log.Println(uuid)
 		// model.CreatNewUploadImg(uuid, openid)
-		result.DataInfo = res
 		RenderJson(w, result)
-		log.Println(*res)
 		return
 	})
 	http.HandleFunc("/hand_operation", func(w http.ResponseWriter, r *http.Request) {
