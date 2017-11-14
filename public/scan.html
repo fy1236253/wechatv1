@@ -80,7 +80,7 @@
             } else {
                 weui.alert('图片识别失败，请重新上传');
                 weui.loading('loading').hide();
-                $(".weui-uploader__files").remove();
+                $(".weui-uploader__files").empty();
                 uploadCustomFileList = []
                 --uploadCount;
             }
