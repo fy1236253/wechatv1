@@ -40,6 +40,7 @@ func BatImageRecognition(base64Str string) string {
 	url := "https://aip.baidubce.com/rest/2.0/ocr/v1/accurate?access_token=24.1f248484d5b7faf54537dfae92fed52c.2592000.1512598910.282335-10330945"
 	req := httplib.Post(url).SetTimeout(3*time.Second, 1*time.Minute)
 	req.Param("img", base64Str)
+	req.Header("Content-Type", "application/x-www-form-urlencoded")
 	resp, err := req.String()
 	if err != nil {
 		log.Println(err)
