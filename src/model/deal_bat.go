@@ -73,7 +73,10 @@ func LocalImageRecognition(base64 string) *RecognizeResult {
 		if amountFloat >= amount {
 			amount = amountFloat
 		}
-		unionid = recongnitionOrderNum(v.Words)
+		id := recongnitionOrderNum(v.Words)
+		if id != "" {
+			unionid = id
+		}
 	}
 	result.TotalAmount = amount
 	result.Uninoid = unionid

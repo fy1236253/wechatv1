@@ -73,10 +73,9 @@ weui.uploader('#uploaderCustom', {
     },
     onSuccess: function (res) {
        weui.toast('操作成功', 2000);
-    //    console.log(this,res);
+        //    console.log(this,res);
         // weui.alert(res)
-
-    //    window.location.href = "/consumer?name="+res.data.shop_name;
+       window.location.href = "/consumer?name="+res.data.shop_name+"&amount="+res.data.total_amount+"&unionid="+res.data.unionid;
        // return true; // 阻止默认行为，不使用默认的成功态
    },
    onError: function(err){

@@ -111,10 +111,11 @@ func ConfigWebHTTP() {
 		return
 	})
 	http.HandleFunc("/consumer", func(w http.ResponseWriter, r *http.Request) {
-		fullurl := "http://" + r.Host + r.RequestURI
-		wxid := "gh_f353e8a82fe5"
-		appid := "wxdfac68fcc7a48fca"
 		var f string // 模板文件路径
+		queryValues, _ := url.ParseQuery(r.URL.RawQuery)
+		unionid := queryValues.Get("unionid")
+		name := queryValues.Get("name")
+		amount := queryValues.Get("amount")
 		f = filepath.Join(g.Root, "/public", "scanFinish.html")
 		if !file.IsExist(f) {
 			log.Println("not find", f)
@@ -122,21 +123,15 @@ func ConfigWebHTTP() {
 			return
 		}
 		// 基本参数设置
-		rand.Seed(time.Now().UnixNano())
-		nonce := strconv.Itoa(rand.Intn(9999999999))
-		ts := time.Now().Unix()
-		sign := util.WXConfigSign(g.GetJsAPITicket(wxid), nonce, strconv.FormatInt(ts, 10), fullurl)
 		data := struct {
 			//Couriers 	string
-			AppId string
-			Ts    int64
-			Nonce string
-			Sign  string
+			Unionid string
+			Name    string
+			Amount  string
 		}{
-			AppId: appid,
-			Ts:    ts,
-			Nonce: nonce,
-			Sign:  sign,
+			Unionid: unionid,
+			Name:    name,
+			Amount:  amount,
 		}
 
 		t, err := template.ParseFiles(f)

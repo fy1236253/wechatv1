@@ -9,4 +9,7 @@ $(function () {
     $("#submit").click(function () {
         window.location.href = "/credits"
     })
+    $("#reload").click(function(){
+        window.location.href = "/scanner"
+    })
 })
