@@ -79,17 +79,7 @@
                 window.location.href = "/consumer?name=" + res.data.shop_name + "&amount=" + res.data.total_amount + "&unionid=" + res.data.unionid;
             } else {
                 weui.alert('图片识别失败，请重新上传');
-                var index;
-                for (var i = 0, len = uploadCustomFileList.length; i < len; ++i) {
-                    var file = uploadCustomFileList[i];
-                    if (file.id == id) {
-                        index = i;
-                        break;
-                    }
-                }
-                if (index !== undefined) uploadCustomFileList.splice(index, 1);
-                --uploadCount
-                target.remove();
+                $(".weui-uploader__files").remove()
             }
         },
         onError: function (err) {
