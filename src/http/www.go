@@ -186,7 +186,7 @@ func ConfigWebHTTP() {
 		if res == nil {
 			log.Println("fail to upload")
 			result.ErrMsg = "1" //表示有错误
-			return
+			// return
 		}
 		log.Println(uuid)
 		// model.CreatNewUploadImg(uuid, openid)
