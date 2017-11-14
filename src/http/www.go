@@ -192,11 +192,11 @@ func ConfigWebHTTP() {
 			return
 		}
 		var result model.CommonResult
-
 		model.CreatNewUploadImg(uuid, openid)
 		result.ErrMsg = "success"
 		result.DataInfo = res
 		RenderJson(w, result)
+		log.Println(result)
 		return
 	})
 	http.HandleFunc("/hand_operation", func(w http.ResponseWriter, r *http.Request) {
