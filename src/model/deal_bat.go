@@ -53,7 +53,7 @@ func BatImageRecognition(base64Str string) string {
 func LocalImageRecognition(base64 string) *RecognizeResult {
 	t := time.Now()
 	resp := BatImageRecognition(base64)
-	log.Printf("bat time:%d", time.Since(t))
+	log.Printf("bat time:%v", time.Since(t))
 	if resp == "" {
 		log.Println("request BAT fail")
 		return nil
@@ -86,7 +86,7 @@ func LocalImageRecognition(base64 string) *RecognizeResult {
 		log.Println("order info have error")
 		return nil
 	}
-	log.Printf("our api time:%d", time.Since(t))
+	log.Printf("our api time:%v", time.Since(t))
 	return result
 }
 
