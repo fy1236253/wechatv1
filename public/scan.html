@@ -118,7 +118,9 @@
     // 手动上传按钮
     document.getElementById("uploaderCustomBtn").addEventListener('click', function () {
         uploadCustomFileList.forEach(function (file) {
-            weui.loading('loading');
+            weui.loading('loading')
+            console.log(uploadCount)
+            $.extend(data, { "rate": uploadNum})
             file.upload();
         });
     });
