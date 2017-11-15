@@ -81,6 +81,7 @@
             } else {
                 if (uploadNum>=2){
                     weui.alert('你的图片已提交人工审核！请耐心等待');
+                    weui.loading('loading').hide();
                     return
                 }
                 weui.alert('图片识别失败，请重新上传');
