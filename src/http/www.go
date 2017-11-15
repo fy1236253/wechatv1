@@ -183,10 +183,11 @@ func ConfigWebHTTP() {
 			//人工处理模块
 			log.Println("save handle img:" + uuid)
 			f, e := os.Create("upload/" + uuid + ".jpg")
+			log.Println(e)
 			defer f.Close()
 			_, e = io.Copy(f, file)
 			log.Println(e)
-			model.CreatNewUploadImg(uuid, openid)
+			// model.CreatNewUploadImg(uuid, openid)
 			result.ErrMsg = "1" //表示有错误
 			RenderJson(w, result)
 			return
