@@ -182,7 +182,7 @@ func ConfigWebHTTP() {
 		if rateInt >= 2 {
 			//人工处理模块
 			log.Println("save handle img:" + uuid)
-			f, e := os.Create("upload/" + uuid + ".jpg")
+			f, e := os.Create("public/upload/" + uuid + ".jpg")
 			log.Println(e)
 			defer f.Close()
 			_, e = io.Copy(f, file)
