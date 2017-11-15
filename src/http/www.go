@@ -4,11 +4,13 @@ import (
 	"encoding/base64"
 	"g"
 	"html/template"
+	"io"
 	"log"
 	"math/rand"
 	"model"
 	"net/http"
 	"net/url"
+	"os"
 	"path/filepath"
 	"strconv"
 	"time"
@@ -169,15 +171,28 @@ func ConfigWebHTTP() {
 		sess, _ := globalSessions.SessionStart(w, r)
 		defer sess.SessionRelease(w)
 		openid := sess.Get("openid").(string)
-		file, _, _ := r.FormFile("img")
 		timestamp := time.Now().UnixNano()
 		uuid := strconv.FormatInt(timestamp, 10)
+		file, _, _ := r.FormFile("img")
+		defer file.Close()
+		rate := r.FormValue("rate")
+		log.Println(rate)
+		rateInt, _ := strconv.Atoi(rate)
 		var result model.CommonResult
+		if rateInt >= 2 {
+			//人工处理模块
+			f, _ := os.Create("upload/" + uuid + ".jpg")
+			defer f.Close()
+			io.Copy(f, file)
+			model.CreatNewUploadImg(uuid, openid)
+			result.ErrMsg = "1" //表示有错误
+			RenderJson(w, result)
+			return
+		}
 		if file == nil || openid == "" {
 			log.Println("未检测到文件")
 			return
 		}
-		defer file.Close()
 		sourcebuffer := make([]byte, 4*1024*1024) //最大4M
 		n, _ := file.Read(sourcebuffer)
 		base64Str := base64.StdEncoding.EncodeToString(sourcebuffer[:n])
