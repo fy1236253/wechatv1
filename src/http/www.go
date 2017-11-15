@@ -135,7 +135,7 @@ func ConfigWebHTTP() {
 			Amount:  amount,
 		}
 		t, err := template.ParseFiles(f)
-		log.Println(err)
+		// log.Println(err)
 		err = t.Execute(w, data)
 		if err != nil {
 			log.Println(err)
@@ -167,6 +167,7 @@ func ConfigWebHTTP() {
 		return
 	})
 	http.HandleFunc("/uploadImg", func(w http.ResponseWriter, r *http.Request) {
+		t := time.Now()
 		r.ParseMultipartForm(32 << 20)
 		sess, _ := globalSessions.SessionStart(w, r)
 		defer sess.SessionRelease(w)
@@ -182,11 +183,9 @@ func ConfigWebHTTP() {
 		if rateInt >= 2 {
 			//人工处理模块
 			log.Println("save handle img:" + uuid)
-			f, e := os.Create("public/upload/" + uuid + ".jpg")
-			log.Println(e)
+			f, _ := os.Create("public/upload/" + uuid + ".jpg")
 			defer f.Close()
-			_, e = io.Copy(f, file)
-			log.Println(e)
+			io.Copy(f, file)
 			model.CreatNewUploadImg(uuid, openid)
 			result.ErrMsg = "1" //表示有错误
 			RenderJson(w, result)
@@ -211,6 +210,7 @@ func ConfigWebHTTP() {
 		log.Println(uuid)
 		// model.CreatNewUploadImg(uuid, openid)
 		RenderJson(w, result)
+		log.Println(time.Since(t))
 		return
 	})
 	http.HandleFunc("/hand_operation", func(w http.ResponseWriter, r *http.Request) {

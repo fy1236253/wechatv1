@@ -64,7 +64,7 @@
     /* 图片手动上传 */
     var uploadCustomFileList = [];
     var uploadCount = 0;
-    var uploadNum = 1;
+    var uploadNum = 0;
     // 这里是简单的调用，其余api请参考文档
     weui.uploader('#uploaderCustom', {
         url: '/uploadImg?',
@@ -127,7 +127,7 @@
     // 手动上传按钮
     document.getElementById("uploaderCustomBtn").addEventListener('click', function () {
         uploadCustomFileList.forEach(function (file) {
-            weui.loading('loading')
+            weui.loading('识别中')
             console.log(uploadNum)
             file.upload();
         });
