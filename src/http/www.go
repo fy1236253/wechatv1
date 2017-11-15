@@ -187,7 +187,7 @@ func ConfigWebHTTP() {
 			defer f.Close()
 			_, e = io.Copy(f, file)
 			log.Println(e)
-			// model.CreatNewUploadImg(uuid, openid)
+			model.CreatNewUploadImg(uuid, openid)
 			result.ErrMsg = "1" //表示有错误
 			RenderJson(w, result)
 			return
