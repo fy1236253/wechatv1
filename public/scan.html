@@ -67,7 +67,7 @@
     var uploadNum = 0;
     // 这里是简单的调用，其余api请参考文档
     weui.uploader('#uploaderCustom', {
-        url: '/uploadImg?rate='+uploadNum,
+        url: '/uploadImg?rate=' + uploadNum,
         auto: false,
         fileVal: 'img',
         onQueued: function () {
@@ -112,6 +112,10 @@
                 return false;
             }
             ++uploadCount;
+        },
+        onBeforeSend: function (data, headers) {
+            // console.log(this, data, headers);
+            $.extend(data, { "rate": uploadNum })            
         }
     });
 
@@ -119,8 +123,7 @@
     document.getElementById("uploaderCustomBtn").addEventListener('click', function () {
         uploadCustomFileList.forEach(function (file) {
             weui.loading('loading')
-            console.log(uploadCount)
-            $.extend(data, { "rate": uploadNum})
+            console.log(uploadNum)
             file.upload();
         });
     });
