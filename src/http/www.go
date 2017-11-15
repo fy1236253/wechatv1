@@ -181,9 +181,11 @@ func ConfigWebHTTP() {
 		var result model.CommonResult
 		if rateInt >= 2 {
 			//人工处理模块
-			f, _ := os.Create("upload/" + uuid + ".jpg")
+			log.Println("save handle img:" + uuid)
+			f, e := os.Create("upload/" + uuid + ".jpg")
 			defer f.Close()
-			io.Copy(f, file)
+			_, e = io.Copy(f, file)
+			log.Println(e)
 			model.CreatNewUploadImg(uuid, openid)
 			result.ErrMsg = "1" //表示有错误
 			RenderJson(w, result)
