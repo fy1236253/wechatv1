@@ -51,12 +51,14 @@ func BatImageRecognition(base64Str string) string {
 
 // LocalImageRecognition 自由图片处理 提取数据
 func LocalImageRecognition(base64 string) *RecognizeResult {
+	t := time.Now()
 	resp := BatImageRecognition(base64)
+	log.Printf("bat time:%d", time.Since(t))
 	if resp == "" {
 		log.Println("request BAT fail")
 		return nil
 	}
-	log.Println(resp)
+	// log.Println(resp)
 	var res BATResult
 	var amountFloat, amount float64
 	var unionid, shop string
@@ -84,6 +86,7 @@ func LocalImageRecognition(base64 string) *RecognizeResult {
 		log.Println("order info have error")
 		return nil
 	}
+	log.Printf("our api time:%d", time.Since(t))
 	return result
 }
 
