@@ -7,39 +7,61 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
     <link rel="stylesheet" href="css/scan.css">
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    <!-- <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script> -->
+    <!-- <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.widgets.helper.min.js"></script> -->
     <title>手工填写图片信息</title>
 </head>
 
 <body>
-    <div class="container">
+    <div class="am-container">
         <header>
             <div class="row mtop20">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="col-xs-4  col-sm-4 col-md-4 col-lg-4 col-md-offset-4 col-xs-offset-4 col-sm-offset-4 col-lg-offset-4">
+                <div class="am-u-lg-12 am-u-sm-12 am-u-md-12 ">
+                    <div class="am-u-lg-4  am-u-sm-4 am-u-md-4 col-lg-4 am-u-md-offset-4 am-u-lg-offset-4 am-u-sm-offset-4 col-lg-offset-4">
                         <img src="img/company.png" class="img-responsive company-img" alt="Image">
                     </div>
                 </div>
             </div>
         </header>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="am-u-lg-12 am-u-sm-12 am-u-md-12 ">
             <img src="upload/{{.UUID}}.jpg" class="img-responsive" alt="Image">
         </div>
-        <div class="form-group">
-            <label for="name">药店名称</label>
-            <input type="text" class="form-control" id="name" placeholder="">
-        </div>
-        <div class="form-group">
-            <label for="amount">金额汇总</label>
-            <input type="number" class="form-control" id="amount" placeholder="">
-        </div>
-        <div class="form-group">
+        <form role="form">
+            <div class="am-form-group">
+                <input type="text" class="am-form-field" placeholder="订单编号">
+            </div>
+            <div class="am-form-group">
+                <input type="text" class="am-form-field" placeholder="药店名称">
+            </div>
+            <div class="am-form-group">
+                <input type="text" class="am-form-field" placeholder="金额汇总">
+            </div>
+            <div class="inputlist" id="">
+                <div class="am-g am-g-3 am-form-group addinput" id="wrapInput">
+                    <div class="am-u-sm-2 am-u-md-2 am-u-lg-2 am-padding-left-0">
+                        <input type="number" class="am-form-field" placeholder="数量">
+                    </div>
+                    <div class="am-u-sm-2 am-u-md-2 am-u-lg-2 am-padding-left-0">
+                        <input type="number" class="am-form-field" placeholder="单价">
+
+                    </div>
+                    <div class="am-u-sm-8 am-u-md-8 am-u-lg-8 am-padding-0">
+                        <input type="text" class="am-form-field" placeholder="药品名称">
+                    </div>
+                </div>
+                
+            </div>
+            <div class="am-form-group am-form-inline">
+                <button id="addinput" type="button" class=" am-btn am-btn-default"><i class="am-icon-plus"></i>添加药品信息</button>
+                <button type="button" id="subInfo" class="am-btn am-btn-success ">提交</button>                
+            </div>
+        </form>
+        <!-- <div class="am-form-group">
             <button id="subInfo" type="button" class="btn btn-primary btn-lg btn-block">提交</button>
-        </div>
+        </div> -->
     </div>
 </body>
-<script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.3/weui.min.js"></script>
 <script type="text/javascript">
     $(function () {
         $("#subInfo").click(function () {
@@ -53,6 +75,9 @@
                 weui.toast('上传成功', 2000);
                 console.log(e)
             })
+        })
+        $("#addinput").click(function(){
+            $(".addinput").eq(0).clone().appendTo(".inputlist")
         })
     })
 
