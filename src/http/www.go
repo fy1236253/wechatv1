@@ -251,11 +251,13 @@ func ConfigWebHTTP() {
 		r.ParseForm()
 		if r.Method == "POST" {
 			log.Println(r.Form)
+
 			http.Redirect(w, r, "/hand_operation", 302)
+			return
 		}
 		urlParse, _ := url.ParseQuery(r.URL.RawQuery)
 		uuid := urlParse.Get("uuid")
-		log.Println(uuid)
+		// log.Println(uuid)
 		var f string // 模板文件路径
 		f = filepath.Join(g.Root, "/public", "edit.html")
 		if !file.IsExist(f) {
