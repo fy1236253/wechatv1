@@ -144,10 +144,6 @@ func ConfigWebHTTP() {
 	})
 	http.HandleFunc("/credits", func(w http.ResponseWriter, r *http.Request) {
 		appid := "wxdfac68fcc7a48fca"
-		r.ParseForm()
-		if r.Method == "POST" {
-			log.Println(r.Form)
-		}
 		var f string // 模板文件路径
 		f = filepath.Join(g.Root, "/public", "scannerIndex.html")
 		if !file.IsExist(f) {
@@ -252,6 +248,11 @@ func ConfigWebHTTP() {
 		return
 	})
 	http.HandleFunc("/edit_img", func(w http.ResponseWriter, r *http.Request) {
+		r.ParseForm()
+		if r.Method == "POST" {
+			log.Println(r.Form)
+			http.Redirect(w, r, "/hand_operation", 302)
+		}
 		urlParse, _ := url.ParseQuery(r.URL.RawQuery)
 		uuid := urlParse.Get("uuid")
 		log.Println(uuid)
