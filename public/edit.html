@@ -61,14 +61,6 @@
 <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.3/weui.min.js"></script>
 <script type="text/javascript">
     $(function () {
-        $("#subInfo").click(function () {
-            var name = document.getElementById("name").value;
-            var amount = document.getElementById("amount").value;
-            if (name == "" || amount == "") {
-                weui.alert('药店和金额必须填写');
-                return
-            }
-        })
         $("#addinput").click(function(){
             $(".addinput").eq(0).clone().appendTo(".inputlist")
         })
