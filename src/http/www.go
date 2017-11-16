@@ -144,6 +144,10 @@ func ConfigWebHTTP() {
 	})
 	http.HandleFunc("/credits", func(w http.ResponseWriter, r *http.Request) {
 		appid := "wxdfac68fcc7a48fca"
+		r.ParseForm()
+		if r.Method == "POST" {
+			log.Println(r.Form)
+		}
 		var f string // 模板文件路径
 		f = filepath.Join(g.Root, "/public", "scannerIndex.html")
 		if !file.IsExist(f) {

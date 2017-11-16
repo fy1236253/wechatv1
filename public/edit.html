@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
     <link rel="stylesheet" href="css/scan.css">
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">    
     <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
     <title>手工填写图片信息</title>
 </head>
@@ -25,27 +26,27 @@
         <div class="am-u-lg-12 am-u-sm-12 am-u-md-12">
             <img src="upload/{{.UUID}}.jpg" class="mtop20 am-img-responsive" alt="Image">
         </div>
-        <form role="form ">
+        <form role="form" id="from" action="/credits">
             <div class="am-form-group">
-                <input type="text" class="am-form-field" placeholder="订单编号">
+                <input type="text" name="no" class="am-form-field" placeholder="订单编号">
             </div>
             <div class="am-form-group">
-                <input type="text" class="am-form-field" placeholder="药店名称">
+                <input type="text" id="name" name="name" class="am-form-field" placeholder="药店名称">
             </div>
             <div class="am-form-group">
-                <input type="text" class="am-form-field" placeholder="金额汇总">
+                <input type="text" id="amount" name="amount" class="am-form-field" placeholder="金额汇总">
             </div>
             <div class="inputlist " id="">
                 <div class="am-g am-g-3 am-form-group addinput" id="wrapInput">
                     <div class="am-u-sm-2 am-u-md-2 am-u-lg-2 am-padding-left-0">
-                        <input type="number" class="am-form-field" placeholder="数量">
+                        <input type="number" name="count" class="am-form-field" placeholder="数量">
                     </div>
                     <div class=" am-u-sm-2 am-u-md-2 am-u-lg-2 am-padding-left-0">
-                        <input type="number" class="am-form-field" placeholder="单价">
+                        <input type="number" name="price" class="am-form-field" placeholder="单价">
 
                     </div>
                     <div class="am-u-sm-8 am-u-md-8 am-u-lg-8 am-padding-0">
-                        <input type="text" class="am-form-field" placeholder="药品名称">
+                        <input type="text" name="drug" class="am-form-field" placeholder="药品名称">
                     </div>
                 </div>
                 
@@ -55,11 +56,9 @@
             </div>
             <button type="button" id="subInfo" class="am-btn am-btn-success am-btn-lg am-btn-block">提交</button>                            
         </form>
-        <!-- <div class="am-form-group">
-            <button id="subInfo" type="button" class="btn btn-primary btn-lg btn-block">提交</button>
-        </div> -->
     </div>
 </body>
+<script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.3/weui.min.js"></script>
 <script type="text/javascript">
     $(function () {
         $("#subInfo").click(function () {
