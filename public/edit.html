@@ -26,7 +26,7 @@
         <div class="am-u-lg-12 am-u-sm-12 am-u-md-12">
             <img src="upload/{{.UUID}}.jpg" class="mtop20 am-img-responsive" alt="Image">
         </div>
-        <form role="form" id="from" action="/credits">
+        <form role="form" id="from" action="/credits" method="POST">
             <div class="am-form-group">
                 <input type="text" name="no" class="am-form-field" placeholder="订单编号">
             </div>
@@ -68,10 +68,10 @@
                 weui.alert('药店和金额必须填写');
                 return
             }
-            $.post("/save_user_info", { "name": name, "amount": amount }, function (e) {
-                weui.toast('上传成功', 2000);
-                console.log(e)
-            })
+            // $.post("/save_user_info", { "name": name, "amount": amount }, function (e) {
+            //     weui.toast('上传成功', 2000);
+            //     console.log(e)
+            // })
         })
         $("#addinput").click(function(){
             $(".addinput").eq(0).clone().appendTo(".inputlist")
