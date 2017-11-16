@@ -28,13 +28,13 @@
         </div>
         <form role="form" id="from" action="/credits" method="POST">
             <div class="am-form-group">
-                <input type="text" name="no" class="am-form-field" placeholder="订单编号">
+                <input type="number" name="no" class="am-form-field" placeholder="订单编号" required>
             </div>
             <div class="am-form-group">
-                <input type="text" id="name" name="name" class="am-form-field" placeholder="药店名称">
+                <input type="text" id="name" name="name" class="am-form-field" placeholder="药店名称" required>
             </div>
             <div class="am-form-group">
-                <input type="text" id="amount" name="amount" class="am-form-field" placeholder="金额汇总">
+                <input type="number" id="amount" name="amount" class="am-form-field" placeholder="金额汇总" required>
             </div>
             <div class="inputlist " id="">
                 <div class="am-g am-g-3 am-form-group addinput" id="wrapInput">
@@ -68,10 +68,6 @@
                 weui.alert('药店和金额必须填写');
                 return
             }
-            // $.post("/save_user_info", { "name": name, "amount": amount }, function (e) {
-            //     weui.toast('上传成功', 2000);
-            //     console.log(e)
-            // })
         })
         $("#addinput").click(function(){
             $(".addinput").eq(0).clone().appendTo(".inputlist")
