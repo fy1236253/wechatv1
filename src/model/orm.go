@@ -19,6 +19,15 @@ func CreatNewUploadImg(uuid, openid string) {
 	stmt.Exec(uuid, openid)
 }
 
+// DeleteUploadImg 成功提交后删除记录
+func DeleteUploadImg(uuid string) error {
+	conn, _ := g.GetDBConn("default")
+	stmt, err := conn.Prepare("DELETE from img_order where uuid=?")
+	log.Println(err)
+	stmt.Exec(uuid)
+	return err
+}
+
 type ImgUuid struct {
 	UUID string `json:"uuid"`
 }

@@ -251,7 +251,11 @@ func ConfigWebHTTP() {
 		r.ParseForm()
 		if r.Method == "POST" {
 			log.Println(r.Form)
-
+			uuid := r.FormValue("uuid")
+			if uuid == "" {
+				return
+			}
+			model.DeleteUploadImg(uuid)
 			http.Redirect(w, r, "/hand_operation", 302)
 			return
 		}
