@@ -9,7 +9,7 @@
 
 .basic-panel {
     min-height: 360px;
-    margin: auto 5%;
+    /* margin: auto 5%; */
     background: #ddd;
     border: none;
 }
@@ -47,8 +47,7 @@
     bottom: 0;
     width: 100%;
     padding: 20px 0;
-    background: #000;
-    position: fixed;
+    display: block;
     
 }
 .company-img {
@@ -60,3 +59,9 @@
     text-align: center;
 }
 
+footer{
+    display: block;
+    text-align: center;
+    padding: 20px 0;
+    color: #ddd;
+}

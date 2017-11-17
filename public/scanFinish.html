@@ -13,35 +13,6 @@
     <title>药品单扫描</title>
 </head>
 <style>
-    .basic-panel {
-        min-height: 300px;
-        margin: auto 5%;
-        background: #ddd;
-        border: none;
-    }
-
-    .mtop20 {
-        margin: 20px auto;
-    }
-
-    .middle-box {
-        margin: 0 auto;
-    }
-
-    .scan-ok {
-        display: block;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        padding: 20px 0;
-        overflow: hidden;
-        background: #000;
-    }
-
-    .consume {
-        font-size: 24px;
-        text-align: center;
-    }
 </style>
 
 <body class="content-body">
@@ -64,7 +35,7 @@
             <p>{{.Amount}}元</p>
         </div>
     </div>
-    <div class="scan-ok">
+    <div class="scan-ok row">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <img src="img/camera.png" class="img-responsive middle-box" id="reload" width="60" alt="Image">
         </div>
@@ -72,6 +43,7 @@
             <img src="img/ok.png" class="img-responsive middle-box" id="submit" width="60" alt="Image">
         </div>
     </div>
+    <footer>客服电话:0575-88137870</footer>
 </body>
 
 </html>
