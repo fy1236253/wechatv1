@@ -58,10 +58,19 @@
     font-size: 24px;
     text-align: center;
 }
-
+header{
+    display: block;
+    overflow: hidden;
+}
 footer{
     display: block;
     text-align: center;
     padding: 20px 0;
+    color: #9c9c9c;
+}
+.color-white{
     color: #ddd;
+}
+.mtop40{
+    margin:40px auto;
 }
