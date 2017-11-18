@@ -19,6 +19,14 @@ func CreatNewUploadImg(uuid, openid string) {
 	stmt.Exec(uuid, openid)
 }
 
+// CreatImgRecord 用户上传记录
+func CreatImgRecord(uuid, openid, info string) {
+	conn, _ := g.GetDBConn("default")
+	stmt, err := conn.Prepare("INSERT upload_log SET uuid=?,openid=?,info=?")
+	log.Println(err)
+	stmt.Exec(uuid, openid, info)
+}
+
 // DeleteUploadImg 成功提交后删除记录
 func DeleteUploadImg(uuid string) error {
 	conn, _ := g.GetDBConn("default")

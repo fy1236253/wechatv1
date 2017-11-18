@@ -3,6 +3,7 @@ package model
 import (
 	"encoding/json"
 	"log"
+	"os/exec"
 	"regexp"
 	"strconv"
 	"strings"
@@ -135,4 +136,15 @@ func commonMatch(regular, str string) (bool, string) {
 		return true, name[0]
 	}
 	return false, ""
+}
+
+// CreateNewID 根据linux系统生成
+func CreateNewID(n int) string {
+	out, err := exec.Command("uuidgen").Output() //C4817373-A378-412B-BC00-A619730FD9C1
+	if err != nil {
+		log.Fatal(err)
+	}
+	outStr := string(out)
+	uuid := outStr[:n]
+	return uuid
 }

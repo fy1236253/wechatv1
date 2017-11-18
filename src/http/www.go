@@ -2,6 +2,7 @@ package http
 
 import (
 	"encoding/base64"
+	"encoding/json"
 	"g"
 	"html/template"
 	"io"
@@ -62,6 +63,7 @@ func ConfigWebHTTP() {
 		}
 		return
 	})
+	// 用户上传图片
 	http.HandleFunc("/scanner", func(w http.ResponseWriter, r *http.Request) {
 		fullurl := "http://" + r.Host + r.RequestURI
 		wxid := "gh_f353e8a82fe5"
@@ -112,6 +114,7 @@ func ConfigWebHTTP() {
 		}
 		return
 	})
+	// 上传图片后  返回识别结果
 	http.HandleFunc("/consumer", func(w http.ResponseWriter, r *http.Request) {
 		var f string // 模板文件路径
 		queryValues, _ := url.ParseQuery(r.URL.RawQuery)
@@ -151,6 +154,8 @@ func ConfigWebHTTP() {
 			http.NotFound(w, r)
 			return
 		}
+		r.ParseForm()
+		// name := r.FormValue("name")
 		// 基本参数设置
 		data := struct {
 			//Couriers 	string
@@ -172,8 +177,7 @@ func ConfigWebHTTP() {
 		sess, _ := globalSessions.SessionStart(w, r)
 		defer sess.SessionRelease(w)
 		openid := sess.Get("openid").(string)
-		timestamp := time.Now().UnixNano()
-		uuid := strconv.FormatInt(timestamp, 10)
+		uuid := model.CreateNewID(12)
 		file, _, _ := r.FormFile("img")
 		defer file.Close()
 		rate := r.FormValue("rate")
@@ -201,14 +205,17 @@ func ConfigWebHTTP() {
 		res := model.LocalImageRecognition(base64Str)
 		result.ErrMsg = "success"
 		if res == nil {
+			//识别有错误  返回错误
 			log.Println("fail to upload")
-			result.ErrMsg = "1" //表示有错误
-			// return
+			result.ErrMsg = "1"
+			RenderJson(w, result)
+			return
 		} else {
-			result.DataInfo = res
+			result.DataInfo = uuid
 		}
 		log.Println(uuid)
-		// model.CreatNewUploadImg(uuid, openid)
+		drugInfo, _ := json.Marshal(res)
+		model.CreatImgRecord(uuid, openid, string(drugInfo)) //上传记录上传至数据库记录
 		RenderJson(w, result)
 		log.Println(time.Since(t))
 		return

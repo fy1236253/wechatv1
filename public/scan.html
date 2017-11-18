@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="css/scan.css">
     <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
     <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
-    <!-- <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
     <title>药品单扫描</title>
 </head>
@@ -64,7 +63,7 @@
     var uploadNum = 0;
     // 这里是简单的调用，其余api请参考文档
     weui.uploader('#uploaderCustom', {
-        url: '/uploadImg?',
+        url: '/uploadImg',
         auto: false,
         fileVal: 'img',
         onQueued: function () {
