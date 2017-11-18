@@ -56,19 +56,19 @@ $(function () {
     });
     $("#submit").click(function () {
         // window.location.href = "/credits?name="+{{.Name}}+"&amount="+{{.Amount}}+"&unionid="+{{.Unionid}}
-        $.ajax({
-            url:"/credits",
-            type:"POST",
-            data:{
-                "name":{{.Name}},
-                "amount":{{.Amount}},
-                "unionid":{{Unionid}}
-            },
-            success:function(){
-                alert("上传成功")
-                window.open("/credits")
-            }
-        })
+        // $.ajax({
+        //     url:"/credits",
+        //     type:"POST",
+        //     data:{
+        //         "name":{{.Name}},
+        //         "amount":{{.Amount}},
+        //         "unionid":{{.Unionid}}
+        //     },
+        //     success:function(){
+        //         alert("上传成功")
+        //         window.open("/credits")
+        //     }
+        // })
     })
     $("#reload").click(function(){
         window.open("/scanner")
