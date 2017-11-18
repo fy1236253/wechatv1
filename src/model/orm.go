@@ -34,13 +34,15 @@ func QueryImgRecord(uuid string) (info *RecognizeResult) {
 	var err error
 	rows, err = conn.Query("select info from upload_log where uuid=? limit 1", uuid)
 	defer rows.Close()
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	if e := rows.Scan(&info); e != nil {
-		log.Println("[ERROR] get row fail", e)
-		return
+	for rows.Next() {
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		if e := rows.Scan(&info); e != nil {
+			log.Println("[ERROR] get row fail", e)
+			return
+		}
 	}
 	return info
 
