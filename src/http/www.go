@@ -138,7 +138,7 @@ func ConfigWebHTTP() {
 			Amount:  amount,
 		}
 		t, err := template.ParseFiles(f)
-		// log.Println(err)
+		log.Println(err)
 		err = t.Execute(w, data)
 		if err != nil {
 			log.Println(err)
