@@ -3,6 +3,7 @@ package model
 import (
 	"bufio"
 	"database/sql"
+	"encoding/json"
 	"g"
 	"io"
 	"log"
@@ -32,6 +33,7 @@ func QueryImgRecord(uuid string) (info *RecognizeResult) {
 	conn, _ := g.GetDBConn("default")
 	var rows *sql.Rows
 	var err error
+	var rowInfo string
 	rows, err = conn.Query("select info from upload_log where uuid=? limit 1", uuid)
 	defer rows.Close()
 	for rows.Next() {
@@ -39,11 +41,16 @@ func QueryImgRecord(uuid string) (info *RecognizeResult) {
 			log.Println(err)
 			return
 		}
-		if e := rows.Scan(&info); e != nil {
+		if e := rows.Scan(&rowInfo); e != nil {
 			log.Println("[ERROR] get row fail", e)
 			return
 		}
+		err = json.Unmarshal([]byte(rowInfo), &info)
+		if err != nil {
+			log.Println("[ERROR] get row fail", err)
+		}
 	}
+
 	return info
 
 }
