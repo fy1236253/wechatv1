@@ -211,7 +211,7 @@ func ConfigWebHTTP() {
 			RenderJson(w, result)
 			return
 		} else {
-			result.DataInfo = uuid
+			result.DataInfo = res
 		}
 		log.Println(uuid)
 		drugInfo, _ := json.Marshal(res)
