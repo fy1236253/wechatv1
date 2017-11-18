@@ -33,6 +33,7 @@ type RecognizeResult struct {
 type CommonResult struct {
 	ErrMsg   string      `json:"errMsg"`
 	DataInfo interface{} `json:"data"`
+	UUID     string      `json:"uuid"`
 }
 
 // BatImageRecognition 百度的图像识别接口

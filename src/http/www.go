@@ -118,9 +118,7 @@ func ConfigWebHTTP() {
 	http.HandleFunc("/consumer", func(w http.ResponseWriter, r *http.Request) {
 		var f string // 模板文件路径
 		queryValues, _ := url.ParseQuery(r.URL.RawQuery)
-		unionid := queryValues.Get("unionid")
-		name := queryValues.Get("name")
-		amount := queryValues.Get("amount")
+		uuid := queryValues.Get("uuid")
 		f = filepath.Join(g.Root, "/public", "scanFinish.html")
 		if !file.IsExist(f) {
 			log.Println("not find", f)
@@ -128,14 +126,13 @@ func ConfigWebHTTP() {
 			return
 		}
 		// 基本参数设置
+		info := model.QueryImgRecord(uuid)
 		data := struct {
-			Unionid string
-			Name    string
-			Amount  string
+			UUID string
+			Info *model.RecognizeResult
 		}{
-			Unionid: unionid,
-			Name:    name,
-			Amount:  amount,
+			UUID: uuid,
+			Info: info,
 		}
 		t, err := template.ParseFiles(f)
 		log.Println(err)
@@ -212,6 +209,7 @@ func ConfigWebHTTP() {
 			return
 		} else {
 			result.DataInfo = res
+			result.UUID = uuid
 		}
 		log.Println(uuid)
 		drugInfo, _ := json.Marshal(res)

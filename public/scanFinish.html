@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/scan.css">
-    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>    
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
     <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
     <script src="js/scan.js"></script>
@@ -27,10 +27,10 @@
 
         <div class="panel-body basic-panel consume">
             <img src="" class="img-responsive" alt="" id="localImg">
-            <p>{{.Unionid}}</p>
-            <p>{{.Name}}</p>
+            <p>{{Info.Unionid}}</p>
+            <p>{{Info.Name}}</p>
             <p>本次消费:</p>
-            <p>{{.Amount}}元</p>
+            <p>{{Info.Amount}}元</p>
         </div>
     </div>
     <div class="scan-ok row">
@@ -48,30 +48,28 @@
 <script type="text/javascript" src="https://res.wx.qq.com/open/libs/weuijs/1.1.3/weui.min.js"></script>
 <script>
 
-$(function () {
-    $("#reload").click(function () {
-        $("#localImg").attr("src", "")
-        $("#scanner").show();
-        $(".scan-ok").hide();
-    });
-    $("#submit").click(function () {
-        // window.location.href = "/credits?name="+{{.Name}}+"&amount="+{{.Amount}}+"&unionid="+{{.Unionid}}
-        // $.ajax({
-        //     url:"/credits",
-        //     type:"POST",
-        //     data:{
-        //         "name":{{.Name}},
-        //         "amount":{{.Amount}},
-        //         "unionid":{{.Unionid}}
-        //     },
-        //     success:function(){
-        //         alert("上传成功")
-        //         window.open("/credits")
-        //     }
-        // })
+    $(function () {
+        $("#reload").click(function () {
+            $("#localImg").attr("src", "")
+            $("#scanner").show();
+            $(".scan-ok").hide();
+        });
+        $("#submit").click(function () {
+            var uuid = document.getElementById("uuid").value
+            $.ajax({
+                url: "/credits",
+                type: "POST",
+                data: {
+                    "uuid":uuid
+                },
+                success: function () {
+                    alert("上传成功")
+                    window.open("/credits")
+                }
+            })
+        })
+        $("#reload").click(function () {
+            window.open("/scanner")
+        })
     })
-    $("#reload").click(function(){
-        window.open("/scanner")
-    })
-})
 </script>

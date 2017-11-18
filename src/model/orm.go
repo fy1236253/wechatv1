@@ -27,6 +27,24 @@ func CreatImgRecord(uuid, openid, info string) {
 	stmt.Exec(uuid, openid, info)
 }
 
+// QueryImgRecord 查询uuid记录
+func QueryImgRecord(uuid string) (info *RecognizeResult) {
+	conn, _ := g.GetDBConn("default")
+	var rows *sql.Rows
+	var err error
+	rows, err = conn.Query("select info from upload_log where uuid limit 1", uuid)
+	defer rows.Close()
+	if err != nil {
+		return
+	}
+	if e := rows.Scan(&info); e != nil {
+		log.Println("[ERROR] get row fail", e)
+		return
+	}
+	return info
+
+}
+
 // DeleteUploadImg 成功提交后删除记录
 func DeleteUploadImg(uuid string) error {
 	conn, _ := g.GetDBConn("default")

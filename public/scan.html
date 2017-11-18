@@ -73,7 +73,7 @@
             if (res.errMsg == "success") {
                 weui.loading('loading').hide();
                 weui.toast('操作成功', 2000);
-                window.location.href = "/consumer?name=" + res.data.shop_name + "&amount=" + res.data.total_amount + "&unionid=" + res.data.unionid;
+                window.location.href = "/consumer?uuid=" + res.uuid
             } else {
                 if (uploadNum >= 2) {
                     weui.alert('你的图片已提交人工审核！请耐心等待');
