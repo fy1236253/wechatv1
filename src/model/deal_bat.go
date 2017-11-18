@@ -66,7 +66,7 @@ func LocalImageRecognition(base64 string) *RecognizeResult {
 	result := new(RecognizeResult)
 	json.Unmarshal([]byte(resp), &res)
 	for _, v := range res.WordsResult { //轮训关键字
-		log.Println(v)
+		// log.Println(v)
 		name := recongnitionName(v.Words)
 		if name != "" {
 			shop = name
