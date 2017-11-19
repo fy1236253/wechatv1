@@ -125,6 +125,10 @@ func ConfigWebHTTP() {
 			http.NotFound(w, r)
 			return
 		}
+		if uuid == "" {
+			log.Println("[error]:have no uuid")
+			return
+		}
 		// 基本参数设置
 		info := model.QueryImgRecord(uuid)
 		data := struct {
