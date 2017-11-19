@@ -133,7 +133,7 @@ func ConfigWebHTTP() {
 		info := model.QueryImgRecord(uuid)
 		data := struct {
 			UUID string
-			Info *model.RecognizeResult
+			Info *model.IntegralReq
 		}{
 			UUID: uuid,
 			Info: info,
