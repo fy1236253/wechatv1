@@ -129,7 +129,7 @@ func ConfigWebHTTP() {
 		info := model.QueryImgRecord(uuid)
 		data := struct {
 			UUID string
-			Info model.RecognizeResult
+			Info *model.RecognizeResult
 		}{
 			UUID: uuid,
 			Info: info,
@@ -162,6 +162,7 @@ func ConfigWebHTTP() {
 		}
 
 		info := model.QueryImgRecord(uuid)
+
 		pkg := new(model.IntegralReq)
 		pkg.Openid = openid
 		pkg.Shop = info.ShopName
