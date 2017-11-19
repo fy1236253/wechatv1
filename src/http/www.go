@@ -160,12 +160,14 @@ func ConfigWebHTTP() {
 			log.Println("用户登录失败")
 			return
 		}
+
 		info := model.QueryImgRecord(uuid)
 		shop := info.ShopName
 		log.Println(info.ShopName)
 		pkg := new(model.IntegralReq)
 		pkg.Openid = openid
 		pkg.Shop = shop
+		pkg.OrderId = info.Unionid
 		pkg.Times = time.Now().Unix()
 		drug := new(model.MedicineList)
 		pkg.Medicine = append(pkg.Medicine, drug)
