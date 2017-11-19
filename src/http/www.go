@@ -161,12 +161,12 @@ func ConfigWebHTTP() {
 			return
 		}
 		info := model.QueryImgRecord(uuid)
+		shop := info.ShopName
+		log.Println(info.ShopName)
 		pkg := new(model.IntegralReq)
 		pkg.Openid = openid
+		pkg.Shop = shop
 		pkg.Times = time.Now().Unix()
-		pkg.Shop = info.ShopName
-		pkg.OrderId = info.Unionid
-		pkg.TotalFee = info.TotalAmount
 		drug := new(model.MedicineList)
 		pkg.Medicine = append(pkg.Medicine, drug)
 		model.GetIntegral(pkg)
