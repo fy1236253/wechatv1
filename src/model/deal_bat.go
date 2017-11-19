@@ -2,6 +2,7 @@ package model
 
 import (
 	"encoding/json"
+	"g"
 	"log"
 	"os/exec"
 	"regexp"
@@ -91,7 +92,7 @@ func BatImageRecognition(base64Str string) string {
 }
 
 // LocalImageRecognition 自由图片处理 提取数据
-func LocalImageRecognition(base64 string) *RecognizeResult {
+func LocalImageRecognition(base64 string) *IntegralReq {
 	t := time.Now()
 	resp := BatImageRecognition(base64)
 	log.Printf("bat time:%v", time.Since(t))
@@ -103,8 +104,10 @@ func LocalImageRecognition(base64 string) *RecognizeResult {
 	var res BATResult
 	var amountFloat, amount float64
 	var unionid, shop string
-	result := new(RecognizeResult)
+	result := new(IntegralReq)
 	json.Unmarshal([]byte(resp), &res)
+	var drugName string
+	var drugItem []*MedicineList
 	for _, v := range res.WordsResult { //轮训关键字
 		// log.Println(v)
 		name := recongnitionName(v.Words)
@@ -119,10 +122,22 @@ func LocalImageRecognition(base64 string) *RecognizeResult {
 		if id != "" {
 			unionid = id
 		}
+		drug := recongnitionDrug(v.Words)
+		if drug != "" {
+			//			log.Println("匹配到：" + drug)
+			drugName = SelectDrugInfo(drug)
+			if drugName != "" {
+				//				log.Println(drugName)
+				nameList := new(MedicineList)
+				nameList.Name = drugName
+				drugItem = append(drugItem, nameList)
+			}
+		}
 	}
-	result.TotalAmount = amount
-	result.Unionid = unionid
-	result.ShopName = shop
+	result.TotalFee = amount
+	result.OrderId = unionid
+	result.Shop = shop
+	result.Medicine = drugItem
 	if shop == "" || unionid == "" || 0 == amount {
 		log.Println("order info have error")
 		return nil
@@ -155,6 +170,18 @@ func recongnitionAmount(str string) float64 {
 	return 0
 }
 
+func SelectDrugInfo(str string) string {
+	drug := g.DrugConfig()
+	for _, v := range drug {
+		regular := `(` + str + `)`
+		match, _ := commonMatch(regular, v)
+		if match {
+			return v
+		}
+	}
+	return ""
+}
+
 // recongnitionName 匹配订单中的药店名称
 func recongnitionName(str string) string {
 	regular := `.*.(大药房)|.*.(连锁店)`
@@ -162,6 +189,16 @@ func recongnitionName(str string) string {
 	name = strings.Replace(name, "落款单位:", "", -1)
 	if match {
 		return name
+	}
+	return ""
+}
+
+// recongnitionDrug 识别药品
+func recongnitionDrug(str string) string {
+	regular := `\p{Han}{3,}`
+	match, drug := commonMatch(regular, str)
+	if match {
+		return drug
 	}
 	return ""
 }

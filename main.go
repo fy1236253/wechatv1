@@ -21,7 +21,8 @@ func main() {
 		fmt.Println(g.VERSION)
 		os.Exit(0)
 	}
-	g.ParseConfig(*cfg)  //配置文件
+	g.ParseConfig(*cfg) //配置文件
+	g.ParseDrugConfig()
 	g.InitWxConfig()     //微信相关参数
 	g.InitDB()           //db池
 	g.InitRootDir()      //全局参数

@@ -147,6 +147,7 @@ func ConfigWebHTTP() {
 		return
 	})
 	http.HandleFunc("/credits", func(w http.ResponseWriter, r *http.Request) {
+
 		queryValues, _ := url.ParseQuery(r.URL.RawQuery)
 		var f string // 模板文件路径
 		f = filepath.Join(g.Root, "/public", "scannerIndex.html")
