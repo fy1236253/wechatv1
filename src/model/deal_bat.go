@@ -62,7 +62,7 @@ func GetIntegral(pkg *IntegralReq) {
 	req.Param("appcode", "AIDAOKE")
 	req.Param("imei", "0001")
 	ps, _ := json.Marshal(pkg)
-	// req.Param("json", string(ps))
+	req.Param("json", string(ps))
 	log.Println(string(ps))
 	resp, _ := req.String()
 	log.Println(resp)
