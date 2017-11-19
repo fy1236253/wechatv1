@@ -168,7 +168,8 @@ func ConfigWebHTTP() {
 			TotalFee: info.TotalAmount,
 			Times:    time.Now().Unix(),
 		}
-		// pkg.Medicine = append(pkg.Medicine)
+		drug := new(model.MedicineList)
+		pkg.Medicine = append(pkg.Medicine, drug)
 		model.GetIntegral(pkg)
 		// 基本参数设置
 		data := struct {
