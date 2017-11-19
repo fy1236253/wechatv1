@@ -49,7 +49,8 @@ func QueryImgRecord(uuid string) (info *RecognizeResult) {
 		if err != nil {
 			log.Println("[ERROR] get row fail", err)
 		}
-		info.Openid = openid
+		log.Println(openid)
+		// info.Openid = openid
 	}
 	return info
 
