@@ -58,14 +58,17 @@
         $("#submit").click(function () {
             var uuid = document.getElementById("uuid").value
             $.ajax({
-                url: "/credits",
+                url: "/save_jifen_info",
                 type: "POST",
                 data: {
                     "uuid":uuid
                 },
                 success: function (e) {
-                    alert("上传成功")
-                    window.open("/credits")
+                    // if (e.success=="t"){
+                    //     window.open("/credits?score="+e.score)
+                    //     return
+                    // }
+                    console.log(e)
                 }
             })
         })

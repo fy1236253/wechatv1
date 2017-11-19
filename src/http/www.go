@@ -151,27 +151,6 @@ func ConfigWebHTTP() {
 			http.NotFound(w, r)
 			return
 		}
-		r.ParseForm()
-		uuid := r.FormValue("uuid")
-		sess, _ := globalSessions.SessionStart(w, r)
-		defer sess.SessionRelease(w)
-		openid := sess.Get("openid").(string)
-		if openid == "" {
-			log.Println("用户登录失败")
-			return
-		}
-
-		info := model.QueryImgRecord(uuid)
-
-		pkg := new(model.IntegralReq)
-		pkg.Openid = openid
-		pkg.Shop = info.ShopName
-		pkg.TotalFee = info.TotalAmount
-		pkg.OrderId = info.Unionid
-		pkg.Times = time.Now().Unix()
-		drug := new(model.MedicineList)
-		pkg.Medicine = append(pkg.Medicine, drug)
-		model.GetIntegral(pkg)
 		// 基本参数设置
 		data := struct {
 			AppId string
@@ -259,14 +238,27 @@ func ConfigWebHTTP() {
 		}
 		return
 	})
-	http.HandleFunc("/save_user_info", func(w http.ResponseWriter, r *http.Request) {
-		name := r.FormValue("name")
-		amount := r.FormValue("amount")
-		if name == "" || amount == "" {
-			log.Println("[no paramas]")
+	http.HandleFunc("/save_jifen_info", func(w http.ResponseWriter, r *http.Request) {
+		r.ParseForm()
+		uuid := r.FormValue("uuid")
+		sess, _ := globalSessions.SessionStart(w, r)
+		defer sess.SessionRelease(w)
+		openid := sess.Get("openid").(string)
+		if openid == "" {
+			log.Println("用户登录失败")
 			return
 		}
-		log.Println(name, amount)
+		info := model.QueryImgRecord(uuid)
+		pkg := new(model.IntegralReq)
+		pkg.Openid = openid
+		pkg.Shop = info.ShopName
+		pkg.TotalFee = info.TotalAmount
+		pkg.OrderId = info.Unionid
+		pkg.Times = time.Now().Unix()
+		drug := new(model.MedicineList)
+		pkg.Medicine = append(pkg.Medicine, drug)
+		result := model.GetIntegral(pkg)
+		RenderJson(w, result)
 		return
 	})
 	http.HandleFunc("/edit_img", func(w http.ResponseWriter, r *http.Request) {

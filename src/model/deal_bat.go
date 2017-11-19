@@ -52,9 +52,14 @@ type MedicineList struct {
 	Amount int     `json:"amount"`
 	Money  float64 `json:"money"`
 }
+type IntegralResponse struct {
+	Success string `json:"success"`
+	Error   string `json:"error"`
+	Result  string `json:"result"`
+}
 
 // GetIntegral 积分请求
-func GetIntegral(pkg *IntegralReq) {
+func GetIntegral(pkg *IntegralReq) (response *IntegralResponse) {
 	url := "http://101.200.187.60:8180/members/servlet/ACSClientHttp"
 	req := httplib.Post(url)
 	req.Param("methodName", "getReceipt")
@@ -66,6 +71,8 @@ func GetIntegral(pkg *IntegralReq) {
 	log.Println(string(ps))
 	resp, _ := req.String()
 	log.Println(resp)
+	json.Unmarshal([]byte(resp), &response)
+	return response
 }
 
 // BatImageRecognition 百度的图像识别接口
