@@ -162,12 +162,12 @@ func ConfigWebHTTP() {
 		}
 		info := model.QueryImgRecord(uuid)
 		pkg := &model.IntegralReq{
-			Openid:   openid,
-			Shop:     info.ShopName,
-			OrderId:  info.Unionid,
-			TotalFee: info.TotalAmount,
-			Times:    time.Now().Unix(),
+			Openid: openid,
+			Times:  time.Now().Unix(),
 		}
+		pkg.Shop = info.ShopName
+		pkg.OrderId = info.Unionid
+		pkg.TotalFee = info.TotalAmount
 		drug := new(model.MedicineList)
 		pkg.Medicine = append(pkg.Medicine, drug)
 		model.GetIntegral(pkg)
