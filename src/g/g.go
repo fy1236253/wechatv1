@@ -36,7 +36,7 @@ var (
 
 // ParseDrugConfig 药品名称
 func ParseDrugConfig() {
-	f, _ := os.Open("medic.json")
+	f, _ := os.Open("data/medic.json")
 	var arry []string
 	r := bufio.NewReader(f)
 	for {
