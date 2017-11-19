@@ -152,15 +152,30 @@ func ConfigWebHTTP() {
 			return
 		}
 		r.ParseForm()
-		// name := r.FormValue("name")
+		uuid := r.FormValue("uuid")
+		sess, _ := globalSessions.SessionStart(w, r)
+		defer sess.SessionRelease(w)
+		if sess.Get("openid") == nil {
+			log.Println("用户登录失败")
+			return
+		}
+		openid := sess.Get("openid").(string)
+		info := model.QueryImgRecord(uuid)
+		pkg := &model.IntegralReq{
+			Openid:   openid,
+			OrderId:  uuid,
+			Shop:     info.ShopName,
+			TotalFee: info.TotalAmount,
+			Times:    time.Now().Unix(),
+		}
+		// pkg.Medicine = append(pkg.Medicine)
+		model.GetIntegral(pkg)
 		// 基本参数设置
 		data := struct {
-			//Couriers 	string
 			AppId string
 		}{
 			AppId: appid,
 		}
-
 		t, err := template.ParseFiles(f)
 		err = t.Execute(w, data)
 		if err != nil {

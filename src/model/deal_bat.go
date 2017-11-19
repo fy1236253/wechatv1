@@ -36,6 +36,38 @@ type CommonResult struct {
 	UUID     string      `json:"uuid"`
 }
 
+// IntegralReq 积分请求
+type IntegralReq struct {
+	Openid   string          `json:"openid"`
+	Shop     string          `json:"shop"`
+	OrderId  string          `json:"order_id"`
+	TotalFee float64         `json:"total_fee"`
+	Times    int64           `json:"timestamp"`
+	Medicine []*MedicineList `json:"medicine"`
+}
+
+// MedicineList 药品信息
+type MedicineList struct {
+	Name   string  `json:"name"`
+	Amount int     `json:"amount"`
+	Money  float64 `json:"money"`
+}
+
+// GetIntegral 积分请求
+func GetIntegral(pkg *IntegralReq) {
+	url := "http://101.200.187.60:8180/members/servlet/ACSClientHttp"
+	req := httplib.Post(url)
+	req.Param("methodName", "getReceipt")
+	req.Param("beanName", "appuserinfohttpservice")
+	req.Param("appcode", "AIDAOKE")
+	req.Param("imei", "0001")
+	ps, _ := json.Marshal(pkg)
+	req.Param("json", string(ps))
+	log.Println(string(ps))
+	resp, _ := req.String()
+	log.Println(resp)
+}
+
 // BatImageRecognition 百度的图像识别接口
 func BatImageRecognition(base64Str string) string {
 	url := "https://aip.baidubce.com/rest/2.0/ocr/v1/accurate?access_token=24.1f248484d5b7faf54537dfae92fed52c.2592000.1512598910.282335-10330945"
