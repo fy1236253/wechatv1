@@ -29,7 +29,7 @@ func CreatImgRecord(uuid, openid, info string) {
 }
 
 // QueryImgRecord 查询uuid记录
-func QueryImgRecord(uuid string) (info *RecognizeResult) {
+func QueryImgRecord(uuid string) (info RecognizeResult) {
 	conn, _ := g.GetDBConn("default")
 	var rows *sql.Rows
 	var err error
