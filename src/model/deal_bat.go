@@ -24,6 +24,7 @@ type BATResult struct {
 
 // RecognizeResult 自处理后的结果
 type RecognizeResult struct {
+	Openid      string  `json:"openid"`
 	ShopName    string  `json:"shop_name"`
 	TotalAmount float64 `json:"total_amount"`
 	Uninoid     string  `json:"unionid"`

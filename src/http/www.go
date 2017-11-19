@@ -155,11 +155,11 @@ func ConfigWebHTTP() {
 		uuid := r.FormValue("uuid")
 		sess, _ := globalSessions.SessionStart(w, r)
 		defer sess.SessionRelease(w)
-		if sess.Get("openid") == nil {
+		openid := sess.Get("openid").(string)
+		if openid == "" {
 			log.Println("用户登录失败")
 			return
 		}
-		openid := sess.Get("openid").(string)
 		info := model.QueryImgRecord(uuid)
 		pkg := &model.IntegralReq{
 			Openid:   openid,

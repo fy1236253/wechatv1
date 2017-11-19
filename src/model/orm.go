@@ -33,15 +33,15 @@ func QueryImgRecord(uuid string) (info *RecognizeResult) {
 	conn, _ := g.GetDBConn("default")
 	var rows *sql.Rows
 	var err error
-	var rowInfo string
-	rows, err = conn.Query("select info from upload_log where uuid=? limit 1", uuid)
+	var rowInfo, openid string
+	rows, err = conn.Query("select openid,info from upload_log where uuid=? limit 1", uuid)
 	defer rows.Close()
 	for rows.Next() {
 		if err != nil {
 			log.Println(err)
 			return
 		}
-		if e := rows.Scan(&rowInfo); e != nil {
+		if e := rows.Scan(&rowInfo, &openid); e != nil {
 			log.Println("[ERROR] get row fail", e)
 			return
 		}
@@ -50,7 +50,7 @@ func QueryImgRecord(uuid string) (info *RecognizeResult) {
 			log.Println("[ERROR] get row fail", err)
 		}
 	}
-
+	info.Openid = openid
 	return info
 
 }
