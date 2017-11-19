@@ -64,10 +64,11 @@
                     "uuid":uuid
                 },
                 success: function (e) {
-                    // if (e.success=="t"){
-                    //     window.open("/credits?score="+e.score)
-                    //     return
-                    // }
+                    if (e.success=="t"){
+                        window.open("/credits?score="+e.result)
+                        return
+                    }
+                    alert(e.error)
                     console.log(e)
                 }
             })

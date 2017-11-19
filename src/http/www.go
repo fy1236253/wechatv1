@@ -143,7 +143,7 @@ func ConfigWebHTTP() {
 		return
 	})
 	http.HandleFunc("/credits", func(w http.ResponseWriter, r *http.Request) {
-		appid := "wxdfac68fcc7a48fca"
+		queryValues, _ := url.ParseQuery(r.URL.RawQuery)
 		var f string // 模板文件路径
 		f = filepath.Join(g.Root, "/public", "scannerIndex.html")
 		if !file.IsExist(f) {
@@ -151,11 +151,12 @@ func ConfigWebHTTP() {
 			http.NotFound(w, r)
 			return
 		}
+		score := queryValues.Get("score")
 		// 基本参数设置
 		data := struct {
-			AppId string
+			Score string
 		}{
-			AppId: appid,
+			Score: score,
 		}
 		t, err := template.ParseFiles(f)
 		err = t.Execute(w, data)
