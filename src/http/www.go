@@ -163,7 +163,7 @@ func ConfigWebHTTP() {
 		info := model.QueryImgRecord(uuid)
 		pkg := &model.IntegralReq{
 			Openid:   openid,
-			OrderId:  uuid,
+			OrderId:  info.Unionid,
 			Shop:     info.ShopName,
 			TotalFee: info.TotalAmount,
 			Times:    time.Now().Unix(),

@@ -26,7 +26,7 @@ type BATResult struct {
 type RecognizeResult struct {
 	ShopName    string  `json:"shop_name"`
 	TotalAmount float64 `json:"total_amount"`
-	Uninoid     string  `json:"unionid"`
+	Unionid     string  `json:"unionid"`
 }
 
 // CommonResult api接口返回数据
@@ -114,7 +114,7 @@ func LocalImageRecognition(base64 string) *RecognizeResult {
 		}
 	}
 	result.TotalAmount = amount
-	result.Uninoid = unionid
+	result.Unionid = unionid
 	result.ShopName = shop
 	if shop == "" || unionid == "" || 0 == amount {
 		log.Println("order info have error")
