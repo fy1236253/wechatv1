@@ -19,6 +19,47 @@ import (
 
 	"github.com/toolkits/file"
 )
+func getuser(w http.ResponseWriter, r *http.Request) {
+	fullurl := "http://" + r.Host + r.RequestURI
+	appid := g.Config().Wechats[0].AppID
+	appsecret := g.Config().Wechats[0].AppSecret
+
+	// 参数检查
+	queryValues, err := url.ParseQuery(r.URL.RawQuery)
+	log.Println("ParseQuery", queryValues)
+	if err != nil {
+		log.Println("[ERROR] URL.RawQuery", err)
+		w.WriteHeader(400)
+		return 
+	}
+
+	// 从 session 中获取用户的 openid
+	sess, _ := globalSessions.SessionStart(w, r)
+	defer sess.SessionRelease(w)
+	if sess.Get("openid") == nil {
+		sess.Set("openid", "")
+	}
+	openid := sess.Get("openid").(string)
+	// session 不存在
+	if openid == "" {
+		//oauth 跳转 ， 页面授权获取用户基本信息
+		code := queryValues.Get("code") //  摇一摇入口 code 有效
+		state := queryValues.Get("state")
+		if code == "" && state == "" {
+			addr := "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + url.QueryEscape(fullurl) + "&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect"
+			log.Println("http.Redirect", addr)
+			http.Redirect(w, r, addr, 302)
+			return
+		}
+		// 获取用户信息
+		openid, _ = util.GetAccessTokenFromCode(appid,appsecret, code)
+		if openid == "" {
+			return
+		}
+		sess.Set("openid", openid)
+	}
+	return 
+}
 
 // ConfigWebHTTP 对外http
 func ConfigWebHTTP() {
@@ -63,31 +104,19 @@ func ConfigWebHTTP() {
 		}
 		return
 	})
+	
 	// 用户上传图片
 	http.HandleFunc("/scanner", func(w http.ResponseWriter, r *http.Request) {
 		fullurl := "http://" + r.Host + r.RequestURI
-		wxid := "gh_f353e8a82fe5"
+		getuser(w,r)//用户授权
+		wxid :=  g.Config().Wechats[0].WxID
 		appid := g.Config().Wechats[0].AppID
-		appsecret := g.Config().Wechats[0].AppSecret
-		queryValues, _ := url.ParseQuery(r.URL.RawQuery)
-		code := queryValues.Get("code") //  摇一摇入口 code 有效
-		if code == "" {
-			addr := "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + url.QueryEscape(fullurl) + "&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect"
-			http.Redirect(w, r, addr, 302)
-			return
-		}
-		openid, _ := util.GetAccessTokenFromCode(appid, appsecret, code)
 		var f string // 模板文件路径
 		f = filepath.Join(g.Root, "/public", "scan.html")
 		if !file.IsExist(f) {
 			log.Println("not find", f)
 			http.NotFound(w, r)
 			return
-		}
-		sess, _ := globalSessions.SessionStart(w, r)
-		defer sess.SessionRelease(w)
-		if sess.Get("openid") == nil {
-			sess.Set("openid", openid)
 		}
 		// 基本参数设置
 		rand.Seed(time.Now().UnixNano())

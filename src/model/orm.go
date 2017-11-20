@@ -49,8 +49,7 @@ func QueryImgRecord(uuid string) (info *IntegralReq) {
 		if err != nil {
 			log.Println("[ERROR] get row fail", err)
 		}
-		log.Println(openid)
-		// info.Openid = openid
+		info.Openid = openid
 	}
 	return info
 
