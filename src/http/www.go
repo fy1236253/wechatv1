@@ -162,10 +162,10 @@ func ConfigWebHTTP() {
 		info := model.QueryImgRecord(uuid)
 		data := struct {
 			UUID string
-			Info model.IntegralReq
+			Info *model.IntegralReq
 		}{
 			UUID: uuid,
-			Info: *info,
+			Info: info,
 		}
 		t, err := template.ParseFiles(f)
 		log.Println(err)
