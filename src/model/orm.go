@@ -52,7 +52,6 @@ func QueryImgRecord(uuid string) (info *IntegralReq) {
 		info.Openid = openid
 	}
 	return info
-
 }
 
 // DeleteUploadImg 成功提交后删除记录
